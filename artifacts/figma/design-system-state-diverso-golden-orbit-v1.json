@@ -6,7 +6,7 @@
     "editorType": "figma"
   },
   "phase": "phase4",
-  "step": "P4.b-gate-3-review-ready",
+  "step": "P4.f-gate-4-high-fidelity-review-ready",
   "entities": {
     "collections": {
       "Primitives": {
@@ -135,6 +135,10 @@
       "Brand Tile": "69:2",
       "Sitemap & Flows": "74:2",
       "Wireframes — Mobile": "75:2",
+      "High fidelity — Public": "83:2",
+      "CMS — Admin": "83:3",
+      "Motion & States": "83:4",
+      "QA & Handoff": "83:5",
       "Utilities": "10:7"
     },
     "components": {
@@ -192,6 +196,38 @@
       "Wireframe / Shortlist": "75:120",
       "Wireframe / Store": "75:149",
       "Wireframe / WhatsApp Transition": "75:169",
+      "Public High-Fidelity / Handoff Board": "84:2",
+      "HF / Desktop / Home": "84:10",
+      "HF / Desktop / Catalog": "84:11",
+      "HF / Desktop / Product": "84:12",
+      "HF / Tablet / Home": "90:498",
+      "HF / Tablet / Catalog": "90:499",
+      "HF / Tablet / Product": "90:500",
+      "HF / Mobile / Home": "94:820",
+      "HF / Mobile / Catalog": "94:821",
+      "HF / Mobile / Product": "94:822",
+      "HF / Mobile / Shortlist": "94:823",
+      "HF / Mobile / Store": "94:824",
+      "HF / Mobile / WhatsApp Transition": "94:825",
+      "Template / Brand + Collection": "102:1173",
+      "Template / Guide + Policy": "102:1218",
+      "Template / Store": "102:1232",
+      "Template / Safe Edge States": "102:1252",
+      "CMS / Handoff Board": "103:2",
+      "CMS / Login": "103:8",
+      "CMS / Dashboard": "103:9",
+      "CMS / Product List": "103:10",
+      "CMS / Product Editor": "103:12",
+      "CMS / Media + Collections": "103:13",
+      "CMS / Settings + Access": "103:14",
+      "Motion / Handoff Board": "107:2",
+      "Motion / Orbit Hero": "107:21",
+      "Motion / Featured Carousel": "107:22",
+      "Motion / Hover Curtain Brands": "107:24",
+      "Motion / Type Reveal Story": "107:25",
+      "Motion / Grid Dive Edit": "107:27",
+      "QA / Handoff Board": "110:2",
+      "QA / Approval Gate": "110:118",
       "Utilities / Source Logo Target": "23:10",
       "Foundations / Primitives Panel": "14:10",
       "Foundations / Semantic Light Panel": "14:11",
@@ -557,7 +593,7 @@
       "failures": []
     },
     "phase4Gate3Artifacts": {
-      "status": "valid-awaiting-approval",
+      "status": "approved",
       "sitemapBoard": "74:3",
       "sitemapNodes": 16,
       "conversionFlowFrames": 16,
@@ -569,6 +605,30 @@
       "pendingFactLabels": 3,
       "confirmedPublicWhatsAppPresent": true,
       "priceValuesPresent": false,
+      "failures": []
+    },
+    "phase4HighFidelityHandoff": {
+      "status": "valid-awaiting-gate-4-approval",
+      "publicHandoffRoot": "84:2",
+      "publicScreensAndTemplates": 16,
+      "desktopCoreScreens": 3,
+      "tabletCoreScreens": 3,
+      "mobileCoreScreens": 6,
+      "supportingRouteTemplates": 4,
+      "cmsHandoffRoot": "103:2",
+      "cmsScreens": 6,
+      "motionHandoffRoot": "107:2",
+      "motionContracts": 5,
+      "qaHandoffRoot": "110:2",
+      "approvalGate": "110:118",
+      "unfinishedPlaceholders": 0,
+      "missingFonts": 0,
+      "fontFamilies": [
+        "Instrument Serif",
+        "Manrope"
+      ],
+      "productionCodeAuthorized": false,
+      "visualReview": "passed-after-responsive-and-state-corrections",
       "failures": []
     }
   },
@@ -587,10 +647,9 @@
     }
   ],
   "pendingValidations": [
-    "gate3:client-approval",
-    "phase4:responsive-screens",
-    "phase4:conversion-flows",
-    "phase4:screen-accessibility"
+    "gate4:client-approval",
+    "phase4:moderated-five-task-usability-review",
+    "phase4:runtime-accessibility-after-implementation"
   ],
   "completedSteps": [
     "P0.a",
@@ -628,6 +687,10 @@
     "P3.f:brand-tile",
     "P3.i",
     "P4.a:sitemap-and-flows",
-    "P4.b:mobile-wireframes"
+    "P4.b:mobile-wireframes",
+    "P4.c:responsive-public-high-fidelity",
+    "P4.d:cms-high-fidelity",
+    "P4.e:motion-resilience-contracts",
+    "P4.f:qa-and-handoff"
   ]
 }

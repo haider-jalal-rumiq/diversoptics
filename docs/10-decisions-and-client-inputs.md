@@ -15,7 +15,7 @@ Rule: unresolved facts remain placeholders and cannot be published.
 | P0 | Confirm WhatsApp number, phone, email, hours, holidays | WhatsApp confirmed; phone/email/hours/holidays open | Client | Public WhatsApp `+92 333 5777710`; test-only `03438067821` |
 | P0 | Confirm launch categories and terminology: optical frames, sunglasses, prescription lenses, contact lenses, watches, pens | Partially confirmed | Client | Sunglasses; Watches; Pens; Optical Frames — Men/Women/Kids; Contact Lenses — Transparent/Colored. Prescription lens services still open. |
 | P0 | Provide 10–20 representative real products across categories | Not provided | Client | — |
-| P0 | Confirm price display: all prices, selected prices, or price on inquiry | Unknown | Client | — |
+| P0 | Confirm price display: all prices, selected prices, or price on inquiry | Confirmed for MVP | Client | Support multiple price modes; default to `Price on inquiry` until verified pricing is supplied. |
 | P0 | Define availability meanings and how often stock is updated | Unknown | Client | — |
 
 ## Trust, policies, and services
@@ -72,13 +72,13 @@ Rule: unresolved facts remain placeholders and cannot be published.
 | Decision | Recommendation | Status |
 |---|---|---|
 | Commerce model | Catalog + WhatsApp; no payment in MVP | Confirmed |
-| Cart model | Rename to Shortlist; no quantity/shipping/payment semantics | Awaiting confirmation |
-| Tech stack | Next.js + TypeScript + Supabase + Vercel | Awaiting confirmation |
-| CMS | Custom owner-friendly admin on Supabase, not direct Studio editing | Awaiting confirmation |
-| 3D | One progressive-enhancement hero/pilot, not catalog-wide | Approved in principle; exact concept to be approved in Figma |
-| Languages | English first; add bilingual only with review capacity | Awaiting confirmation |
+| Cart model | Rename to Shortlist; no quantity/shipping/payment semantics | Confirmed |
+| Tech stack | Next.js + TypeScript + Supabase + Vercel | Confirmed |
+| CMS | Custom owner-friendly admin on Supabase, not direct Studio editing | Confirmed |
+| 3D | Progressive-enhancement hero/pilot; no WebGL until a verified real asset exists | Confirmed for MVP |
+| Languages | English first; add bilingual only with review capacity | Confirmed for MVP |
 | Social priority | Instagram primary; TikTok discovery; Facebook/local; GBP essential | Awaiting confirmation |
-| SEO model | Product snippets + LocalBusiness; no false merchant checkout | Proposed |
+| SEO model | Product snippets + LocalBusiness; no false merchant checkout | Confirmed for MVP |
 
 ## Client meeting agenda
 
@@ -102,3 +102,6 @@ Add dated entries; do not overwrite history.
 | 2026-08-21 | Public WhatsApp confirmed as `+92 333 5777710`; `03438067821` is test-only | Separate production inquiries from development testing | Client | Business context, UX, implementation configuration |
 | 2026-08-21 | Delivery offered; policy details remain open | Delivery may appear as a confirmed service but no area/cost/time/COD promise may be designed as final | Client | Business context, product/store content |
 | 2026-08-21 | Initial catalog shape confirmed | Plan CMS and discovery around realistic launch scale | Client | Architecture, UX, Figma, content production |
+| 2026-08-21 | Gate 3 sitemap, conversion flows and mobile wireframes approved | Authorize responsive high-fidelity composition while preserving the code gate | Project owner | `14-figma-gate-3-sitemap-wireframes.md`, Figma |
+| 2026-08-21 | Website/CMS implementation plan accepted | Lock the shortlist model, English MVP, Next.js/Supabase/Vercel family, price-mode contract and phase workflow | Project owner | Architecture, UX, Figma, delivery backlog |
+| 2026-08-21 | Gate 4 high-fidelity handoff prepared | Public, CMS, motion and failure-state designs are ready for review; production implementation is still blocked pending approval | Project owner review pending | `15-figma-high-fidelity-handoff.md`, Figma, `TASKS.md` |

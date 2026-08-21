@@ -17,12 +17,15 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - Figma Phase 3 is complete: 13 component sets, 133 variants, 63 exposed component properties, four supporting media/mark components, six icons, and 143 total component nodes have passed structural and screenshot review.
 - The component library includes responsive Header, Search, Filter Chip, WhatsApp CTA, Product Card, Category Card, Brand Tile, Availability Badge, Shortlist Tray, and an Orbit Hero with enhanced and reduced-motion variants.
 - Gate 3 review artifacts are ready in Figma: a public sitemap, three core conversion flows, and six 390×844 mobile wireframes for Home, Catalog, Product, Shortlist, Store and WhatsApp transition.
+- Gate 3 is approved by the project owner.
+- Gate 4 high fidelity is ready for review: 16 responsive public screens/templates, six CMS screens, five motion/resilience storyboards, and a QA/approval board.
+- Figma structural audits found no unfinished placeholders or missing fonts across the new public, CMS, motion and QA pages.
 - The supplied logo JPEG is placed as the canonical reference. An orbital badge is explicitly marked as an unapproved digital-extension exploration.
-- No high-fidelity public screens or production code exist yet. Gate 3 sitemap/wireframe approval is now required before high-fidelity Phase 4 composition; production code remains unauthorized until final Figma approval.
+- No production code exists yet. The dedicated `phase/00-figma-handoff` branch records the Gate 4 handoff; production code remains blocked until explicit high-fidelity approval.
 
 ## Recommended next move
 
-Obtain Gate 3 approval for the sitemap, conversion flows and six mobile wireframes. After approval, compose the high-fidelity responsive screens from the validated Golden Orbit library.
+Review and approve the Gate 4 public, CMS and motion handoff in Figma. After approval, squash-merge Phase 00 into `dev` and begin `phase/01-web-foundation`.
 
 ## Non-negotiables
 

@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <main className="grid min-h-screen place-items-center bg-porcelain px-6 py-16">
+    <main
+      className="grid min-h-screen place-items-center bg-porcelain px-6 py-16"
+      id="main"
+    >
       <div className="max-w-xl text-center">
         <p className="text-sm font-semibold tracking-[0.12em]">
           404 · NOT FOUND

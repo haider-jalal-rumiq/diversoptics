@@ -1,54 +1,52 @@
-import type { CatalogRepository, ProductSummary } from "../domain/types";
-import { demoBrands, demoCategories, demoProducts } from "./demo-fixtures";
+import { resolveDeploymentEnvironment } from "@/lib/config/site";
 
-const demoCatalogRepository: CatalogRepository = {
-  async getCategories() {
-    return demoCategories;
-  },
-  async getFeaturedProducts() {
-    return demoProducts;
-  },
-  async getFeaturedBrands() {
-    return demoBrands;
-  },
-  async getProductBySlug(slug) {
-    return demoProducts.find((product) => product.slug === slug) ?? null;
-  },
-};
+import {
+  resolveCatalogSource,
+  type CatalogSource,
+} from "../domain/catalog-source";
+import type { CatalogRepository } from "../domain/types";
+import {
+  createFixtureCatalogRepository,
+  emptyCatalogRepository,
+} from "./fixture-catalog";
+import { tryCreateSupabaseCatalogRepository } from "./supabase-catalog";
 
-const emptyCatalogRepository: CatalogRepository = {
-  async getCategories() {
-    return [];
-  },
-  async getFeaturedProducts() {
-    return [];
-  },
-  async getFeaturedBrands() {
-    return [];
-  },
-  async getProductBySlug() {
-    return null;
-  },
-};
+function resolveActiveSource(): {
+  source: CatalogSource;
+  supabase: CatalogRepository | null;
+} {
+  const supabase = tryCreateSupabaseCatalogRepository();
+
+  return {
+    source: resolveCatalogSource(
+      resolveDeploymentEnvironment(),
+      supabase !== null,
+    ),
+    supabase,
+  };
+}
+
+export function createCatalogRepository(): CatalogRepository {
+  const { source, supabase } = resolveActiveSource();
+
+  switch (source) {
+    case "supabase":
+      // supabase is non-null whenever the policy resolves to this source.
+      return supabase ?? emptyCatalogRepository;
+    case "fixtures":
+      return createFixtureCatalogRepository();
+    default:
+      return emptyCatalogRepository;
+  }
+}
 
 /**
- * Fictional data is available in local and protected preview environments only.
- * A production deployment stays safely empty until Phase 02 provides Supabase data.
+ * True when the active catalog is fictional. Public pages read this to render the
+ * fixture disclosure AGENTS.md requires for unconfirmed content, so a preview can
+ * never be mistaken for real inventory.
  */
-export function createCatalogRepository(
-  vercelEnvironment = process.env.VERCEL_ENV,
-): CatalogRepository {
-  return vercelEnvironment === "production"
-    ? emptyCatalogRepository
-    : demoCatalogRepository;
+export function isDemoCatalog(): boolean {
+  return resolveActiveSource().source === "fixtures";
 }
 
-export function formatPriceLabel(
-  product: Pick<ProductSummary, "priceMode">,
-): string | null {
-  if (product.priceMode === "hidden") return null;
-  if (product.priceMode === "on_inquiry") return "Price on inquiry";
-  return product.priceMode === "from"
-    ? "Price from — pending"
-    : "Price pending";
-}
+export { createFixtureCatalogRepository, emptyCatalogRepository };

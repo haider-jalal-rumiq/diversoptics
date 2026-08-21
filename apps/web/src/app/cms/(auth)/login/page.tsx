@@ -14,7 +14,10 @@ export default function CmsLoginPage() {
   const configured = Boolean(getSupabasePublicConfig());
 
   return (
-    <main className="grid min-h-screen bg-charcoal lg:grid-cols-[1.05fr_0.95fr]">
+    <main
+      className="grid min-h-screen bg-charcoal lg:grid-cols-[1.05fr_0.95fr]"
+      id="main"
+    >
       <section className="relative hidden overflow-hidden p-12 text-white lg:flex lg:flex-col lg:justify-between">
         <div
           aria-hidden="true"

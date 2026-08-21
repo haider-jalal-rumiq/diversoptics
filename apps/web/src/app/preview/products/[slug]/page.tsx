@@ -5,10 +5,8 @@ import { notFound } from "next/navigation";
 import { ProductMediaPlaceholder } from "@/components/home/product-media-placeholder";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import {
-  createCatalogRepository,
-  formatPriceLabel,
-} from "@/features/catalog/data/catalog-repository";
+import { createCatalogRepository } from "@/features/catalog/data/catalog-repository";
+import { formatPriceLabel } from "@/features/catalog/domain/price";
 import { buildGeneralWhatsAppHref } from "@/lib/config/site";
 
 export const metadata: Metadata = {
@@ -28,7 +26,7 @@ export default async function PreviewProductPage({
   if (!product) notFound();
 
   return (
-    <main className="min-h-screen bg-porcelain py-8 sm:py-16">
+    <main className="min-h-screen bg-porcelain py-8 sm:py-16" id="main">
       <Container>
         <Link
           className="inline-flex min-h-11 items-center text-sm font-semibold hover:underline"

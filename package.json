@@ -1,0 +1,28 @@
+{
+  "name": "diverso-optics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Diverso Optics public catalog and owner CMS workspace.",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=22 <23",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "build": "pnpm --filter @diverso/web build",
+    "dev": "pnpm --filter @diverso/web dev",
+    "format": "prettier --write \"apps/web/**/*.{ts,tsx,mjs,json,css}\" .github/workflows/ci.yml package.json pnpm-workspace.yaml lighthouserc.json",
+    "format:check": "prettier --check \"apps/web/**/*.{ts,tsx,mjs,json,css}\" .github/workflows/ci.yml package.json pnpm-workspace.yaml lighthouserc.json",
+    "lint": "pnpm --filter @diverso/web lint",
+    "lhci": "lhci autorun --config=lighthouserc.json",
+    "start": "pnpm --filter @diverso/web start",
+    "test": "pnpm --filter @diverso/web test",
+    "test:e2e": "pnpm --filter @diverso/web test:e2e",
+    "test:watch": "pnpm --filter @diverso/web test:watch",
+    "typecheck": "pnpm --filter @diverso/web typecheck"
+  },
+  "devDependencies": {
+    "@lhci/cli": "0.15.1",
+    "prettier": "3.9.6"
+  }
+}

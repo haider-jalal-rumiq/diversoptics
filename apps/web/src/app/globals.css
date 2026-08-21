@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-orbit-gold: #fecc29;
+  --color-obsidian: #151515;
+  --color-charcoal: #242321;
+  --color-porcelain: #f7f4ed;
+  --color-white: #ffffff;
+  --color-antique-brass: #a8792a;
+  --color-smoke: #68635e;
+  --color-signal-green: #217a4b;
+  --color-signal-red: #b42318;
+
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-instrument-serif);
+
+  --radius-card: 0.75rem;
+  --shadow-card: 0 6px 24px rgb(21 21 21 / 0.08);
+}
+
+:root {
+  color-scheme: light;
+  background: var(--color-porcelain);
+  color: var(--color-obsidian);
+  font-synthesis: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--color-porcelain);
+  color: var(--color-obsidian);
+  font-family: var(--font-manrope), Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--color-orbit-gold);
+  color: var(--color-obsidian);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-orbit-gold);
+  outline-offset: 3px;
+}
+
+.orbit-scene {
+  transform: rotate(2deg);
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

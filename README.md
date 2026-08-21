@@ -1,10 +1,10 @@
 # Diverso Optics
 
-Planning workspace for the Diverso Optics brand, catalog website, CMS, WhatsApp inquiry journey, and social-media operation.
+Workspace for the Diverso Optics brand, catalog website, CMS, WhatsApp inquiry journey, and social-media operation.
 
 ## Current phase
 
-Golden Orbit is selected. The responsive public, CMS, motion and QA handoff is ready for Gate 4 review; no production website code should be started until it is explicitly approved.
+Golden Orbit and the responsive Gate 4 handoff are approved. Phase 01 provides the tested Next.js web foundation; Phase 02 adds Supabase Auth, database, Storage and the owner CMS.
 
 ## Knowledge map
 
@@ -31,7 +31,8 @@ Golden Orbit is selected. The responsive public, CMS, motion and QA handoff is r
 | `docs/13-figma-phase-3-components.md` | Golden Orbit component library inventory and validation |
 | `docs/14-figma-gate-3-sitemap-wireframes.md` | Approved sitemap, conversion flows and mobile wireframes |
 | `docs/15-figma-high-fidelity-handoff.md` | Gate 4 public, CMS, motion and QA review links |
+| `docs/16-phase-01-web-foundation.md` | Implemented web-foundation architecture, verification and Phase 02 handoff |
 
 ## Immediate next step
 
-Review and approve `docs/15-figma-high-fidelity-handoff.md`. After approval, merge Phase 00 into `dev` and begin `phase/01-web-foundation`.
+Integrate the tested Phase 01 branch and begin `phase/02-supabase-cms` from the updated `dev` baseline.

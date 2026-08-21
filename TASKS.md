@@ -22,11 +22,11 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 - [x] Design responsive public screens and CMS screens; 16 public templates and six CMS screens are ready for Gate 4 review.
 - [x] Complete motion storyboards for Orbit Hero and the four supplied animation references, including mobile, reduced-motion and failure behavior.
 - [~] Run accessibility and five-task usability review; structural/state review is complete, while moderated task validation and runtime checks remain.
-- [ ] Obtain explicit high-fidelity approval.
+- [x] Obtain explicit high-fidelity approval.
 
 ## Implementation
 
-- [ ] Initialize Next.js/TypeScript project after Figma approval.
+- [x] Initialize and validate the Next.js/TypeScript web foundation after Figma approval.
 - [ ] Configure Supabase environments, migrations, Auth, RLS, and Storage policies.
 - [ ] Build catalog, search/filtering, product pages, shortlist, and inquiry redirect.
 - [ ] Build owner CMS and product media workflow.

@@ -16,12 +16,12 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 ## Figma
 
 - [x] Create the Figma project, page structure, variables, foundation documentation, and naming conventions.
-- [~] Produce sitemap and mobile-first low-fidelity flows; artifacts are complete and awaiting Gate 3 approval.
-- [~] Review homepage, catalog, product detail, shortlist, store, and WhatsApp transition; six mobile wireframes are ready for review.
+- [x] Produce and approve the sitemap and mobile-first low-fidelity flows.
+- [x] Review and approve homepage, catalog, product detail, shortlist, store, and WhatsApp transition wireframes.
 - [x] Build and validate the approved Golden Orbit token and component library in Figma.
-- [~] Design responsive public screens and CMS screens; public-screen composition is starting.
-- [~] Prototype motion/3D with reduced-motion variants; the Orbit Hero component contract is validated and page-level prototyping remains.
-- [ ] Run accessibility and five-task usability review.
+- [x] Design responsive public screens and CMS screens; 16 public templates and six CMS screens are ready for Gate 4 review.
+- [x] Complete motion storyboards for Orbit Hero and the four supplied animation references, including mobile, reduced-motion and failure behavior.
+- [~] Run accessibility and five-task usability review; structural/state review is complete, while moderated task validation and runtime checks remain.
 - [ ] Obtain explicit high-fidelity approval.
 
 ## Implementation

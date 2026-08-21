@@ -1,6 +1,6 @@
 # Figma Gate 3 — sitemap, flows and mobile wireframes
 
-Status: Structurally and visually validated; awaiting project-owner approval on 2026-08-21.
+Status: approved by the project owner on 2026-08-21; high-fidelity composition proceeded from this baseline.
 
 Figma file: <https://www.figma.com/design/bTTNOsvFVrnoFczV6mFbeJ>
 
@@ -62,4 +62,4 @@ All six frames are 390×844:
 
 ## Approval gate
 
-High-fidelity responsive page composition begins only after the project owner approves this sitemap, the three conversion flows and the six mobile wireframes or records requested changes.
+The project owner approved the sitemap, conversion flows and mobile-first wireframes. The resulting high-fidelity handoff is documented in `docs/15-figma-high-fidelity-handoff.md` and now awaits Gate 4 approval.

@@ -18,14 +18,15 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - The component library includes responsive Header, Search, Filter Chip, WhatsApp CTA, Product Card, Category Card, Brand Tile, Availability Badge, Shortlist Tray, and an Orbit Hero with enhanced and reduced-motion variants.
 - Gate 3 review artifacts are ready in Figma: a public sitemap, three core conversion flows, and six 390×844 mobile wireframes for Home, Catalog, Product, Shortlist, Store and WhatsApp transition.
 - Gate 3 is approved by the project owner.
-- Gate 4 high fidelity is ready for review: 16 responsive public screens/templates, six CMS screens, five motion/resilience storyboards, and a QA/approval board.
+- Gate 4 high fidelity is approved: 16 responsive public screens/templates, six CMS screens, five motion/resilience storyboards, and a QA/approval board.
 - Figma structural audits found no unfinished placeholders or missing fonts across the new public, CMS, motion and QA pages.
 - The supplied logo JPEG is placed as the canonical reference. An orbital badge is explicitly marked as an unapproved digital-extension exploration.
-- No production code exists yet. The dedicated `phase/00-figma-handoff` branch records the Gate 4 handoff; production code remains blocked until explicit high-fidelity approval.
+- Phase 01 establishes the production Next.js 16/React 19 foundation in `apps/web`, the Golden Orbit home experience, typed preview fixtures, environment-safe WhatsApp routing, and automated quality gates.
+- Supabase project `diversoptics` (`eevpaueawctcutxultpi`) is connected and healthy. Schema, Auth, RLS, Storage and CMS work begin in Phase 02.
 
 ## Recommended next move
 
-Review and approve the Gate 4 public, CMS and motion handoff in Figma. After approval, squash-merge Phase 00 into `dev` and begin `phase/01-web-foundation`.
+Integrate the tested Phase 01 foundation, then begin `phase/02-supabase-cms` with versioned migrations, generated types, invite-only Auth, RLS, Storage policies and the owner CMS shell.
 
 ## Non-negotiables
 

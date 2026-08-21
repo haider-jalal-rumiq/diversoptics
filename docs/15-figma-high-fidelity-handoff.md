@@ -1,6 +1,6 @@
 # Figma Gate 4 — high-fidelity handoff
 
-Status: ready for project-owner review on 2026-08-21. Production implementation remains blocked until explicit approval is recorded.
+Status: approved by the project owner on 2026-08-21. Production implementation is authorized against this handoff.
 
 Figma file: <https://www.figma.com/design/bTTNOsvFVrnoFczV6mFbeJ>
 

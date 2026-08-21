@@ -31,6 +31,11 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 ## Recommended next move
 
 Obtain the first owner email, configure hosted Auth/SMTP/server secret, bootstrap that owner, and run authenticated owner/editor/viewer acceptance tests. In parallel, Phase 03 can begin the public catalog against the typed data adapter while 10–20 verified pilot products are collected.
+- Supabase project `diversoptics` (`eevpaueawctcutxultpi`) is connected and healthy. Schema, Auth, RLS, Storage and CMS work begin in Phase 02.
+
+## Recommended next move
+
+Integrate the tested Phase 01 foundation, then begin `phase/02-supabase-cms` with versioned migrations, generated types, invite-only Auth, RLS, Storage policies and the owner CMS shell.
 
 ## Non-negotiables
 

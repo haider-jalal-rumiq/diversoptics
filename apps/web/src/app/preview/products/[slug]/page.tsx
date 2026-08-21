@@ -5,10 +5,8 @@ import { notFound } from "next/navigation";
 import { ProductMediaPlaceholder } from "@/components/home/product-media-placeholder";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import {
-  createCatalogRepository,
-  formatPriceLabel,
-} from "@/features/catalog/data/catalog-repository";
+import { createCatalogRepository } from "@/features/catalog/data/catalog-repository";
+import { formatPriceLabel } from "@/features/catalog/domain/price";
 import { buildGeneralWhatsAppHref } from "@/lib/config/site";
 
 export const metadata: Metadata = {

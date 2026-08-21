@@ -715,6 +715,17 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      record_inquiry_event: {
+        Args: {
+          p_anonymous_session_hash?: string;
+          p_campaign?: Json;
+          p_catalog_snapshot: Json;
+          p_entry_path?: string;
+          p_event_type: string;
+          p_idempotency_key_hash: string;
+        };
+        Returns: string;
+      };
       save_product_attribute_values: {
         Args: { p_product_id: number; p_values: Json };
         Returns: undefined;

@@ -5,9 +5,13 @@ import { demoProducts } from "@/features/catalog/data/demo-fixtures";
 
 import { ProductCard } from "./product-card";
 
+const [product] = demoProducts;
+
+if (!product)
+  throw new Error("The demo fixtures must expose at least one product.");
+
 describe("ProductCard", () => {
   it("exposes fixture identity and a usable detail link", () => {
-    const product = demoProducts[0];
     render(<ProductCard product={product} />);
 
     expect(
@@ -21,7 +25,7 @@ describe("ProductCard", () => {
   });
 
   it("does not present an unfinished shortlist control as active", () => {
-    render(<ProductCard product={demoProducts[0]} />);
+    render(<ProductCard product={product} />);
 
     expect(
       screen.getByRole("button", { name: /shortlist preview/i }),

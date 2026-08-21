@@ -28,11 +28,13 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 
 - [x] Initialize and validate the Next.js/TypeScript web foundation after Figma approval.
 - [x] Configure Supabase environments, migrations, Auth, RLS, and Storage policies.
-- [ ] Build catalog, search/filtering, product pages, shortlist, and inquiry redirect.
+- [x] Build catalog, search/filtering, product pages, shortlist, and inquiry redirect.
 - [x] Build owner CMS and product media workflow.
 - [!] Bootstrap the first owner and configure hosted Auth URLs, invite template, SMTP, and server-only secret after the client supplies the owner email.
-- [ ] Add metadata, sitemap, Product/Breadcrumb/LocalBusiness structured data, and social previews.
-- [ ] Add analytics events and reporting definitions.
+- [x] Add metadata, sitemap, Product/Breadcrumb/LocalBusiness structured data, and social previews.
+- [~] Add analytics events and reporting definitions; first-party inquiry events are recorded, reporting definitions remain.
+- [!] Apply the two Phase 03 migrations to the cloud project and regenerate database types.
+- [!] Add business-hours editing to the CMS settings screen; the public store page cannot show confirmed hours without it.
 - [ ] Seed a 10–20 product pilot set and validate the schema before bulk entry.
 - [ ] Complete accessibility, performance, device, content, and security QA.
 - [ ] Train owner/admin and launch.

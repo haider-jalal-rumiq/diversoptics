@@ -11,6 +11,14 @@ export const SHORTLIST_STORAGE_KEY = "diverso.shortlist.v1";
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MAX_VARIANT_SKU_LENGTH = 64;
 
+/**
+ * Shared by the shortlist API and the inquiry redirect so a slug arriving from a
+ * URL or from browser storage is validated the same way in both places.
+ */
+export function isProductSlug(value: string): boolean {
+  return SLUG_PATTERN.test(value);
+}
+
 function normalizeEntry(value: unknown): ShortlistEntry | null {
   if (typeof value !== "object" || value === null) return null;
 

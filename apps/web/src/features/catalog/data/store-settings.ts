@@ -31,8 +31,19 @@ export async function getStoreSettings(): Promise<StoreSettings | null> {
     .eq("id", true)
     .maybeSingle();
 
+  /**
+   * Settings are supplementary: every page that reads them already renders an
+   * honest "not confirmed" state, and the WhatsApp destination falls back to the
+   * environment-safe configured number. So a failure here degrades instead of
+   * throwing — losing the shop address must not take down the whole storefront.
+   *
+   * This also covers the window before the Phase 03 read grant is applied, when
+   * anon reads are still denied on this table.
+   */
   if (error) {
-    throw new Error(`Could not load store settings: ${error.message}`);
+    console.error("Could not load store settings", error.message);
+
+    return null;
   }
 
   if (!data) return null;

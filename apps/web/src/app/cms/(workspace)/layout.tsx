@@ -31,7 +31,10 @@ export default async function CmsWorkspaceLayout({
       <CmsNav staff={staff} />
       <div className="min-w-0">
         <CmsHeader staff={staff} />
-        <main className="mx-auto w-full max-w-[92rem] p-5 sm:p-8 lg:p-10">
+        <main
+          className="mx-auto w-full max-w-[92rem] p-5 sm:p-8 lg:p-10"
+          id="main"
+        >
           {children}
         </main>
       </div>

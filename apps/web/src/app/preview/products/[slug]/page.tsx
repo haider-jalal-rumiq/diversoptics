@@ -26,7 +26,7 @@ export default async function PreviewProductPage({
   if (!product) notFound();
 
   return (
-    <main className="min-h-screen bg-porcelain py-8 sm:py-16">
+    <main className="min-h-screen bg-porcelain py-8 sm:py-16" id="main">
       <Container>
         <Link
           className="inline-flex min-h-11 items-center text-sm font-semibold hover:underline"

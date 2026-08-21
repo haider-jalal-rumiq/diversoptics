@@ -49,7 +49,9 @@ test("fixture product detail remains clearly fictional", async ({ page }) => {
   await expect(
     page.getByText("FICTIONAL FIXTURE · NOT REAL INVENTORY"),
   ).toBeVisible();
-  await expect(page.getByText("Price on inquiry")).toBeVisible();
+  // The fixture now carries a placeholder amount, so the page shows a price
+  // rather than the inquiry fallback. en-PK localises PKR as "Rs".
+  await expect(page.getByText(/Rs\s?18,500/)).toBeVisible();
 });
 
 test("mobile reduced-motion navigation remains complete and contained", async ({

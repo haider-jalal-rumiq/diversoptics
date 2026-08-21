@@ -17,7 +17,15 @@ export function BrandTile({ brand }: { brand: CatalogBrand }) {
         </span>
       </div>
       <h3 className="mt-3 text-lg font-semibold uppercase">{brand.name}</h3>
-      <p className="mt-1 text-xs text-porcelain/65">{brand.categoryLabel}</p>
+      {/*
+        A brand's category mix is derived from its products, so the label is only
+        shown when it actually holds a value rather than guessed at.
+      */}
+      {brand.categoryLabel ? (
+        <p className="mt-1 text-xs text-porcelain/65">{brand.categoryLabel}</p>
+      ) : (
+        <p className="mt-1 text-xs text-porcelain/65">View products</p>
+      )}
     </Link>
   );
 }

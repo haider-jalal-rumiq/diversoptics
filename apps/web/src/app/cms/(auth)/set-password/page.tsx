@@ -10,7 +10,10 @@ export const metadata: Metadata = {
 
 export default function SetPasswordPage() {
   return (
-    <main className="grid min-h-screen place-items-center bg-charcoal p-5">
+    <main
+      className="grid min-h-screen place-items-center bg-charcoal p-5"
+      id="main"
+    >
       <section className="w-full max-w-md rounded-[1.75rem] bg-porcelain p-7 shadow-card sm:p-10">
         <BrandMark />
         <p className="mt-8 text-xs font-bold tracking-[0.18em] text-brass-ink uppercase">

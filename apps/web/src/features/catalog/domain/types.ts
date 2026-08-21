@@ -178,6 +178,23 @@ export type ShortlistEntry = {
   variantSku: string | null;
 };
 
+/**
+ * Wire shape returned by the shortlist endpoint. The shortlist lives in browser
+ * storage, so its page resolves slugs through an API call rather than on the
+ * server, and this is the contract both sides share.
+ */
+export type ShortlistApiProduct = {
+  slug: string;
+  name: string;
+  sku: string;
+  brandName: string | null;
+  eyebrow: string;
+  href: string;
+  imagePath: string | null;
+  priceLabel: string | null;
+  availabilityLabel: string;
+};
+
 export type InquirySnapshotItem = {
   slug: string;
   name: string;

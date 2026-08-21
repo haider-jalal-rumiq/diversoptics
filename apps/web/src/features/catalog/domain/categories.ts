@@ -94,9 +94,14 @@ export function findCategoryByPath(
 ): CatalogCategoryNode | null {
   if (segments.length === 0) return null;
 
-  const path = `/${segments.join("/")}`;
+  return findCategoryByHref(nodes, `/${segments.join("/")}`);
+}
 
-  return flattenCategories(nodes).find((node) => node.href === path) ?? null;
+export function findCategoryByHref(
+  nodes: readonly CatalogCategoryNode[],
+  href: string,
+): CatalogCategoryNode | null {
+  return flattenCategories(nodes).find((node) => node.href === href) ?? null;
 }
 
 /**

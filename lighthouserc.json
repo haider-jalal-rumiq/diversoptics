@@ -3,7 +3,11 @@
     "collect": {
       "startServerCommand": "node apps/web/node_modules/next/dist/bin/next start apps/web --hostname 127.0.0.1",
       "startServerReadyPattern": "Ready in|started server",
-      "url": ["http://127.0.0.1:3000/"],
+      "url": [
+        "http://127.0.0.1:3000/",
+        "http://127.0.0.1:3000/eyewear",
+        "http://127.0.0.1:3000/products/demo-frame-01"
+      ],
       "numberOfRuns": 1,
       "settings": {
         "preset": "desktop",

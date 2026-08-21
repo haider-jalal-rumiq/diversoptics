@@ -4,7 +4,7 @@
 
 Build Diverso Optics into a credible premium local retail brand: a visually distinctive catalog website, an easy product CMS, a human WhatsApp inquiry experience, and a sustainable Instagram/Facebook/TikTok content operation.
 
-## Current state — 2026-08-21
+## Current state — 2026-08-22
 
 - Workspace began with two JPEG logo variants and no codebase.
 - Competitor and benchmark research is documented.
@@ -27,10 +27,14 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - CMS coverage includes products, variants, media optimization, brands, categories, structured attributes, collections, pages, CSV draft import, business settings, staff roles, product preview, and audit activity.
 - Phase 02 verification currently passes 30 pgTAP assertions, the Supabase security advisor, strict application checks, production build, and cross-browser anonymous Auth/accessibility tests.
 - No real catalog or staff identities were seeded. The singleton settings row contains only already confirmed facts.
+- Phase 03 implements the public catalog: root-level category listings, brand and collection pages, search, product detail with gallery, variants and specifications, a browser-local shortlist, and the WhatsApp inquiry redirect that records a first-party event first.
+- Two Phase 03 migrations expose the public settings row to anonymous readers and add a definer `record_inquiry_event()` function that rebuilds its stored payload from a key allowlist and accepts only hashed session tokens. Both are written and CI-verified but not yet applied to the cloud project.
+- Metadata, canonical URLs, generated sitemap, robots, and Product/Breadcrumb/LocalBusiness structured data are in place. Crawling stays closed behind a single launch flag.
+- Phase 03 verification: 82 Vitest tests, 88 Playwright scenarios across four browsers, 20 new pgTAP assertions, and Lighthouse 100 performance and 100 accessibility on the home, category and product pages.
 
 ## Recommended next move
 
-Obtain the first owner email, configure hosted Auth/SMTP/server secret, bootstrap that owner, and run authenticated owner/editor/viewer acceptance tests. In parallel, Phase 03 can begin the public catalog against the typed data adapter while 10–20 verified pilot products are collected.
+Apply the two Phase 03 migrations with `supabase db push` and regenerate `database.types.ts`. Obtain the first owner email, configure hosted Auth/SMTP/server secret, and bootstrap that owner. Then seed the 10–20 verified pilot products so the catalog renders real inventory, and add business-hours editing to the CMS so the store page can show confirmed hours. Analytics reporting definitions are the remaining Phase 03 item; the inquiry event already records the data they will read.
 
 ## Non-negotiables
 

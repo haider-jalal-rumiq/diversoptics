@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atelier Meridian — Watches</title>
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+  <div class="container">
+    <header class="nav">
+      <a class="nav-brand" href="#">Atelier Meridian</a>
+      <ul class="nav-links">
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#models">Models</a></li>
+        <li><a href="#materials">Materials</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-reserve" href="#discover">Discover</a>
+      </div>
+    </header>
+
+    <section class="hero" id="collections">
+      <h1>Measured in light.</h1>
+      <p class="lede">Watch system for brand sites, model pages, and boutique decks — Ink ground, Champagne accents, photography ready for the web.</p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="#models">Explore models</a>
+        <a class="btn btn-ghost" href="#materials">View materials</a>
+      </div>
+    </section>
+
+    <section class="stat-row" aria-label="Brand stats">
+      <div class="stat"><div class="stat-value">12</div><div class="stat-label">References</div></div>
+      <div class="stat"><div class="stat-value">3</div><div class="stat-label">Collections</div></div>
+      <div class="stat"><div class="stat-value">41</div><div class="stat-label">mm case</div></div>
+      <div class="stat"><div class="stat-value">5</div><div class="stat-label">Boutiques</div></div>
+    </section>
+
+    <section style="margin:var(--space-6) 0">
+      <form class="lookbook-bar" onsubmit="return false" aria-label="Model filter">
+        <div class="field">
+          <label for="bb-ref">Reference</label>
+          <input class="input" id="bb-ref" type="text" placeholder="AM-41">
+        </div>
+        <div class="field">
+          <label for="bb-move">Movement</label>
+          <select class="select" id="bb-move">
+            <option>Automatic</option>
+            <option>Manual</option>
+            <option>Chronograph</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bb-case">Case</label>
+          <select class="select" id="bb-case">
+            <option>Steel</option>
+            <option>Gold</option>
+            <option>Titanium</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="bb-strap">Strap</label>
+          <select class="select" id="bb-strap">
+            <option>Leather</option>
+            <option>Bracelet</option>
+            <option>Rubber</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Find models</button>
+      </form>
+    </section>
+
+    <section id="models" class="pad" style="padding-inline:0">
+      <p class="kicker">01 · Capabilities</p>
+      <div class="feature-row"><h3>Precision dark UI</h3><p class="p2">Ink pages, 3px radius, Bone type — structure leads, Champagne marks the action.</p></div>
+      <div class="feature-row"><h3>Campaign heroes</h3><p class="p2">Boutique and marble stills with room for headline overlays.</p></div>
+      <div class="feature-row"><h3>Material proof</h3><p class="p2">Brushed steel, strap grain, and dial details that earn trust before enquire.</p></div>
+    </section>
+
+    <section id="materials" style="margin:var(--space-7) 0">
+      <div class="grid grid-3" style="gap:var(--space-3)">
+        <figure data-image-slot="space">
+          <img src="../../assets/imagery/01-space-hero.webp" alt="Dress watch hero">
+          <figcaption class="p3" style="margin-top:var(--space-3)">Space / hero</figcaption>
+        </figure>
+        <figure data-image-slot="material">
+          <img src="../../assets/imagery/02-material.webp" alt="Brushed steel and strap material">
+          <figcaption class="p3" style="margin-top:var(--space-3)">Material</figcaption>
+        </figure>
+        <figure data-image-slot="object">
+          <img src="../../assets/imagery/03-object-detail.webp" alt="Dial and crown detail">
+          <figcaption class="p3" style="margin-top:var(--space-3)">Object / detail</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="pad" style="padding-inline:0; margin-bottom:var(--space-7)" id="discover">
+      <div class="grid grid-2">
+        <div>
+          <p class="kicker">Restraint</p>
+          <h2>One Champagne mark. Endless precision.</h2>
+        </div>
+        <p class="p1">Atelier Meridian is the specimen brand site for CALIBER — same tokens as the deck, chips, and foundations. Swap the copy; keep the horology language.</p>
+      </div>
+      <div class="btn-row" style="margin-top:var(--space-5)">
+        <a class="btn btn-primary" href="#">Book a boutique visit</a>
+        <a class="btn btn-ghost" href="#">Download specs</a>
+      </div>
+    </section>
+  </div>
+  <script src="image-slot.js"></script>
+  <script src="ds-base.js"></script>
+</body>
+</html>

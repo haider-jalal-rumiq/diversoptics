@@ -1,0 +1,12 @@
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+.vercel
+.netlify
+.wrangler
+/.pnpm-store
+.DS_Store

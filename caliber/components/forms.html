@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CALIBER — Forms</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <div class="container pad-lg">
+    <p class="kicker"><a href="index.html">← Components</a></p>
+    <h1>Forms</h1>
+    <p class="p1" style="max-width:52ch">Collection and inquiry forms use Bone labels, Ink inputs, Champagne focus rings, and Sapphire error text.</p>
+    <hr class="rule">
+    <form style="max-width:420px" onsubmit="return false">
+      <div class="field">
+        <label for="name">Name</label>
+        <input class="input" id="name" name="name" placeholder="Elena March">
+        <span class="field-hint">Used to confirm your boutique appointment.</span>
+      </div>
+      <div class="field">
+        <label for="date">Preferred date</label>
+        <input class="input" id="date" name="date" type="date">
+      </div>
+      <div class="field">
+        <label for="model">Model</label>
+        <select class="select" id="model" name="model">
+          <option>Meridian 38</option>
+          <option>Meridian Chronograph</option>
+          <option>Meridian GMT</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="notes">Appointment notes</label>
+        <textarea class="textarea" id="notes" name="notes" placeholder="Models, straps, or sizing questions…"></textarea>
+        <span class="field-error">Select a model before requesting an appointment.</span>
+      </div>
+      <button class="btn btn-reserve" type="submit">Request appointment</button>
+    </form>
+  </div>
+</body>
+</html>

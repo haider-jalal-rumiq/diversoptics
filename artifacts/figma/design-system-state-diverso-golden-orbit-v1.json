@@ -1,0 +1,633 @@
+{
+  "runId": "diverso-golden-orbit-v1",
+  "figma": {
+    "fileKey": "bTTNOsvFVrnoFczV6mFbeJ",
+    "fileUrl": "https://www.figma.com/design/bTTNOsvFVrnoFczV6mFbeJ",
+    "editorType": "figma"
+  },
+  "phase": "phase4",
+  "step": "P4.b-gate-3-review-ready",
+  "entities": {
+    "collections": {
+      "Primitives": {
+        "id": "VariableCollectionId:2:2",
+        "modes": {
+          "Value": "2:0"
+        }
+      },
+      "Color": {
+        "id": "VariableCollectionId:2:3",
+        "modes": {
+          "Light": "2:1",
+          "Editorial": "2:4"
+        }
+      },
+      "Spacing": {
+        "id": "VariableCollectionId:2:4",
+        "modes": {
+          "Default": "2:2"
+        }
+      },
+      "Radius": {
+        "id": "VariableCollectionId:2:5",
+        "modes": {
+          "Default": "2:3"
+        }
+      }
+    },
+    "variables": {
+      "gold/400": "VariableID:3:2",
+      "gold/500": "VariableID:3:3",
+      "gold/600": "VariableID:3:4",
+      "gold/700": "VariableID:3:5",
+      "neutral/0": "VariableID:3:6",
+      "porcelain/50": "VariableID:3:7",
+      "smoke/600": "VariableID:3:8",
+      "obsidian/800": "VariableID:3:9",
+      "obsidian/900": "VariableID:3:10",
+      "brass/600": "VariableID:3:11",
+      "green/600": "VariableID:3:12",
+      "red/600": "VariableID:3:13",
+      "space/0": "VariableID:3:14",
+      "space/2": "VariableID:3:15",
+      "space/4": "VariableID:3:16",
+      "space/8": "VariableID:3:17",
+      "space/12": "VariableID:3:18",
+      "space/16": "VariableID:3:19",
+      "space/20": "VariableID:3:20",
+      "space/24": "VariableID:3:21",
+      "space/32": "VariableID:3:22",
+      "space/40": "VariableID:3:23",
+      "space/48": "VariableID:3:24",
+      "space/64": "VariableID:3:25",
+      "space/80": "VariableID:3:26",
+      "space/96": "VariableID:3:27",
+      "space/120": "VariableID:3:28",
+      "radius/0": "VariableID:3:29",
+      "radius/4": "VariableID:3:30",
+      "radius/8": "VariableID:3:31",
+      "radius/12": "VariableID:3:32",
+      "radius/full": "VariableID:3:33",
+      "color/bg/page": "VariableID:5:2",
+      "color/bg/surface": "VariableID:5:3",
+      "color/bg/inverse": "VariableID:5:4",
+      "color/bg/action/default": "VariableID:5:5",
+      "color/bg/action/hover": "VariableID:5:6",
+      "color/bg/action/pressed": "VariableID:5:7",
+      "color/bg/availability": "VariableID:5:8",
+      "color/bg/error": "VariableID:5:9",
+      "color/bg/whatsapp": "VariableID:5:10",
+      "color/text/primary": "VariableID:5:11",
+      "color/text/secondary": "VariableID:5:12",
+      "color/text/inverse": "VariableID:5:13",
+      "color/text/on-action": "VariableID:5:14",
+      "color/text/on-status": "VariableID:5:15",
+      "color/text/link": "VariableID:5:16",
+      "color/text/availability": "VariableID:5:17",
+      "color/text/error": "VariableID:5:18",
+      "color/icon/primary": "VariableID:5:19",
+      "color/icon/secondary": "VariableID:5:20",
+      "color/icon/on-action": "VariableID:5:21",
+      "color/icon/on-status": "VariableID:5:22",
+      "color/border/default": "VariableID:5:23",
+      "color/border/subtle": "VariableID:5:24",
+      "color/border/action": "VariableID:5:25",
+      "color/border/focus": "VariableID:5:26"
+    },
+    "styles": {
+      "Display/XL": "S:047fc163feba71630fc00541b3ee66e0cad2b16d,",
+      "Display/L": "S:37ee4fcf5f66f3981a44a9665818f2a66806c527,",
+      "Display/M": "S:6384a7cce2af143044200192f401d7d68f858054,",
+      "Heading/H1": "S:88a40e2434f7510d29ed6fcaa437c958d341af6e,",
+      "Heading/H2": "S:ad986d7bda992e6454d276a4500cf564a5140a89,",
+      "Heading/H3": "S:c95b2d43c8834cf15c56245875ab5911839d7dd4,",
+      "Heading/H4": "S:7362581e04041073f2ab2b89f071f211be6f25c8,",
+      "Body/L": "S:de295027ceb3f8553af002a71d94c6724440caa1,",
+      "Body/M": "S:7558c2e646a6f034e8ec28bd9938b01ab0721406,",
+      "Body/S": "S:8a9c981f48b7c608b163c17c32bee76412f85fd5,",
+      "Label/M": "S:425577bdfcc0528d6192e710813a9c7eb0da67a9,",
+      "Label/S": "S:d5267e31653f3e452bc98171152990e7b5619dc7,",
+      "Product/Model": "S:5052e1c86f0ea15f8f70423b2c5d818c31cad92b,",
+      "shadow/subtle": "S:c3a725ab0ac5ae8e66147549ae6d7efb44e5f66b,",
+      "shadow/floating": "S:064322461bd4d71fc471a015a8a9690561f3c136,",
+      "focus/gold": "S:5300f6ec041b0c2b7cdd6d09633a8b1b72602625,"
+    },
+    "pages": {
+      "Cover": "0:1",
+      "Getting Started": "10:2",
+      "Foundations": "10:3",
+      "Separator / 1": "10:4",
+      "Components": "10:6",
+      "Separator / 2": "10:5",
+      "Icons": "26:2",
+      "Button": "27:2",
+      "Text Link": "32:2",
+      "Icon Button": "37:2",
+      "Search": "41:2",
+      "Filter Chip": "42:2",
+      "WhatsApp CTA": "44:2",
+      "Header": "48:2",
+      "Availability Badge": "54:2",
+      "Product Card": "55:2",
+      "Shortlist Tray": "59:2",
+      "Orbit Hero": "63:2",
+      "Category Card": "67:2",
+      "Brand Tile": "69:2",
+      "Sitemap & Flows": "74:2",
+      "Wireframes — Mobile": "75:2",
+      "Utilities": "10:7"
+    },
+    "components": {
+      "Icon/Arrow Right": "26:13",
+      "Icon/Search": "26:19",
+      "Icon/Menu": "26:26",
+      "Icon/Heart": "26:32",
+      "Icon/Message": "26:38",
+      "Icon/Close": "26:44",
+      "Button": "29:2",
+      "Text Link": "36:2",
+      "Icon Button": "38:95",
+      "Search": "41:86",
+      "Filter Chip": "42:52",
+      "WhatsApp CTA": "44:97",
+      "Header": "48:156",
+      "Availability Badge": "54:31",
+      "Product Media / CMS Placeholder": "55:15",
+      "Product Card": "55:133",
+      "Shortlist Tray": "59:151",
+      "Orbit Scene / CMS Product Placeholder": "63:19",
+      "Orbit Hero": "63:100",
+      "Category Media / CMS Placeholder": "67:16",
+      "Category Card": "67:84",
+      "Brand Mark / Rights Pending": "69:19",
+      "Brand Tile": "69:52"
+    },
+    "screens": {
+      "Cover / Golden Orbit": "11:2",
+      "Getting Started / Golden Orbit": "13:2",
+      "Foundations / Golden Orbit": "14:2",
+      "Components / Index": "22:2",
+      "Utilities / Brand Assets": "23:2",
+      "Icons / Board": "26:3",
+      "Button / Board": "27:3",
+      "Text Link / Board": "32:3",
+      "Icon Button / Board": "37:3",
+      "Search / Board": "41:3",
+      "Filter Chip / Board": "42:3",
+      "WhatsApp CTA / Board": "44:3",
+      "Header / Board": "48:3",
+      "Availability Badge / Board": "54:3",
+      "Product Card / Board": "55:3",
+      "Shortlist Tray / Board": "59:3",
+      "Orbit Hero / Board": "63:3",
+      "Category Card / Board": "67:3",
+      "Brand Tile / Board": "69:3",
+      "Sitemap & Core Flows / Board": "74:3",
+      "Public Sitemap": "74:10",
+      "Core Conversion Flows": "74:68",
+      "Mobile Wireframes / Gate 3 Board": "75:3",
+      "Wireframe / Home": "75:11",
+      "Wireframe / Catalog": "75:48",
+      "Wireframe / Product": "75:95",
+      "Wireframe / Shortlist": "75:120",
+      "Wireframe / Store": "75:149",
+      "Wireframe / WhatsApp Transition": "75:169",
+      "Utilities / Source Logo Target": "23:10",
+      "Foundations / Primitives Panel": "14:10",
+      "Foundations / Semantic Light Panel": "14:11",
+      "Foundations / Editorial Panel": "14:12",
+      "Foundations / Display Typography Panel": "14:16",
+      "Foundations / Functional Typography Panel": "14:17",
+      "Foundations / Spacing Panel": "14:21",
+      "Foundations / Radius Panel": "14:22",
+      "Foundations / Effects Panel": "14:26"
+    }
+  },
+  "libraryReferences": {
+    "simpleDesignSystem": "lk-e0ffcff14368019c4f30f45401cd233d6cbc5f869988484192d04cbbef801fb0064ef68feaa8a2775ee4f1f05d9a4af1a6d07b2658eac4aefb7afb18728c4066"
+  },
+  "validationResults": {
+    "phase1Variables": {
+      "status": "valid",
+      "collections": 4,
+      "variables": 57,
+      "semanticAliasValues": 50,
+      "brokenAliases": 0,
+      "rawSemanticValues": 0,
+      "allScopesViolations": 0,
+      "missingWebSyntax": 0
+    },
+    "phase1Styles": {
+      "status": "valid",
+      "textStyles": 13,
+      "effectStyles": 3
+    },
+    "phase2FileStructure": {
+      "status": "valid",
+      "pages": 7,
+      "documentationRoots": 5,
+      "foundationsPanels": 8,
+      "logoSourcePlaced": true,
+      "visualReview": "passed"
+    },
+    "phase3Icons": {
+      "status": "valid",
+      "components": 6,
+      "size": "24x24",
+      "semanticStrokeBindings": true,
+      "visualReview": "passed"
+    },
+    "phase3Button": {
+      "status": "valid",
+      "componentSet": "29:2",
+      "variants": 30,
+      "sizes": {
+        "Medium": 50,
+        "Large": 58
+      },
+      "uniqueGridPositions": 30,
+      "focusedVariants": 6,
+      "properties": [
+        "Label",
+        "Size",
+        "Variant",
+        "State"
+      ],
+      "visualReview": "passed-after-focus-outline-correction"
+    },
+    "phase3TextLink": {
+      "status": "valid",
+      "componentSet": "36:2",
+      "variants": 20,
+      "sizes": {
+        "Small": 46,
+        "Medium": 50
+      },
+      "uniqueGridPositions": 20,
+      "focusedVariants": 4,
+      "underlinedHoverAndFocusVariants": 8,
+      "properties": [
+        "Label",
+        "Size",
+        "Emphasis",
+        "State"
+      ],
+      "visualReview": "passed"
+    },
+    "phase3IconButton": {
+      "status": "valid",
+      "componentSet": "38:95",
+      "variants": 16,
+      "sizes": {
+        "Medium": 48,
+        "Large": 56
+      },
+      "uniqueGridPositions": 16,
+      "focusedVariants": 4,
+      "iconInstanceLinks": 16,
+      "accessibilityLabelLinks": 16,
+      "tokenBoundVariants": 16,
+      "properties": [
+        "Icon",
+        "Accessibility Label",
+        "Size",
+        "Style",
+        "State"
+      ],
+      "visualReview": "passed"
+    },
+    "phase3Search": {
+      "status": "valid",
+      "componentSet": "41:86",
+      "variants": 8,
+      "sizes": {
+        "Compact": 240,
+        "Wide": 400,
+        "height": 52
+      },
+      "uniqueGridPositions": 8,
+      "focusedVariants": 2,
+      "textPropertyLinks": 8,
+      "leadingIconLinks": 8,
+      "filledClearActions": 2,
+      "hiddenClearActions": 6,
+      "tokenBoundVariants": 8,
+      "properties": [
+        "Placeholder",
+        "Value",
+        "Size",
+        "State"
+      ],
+      "visualReview": "passed"
+    },
+    "phase3FilterChip": {
+      "status": "valid",
+      "componentSet": "42:52",
+      "variants": 8,
+      "height": 44,
+      "uniqueGridPositions": 8,
+      "focusedVariants": 2,
+      "textPropertyLinks": 8,
+      "booleanPropertyLinks": 8,
+      "tokenBoundVariants": 8,
+      "properties": [
+        "Label",
+        "Count",
+        "Show Count",
+        "Selection",
+        "State"
+      ],
+      "visualReview": "passed-after-text-paint-fallback-and-focus-outline-correction"
+    },
+    "phase3WhatsAppCta": {
+      "status": "valid",
+      "componentSet": "44:97",
+      "variants": 15,
+      "size": {
+        "width": 240,
+        "height": 52
+      },
+      "uniqueGridPositions": 15,
+      "focusedVariants": 3,
+      "textPropertyLinks": 15,
+      "messageIconTokenGroups": 15,
+      "semanticFillBindings": 15,
+      "publicDestination": "+92 333 5777710",
+      "messageContractFields": [
+        "product name",
+        "SKU/model",
+        "variant",
+        "URL",
+        "inquiry ID"
+      ],
+      "properties": [
+        "Label",
+        "Context",
+        "State"
+      ],
+      "visualReview": "passed-after-focus-outline-correction"
+    },
+    "phase3Header": {
+      "status": "valid",
+      "componentSet": "48:156",
+      "variants": 4,
+      "sizes": {
+        "Desktop": "816x88 documentation width; stretchable to production container",
+        "Mobile": "375x72"
+      },
+      "uniqueGridPositions": 4,
+      "scrolledVariants": 2,
+      "logoImageVariants": 4,
+      "responsiveVisibilityVariants": 4,
+      "shortlistPropertyLinks": 4,
+      "nestedActionGroups": 4,
+      "properties": [
+        "Shortlist Count",
+        "Show Shortlist Count",
+        "Breakpoint",
+        "State"
+      ],
+      "visualReview": "passed-after-documentation-spacing-correction",
+      "usesPreservedSuppliedLogo": true
+    },
+    "phase3AvailabilityBadge": {
+      "status": "valid",
+      "componentSet": "54:31",
+      "variants": 6,
+      "size": "166x30",
+      "uniqueGridPositions": 6,
+      "textPropertyLinks": 6,
+      "semanticFillBindings": 6,
+      "outlineBindings": 3,
+      "semanticLabelBindings": 6,
+      "properties": [
+        "Label",
+        "Tone",
+        "Style"
+      ],
+      "cmsDrivenOnly": true,
+      "visualReview": "passed"
+    },
+    "phase3ProductCard": {
+      "status": "valid",
+      "componentSet": "55:133",
+      "mediaComponent": "55:15",
+      "variants": 6,
+      "sizes": {
+        "Grid": "276x420",
+        "List": "848x200 documentation width; stretchable"
+      },
+      "uniqueGridPositions": 6,
+      "textPropertyLinks": 6,
+      "mediaInstanceSwapLinks": 6,
+      "statusInstanceSwapLinks": 6,
+      "nestedControlLinks": 6,
+      "focusedVariants": 2,
+      "hoverVariants": 2,
+      "properties": [
+        "Brand",
+        "Product Name",
+        "Model",
+        "Product Media",
+        "Status",
+        "Show Status",
+        "Layout",
+        "State"
+      ],
+      "defaultAvailabilityCopy": "Ask for availability",
+      "pricingDisplayed": false,
+      "visualReview": "passed-after-status-copy-media-constraint-and-list-spacing-corrections"
+    },
+    "phase3ShortlistTray": {
+      "status": "valid",
+      "componentSet": "59:151",
+      "variants": 4,
+      "sizes": {
+        "Desktop Empty": "816x112",
+        "Desktop Filled": "816x180",
+        "Mobile Empty": "375x156",
+        "Mobile Filled": "375x360"
+      },
+      "uniqueGridPositions": 4,
+      "stateVisibilityChecks": 4,
+      "textPropertyLinks": 4,
+      "filledSecondItemBooleanLinks": 2,
+      "nestedActionGroups": 4,
+      "properties": [
+        "Count",
+        "Item One",
+        "Item Two",
+        "Show Item Two",
+        "Breakpoint",
+        "State"
+      ],
+      "whatsAppLabel": "Send shortlist",
+      "emptyActionLabel": "Browse catalog",
+      "visualReview": "passed-after-nested-label-thumbnail-and-mobile-spacing-corrections"
+    },
+    "phase3OrbitHero": {
+      "status": "valid",
+      "componentSet": "63:100",
+      "sceneComponent": "63:19",
+      "variants": 4,
+      "sizes": {
+        "Desktop": "816x440 documentation width; stretchable",
+        "Mobile": "375x560"
+      },
+      "uniqueGridPositions": 4,
+      "textPropertyLinks": 4,
+      "sceneInstanceSwapLinks": 4,
+      "motionVisibilityChecks": 4,
+      "editorialThemeModes": 4,
+      "nestedActionLabels": 4,
+      "properties": [
+        "Eyebrow",
+        "Headline",
+        "Body",
+        "Scene",
+        "Breakpoint",
+        "Motion"
+      ],
+      "reducedMotionVariant": true,
+      "staticPosterFallback": true,
+      "sceneClipsToResponsiveBounds": true,
+      "visualReview": "passed-after-mobile-scene-cta-and-documentation-spacing-corrections"
+    },
+    "phase3CategoryCard": {
+      "status": "valid",
+      "componentSet": "67:84",
+      "mediaComponent": "67:16",
+      "variants": 6,
+      "sizes": {
+        "Compact": "276x340",
+        "Wide": "848x260 documentation width; stretchable"
+      },
+      "uniqueGridPositions": 6,
+      "textPropertyLinks": 6,
+      "mediaInstanceSwapLinks": 6,
+      "editorialThemeModes": 6,
+      "nestedActionLabels": 6,
+      "focusedVariants": 2,
+      "hoverVariants": 2,
+      "properties": [
+        "Eyebrow",
+        "Title",
+        "Description",
+        "Media",
+        "Layout",
+        "State"
+      ],
+      "visualReview": "passed-after-documentation-height-correction"
+    },
+    "phase3BrandTile": {
+      "status": "valid",
+      "componentSet": "69:52",
+      "markComponent": "69:19",
+      "variants": 6,
+      "size": "260x180",
+      "uniqueGridPositions": 6,
+      "textPropertyLinks": 6,
+      "markInstanceSwapLinks": 6,
+      "themeModeChecks": 6,
+      "focusedVariants": 2,
+      "hoverVariants": 2,
+      "properties": [
+        "Brand Name",
+        "Category",
+        "Brand Mark",
+        "Style",
+        "State"
+      ],
+      "usageRightsGate": true,
+      "visualReview": "passed-after-dark-surface-fallback-and-label-spacing-correction"
+    },
+    "phase3LibraryAudit": {
+      "status": "valid",
+      "componentSets": 13,
+      "variants": 133,
+      "componentProperties": 63,
+      "uniquePositionSets": 13,
+      "validatedDocumentationStatuses": 14,
+      "variables": 57,
+      "textStyles": 13,
+      "effectStyles": 3,
+      "totalComponentsIncludingVariantChildren": 143,
+      "componentPages": 14,
+      "reducedMotionVariants": 2,
+      "failures": []
+    },
+    "phase4Gate3Artifacts": {
+      "status": "valid-awaiting-approval",
+      "sitemapBoard": "74:3",
+      "sitemapNodes": 16,
+      "conversionFlowFrames": 16,
+      "categoryCoverage": 5,
+      "conversionFlows": 3,
+      "whatsAppMessageFields": 5,
+      "mobileWireframes": 6,
+      "mobileFrameSize": "390x844",
+      "pendingFactLabels": 3,
+      "confirmedPublicWhatsAppPresent": true,
+      "priceValuesPresent": false,
+      "failures": []
+    }
+  },
+  "recoveryEvents": [
+    {
+      "step": "P3.c/page-and-documentation",
+      "issue": "Figma MCP transport response failed after the write completed",
+      "resolution": "Read-only inventory confirmed the committed page and recovered IDs before continuing",
+      "dataLoss": false
+    },
+    {
+      "step": "P3.e/whatsapp-final-read-only-audit",
+      "issue": "Figma connector timed out during a read-only focus verification",
+      "resolution": "Retried the same compact read-only audit; all 15 variants and three focus treatments passed",
+      "dataLoss": false
+    }
+  ],
+  "pendingValidations": [
+    "gate3:client-approval",
+    "phase4:responsive-screens",
+    "phase4:conversion-flows",
+    "phase4:screen-accessibility"
+  ],
+  "completedSteps": [
+    "P0.a",
+    "P0.b",
+    "P0.c",
+    "P0.d",
+    "P0.e",
+    "P0.f:analysis",
+    "P0.approval",
+    "P1.a",
+    "P1.b",
+    "P1.c",
+    "P1.d",
+    "P1.e",
+    "P1.f",
+    "P1.g",
+    "P1.h",
+    "P2.a",
+    "P2.b",
+    "P2.c",
+    "P3.a:patterns",
+    "P3.a:icons",
+    "P3.b",
+    "P3.c",
+    "P3.d",
+    "P3.e:search",
+    "P3.e:filter-chip",
+    "P3.e:whatsapp-cta",
+    "P3.e:header",
+    "P3.f:availability-badge",
+    "P3.f:product-card",
+    "P3.g",
+    "P3.h",
+    "P3.f:category-card",
+    "P3.f:brand-tile",
+    "P3.i",
+    "P4.a:sitemap-and-flows",
+    "P4.b:mobile-wireframes"
+  ]
+}

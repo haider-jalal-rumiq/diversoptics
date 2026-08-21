@@ -4,6 +4,7 @@ Workspace for the Diverso Optics brand, catalog website, CMS, WhatsApp inquiry j
 
 ## Current phase
 
+Golden Orbit and the responsive Gate 4 handoff are approved. Phase 01 provides the tested Next.js web foundation; Phase 02 implements Supabase Auth, database, Storage and the owner CMS, pending first-owner operational bootstrap.
 Golden Orbit and the responsive Gate 4 handoff are approved. Phase 01 provides the tested Next.js web foundation; Phase 02 adds Supabase Auth, database, Storage and the owner CMS.
 
 ## Knowledge map
@@ -32,6 +33,11 @@ Golden Orbit and the responsive Gate 4 handoff are approved. Phase 01 provides t
 | `docs/14-figma-gate-3-sitemap-wireframes.md` | Approved sitemap, conversion flows and mobile wireframes |
 | `docs/15-figma-high-fidelity-handoff.md` | Gate 4 public, CMS, motion and QA review links |
 | `docs/16-phase-01-web-foundation.md` | Implemented web-foundation architecture, verification and Phase 02 handoff |
+| `docs/17-phase-02-supabase-cms.md` | Applied cloud schema, CMS capabilities, security verification and operational Auth handoff |
+
+## Immediate next step
+
+Bootstrap the first owner after receiving the client-approved email, complete hosted Auth/SMTP settings, then run authenticated role acceptance tests while Phase 03 public catalog work begins.
 
 ## Immediate next step
 

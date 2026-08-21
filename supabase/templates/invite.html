@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <body style="margin: 0; background: #f7f4ed; color: #151515; font-family: Arial, sans-serif">
+    <div style="margin: 0 auto; max-width: 560px; padding: 40px 20px">
+      <div style="border-radius: 18px; background: #ffffff; padding: 32px">
+        <p style="margin: 0; color: #a8792a; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase">
+          Diverso Optics CMS
+        </p>
+        <h1 style="margin: 16px 0 0; font-size: 30px; line-height: 1.15">
+          You have been invited
+        </h1>
+        <p style="margin: 18px 0 0; color: #68635e; font-size: 15px; line-height: 1.65">
+          An owner invited you to help manage the Diverso Optics catalog. Use
+          the secure link below to accept the invitation and choose a password.
+        </p>
+        <p style="margin: 26px 0 0">
+          <a
+            href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=invite&next=/cms/set-password"
+            style="display: inline-block; border-radius: 999px; background: #fecc29; color: #151515; font-size: 14px; font-weight: 700; padding: 14px 22px; text-decoration: none"
+          >
+            Accept invitation
+          </a>
+        </p>
+        <p style="margin: 24px 0 0; color: #68635e; font-size: 12px; line-height: 1.6">
+          If you were not expecting this invitation, you can ignore this email.
+          The link expires according to the store’s Auth security settings.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

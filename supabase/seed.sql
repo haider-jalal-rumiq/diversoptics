@@ -1,0 +1,2 @@
+-- Verified catalog content is intentionally not seeded.
+-- Local test users and fixtures belong in isolated database tests, never production migrations.

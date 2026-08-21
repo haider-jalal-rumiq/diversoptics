@@ -22,11 +22,15 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - Figma structural audits found no unfinished placeholders or missing fonts across the new public, CMS, motion and QA pages.
 - The supplied logo JPEG is placed as the canonical reference. An orbital badge is explicitly marked as an unapproved digital-extension exploration.
 - Phase 01 establishes the production Next.js 16/React 19 foundation in `apps/web`, the Golden Orbit home experience, typed preview fixtures, environment-safe WhatsApp routing, and automated quality gates.
-- Supabase project `diversoptics` (`eevpaueawctcutxultpi`) is connected and healthy. Schema, Auth, RLS, Storage and CMS work begin in Phase 02.
+- Supabase project `diversoptics` (`eevpaueawctcutxultpi`) is connected and healthy.
+- Phase 02 implements six cloud migrations, generated database types, explicit grants/RLS, two Storage buckets, invite-only profile activation, transactional media/attribute functions, and the responsive owner CMS.
+- CMS coverage includes products, variants, signed direct-to-private-Storage media uploads and server-side optimization, brands, categories, structured attributes, collections, pages, CSV draft import, business settings, staff roles, product preview, and audit activity.
+- Phase 02 verification currently passes 30 pgTAP assertions, the Supabase security advisor, strict application checks, production build, and cross-browser anonymous Auth/accessibility tests.
+- No real catalog or staff identities were seeded. The singleton settings row contains only already confirmed facts.
 
 ## Recommended next move
 
-Integrate the tested Phase 01 foundation, then begin `phase/02-supabase-cms` with versioned migrations, generated types, invite-only Auth, RLS, Storage policies and the owner CMS shell.
+Obtain the first owner email, configure hosted Auth/SMTP/server secret, bootstrap that owner, and run authenticated owner/editor/viewer acceptance tests. In parallel, Phase 03 can begin the public catalog against the typed data adapter while 10–20 verified pilot products are collected.
 
 ## Non-negotiables
 

@@ -27,9 +27,10 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 ## Implementation
 
 - [x] Initialize and validate the Next.js/TypeScript web foundation after Figma approval.
-- [ ] Configure Supabase environments, migrations, Auth, RLS, and Storage policies.
+- [x] Configure Supabase environments, migrations, Auth, RLS, and Storage policies.
 - [ ] Build catalog, search/filtering, product pages, shortlist, and inquiry redirect.
-- [ ] Build owner CMS and product media workflow.
+- [x] Build owner CMS and product media workflow.
+- [!] Bootstrap the first owner and configure hosted Auth URLs, invite template, SMTP, and server-only secret after the client supplies the owner email.
 - [ ] Add metadata, sitemap, Product/Breadcrumb/LocalBusiness structured data, and social previews.
 - [ ] Add analytics events and reporting definitions.
 - [ ] Seed a 10–20 product pilot set and validate the schema before bulk entry.

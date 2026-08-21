@@ -4,6 +4,11 @@ import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 import { requireOwner } from "@/features/cms/auth/staff";
+import {
+  buildBusinessHours,
+  BUSINESS_DAYS,
+  type BusinessHoursFormInput,
+} from "@/features/cms/domain/business-hours";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient, hasSupabaseSecretKey } from "@/lib/supabase/admin";
 
@@ -33,11 +38,37 @@ const settingsSchema = z.object({
     .pipe(z.string().regex(/^\+[1-9]\d{7,14}$/)),
 });
 
+/**
+ * The seven day rows arrive as `hours-<day>-opens|closes|closed` fields. They are
+ * validated separately from the contact fields so the owner gets a message naming
+ * the day that is wrong rather than one generic contact-field warning.
+ */
+function readBusinessHoursForm(formData: FormData): BusinessHoursFormInput {
+  const input: BusinessHoursFormInput = {};
+
+  for (const day of BUSINESS_DAYS) {
+    input[day] = {
+      closed: formData.get(`hours-${day}-closed`) === "on",
+      closes: String(formData.get(`hours-${day}-closes`) ?? ""),
+      opens: String(formData.get(`hours-${day}-opens`) ?? ""),
+    };
+  }
+
+  return input;
+}
+
 export async function saveSettings(
   _previousState: SettingsActionState,
   formData: FormData,
 ): Promise<SettingsActionState> {
   await requireOwner();
+
+  const hours = buildBusinessHours(readBusinessHoursForm(formData));
+
+  if (!hours.ok) {
+    return { message: hours.errors.join(" ") };
+  }
+
   const parsed = settingsSchema.safeParse({
     deliveryAvailable: formData.get("deliveryAvailable") === "on",
     fullAddress: formData.get("fullAddress"),
@@ -60,6 +91,7 @@ export async function saveSettings(
   const { data, error } = await supabase
     .from("site_settings")
     .update({
+      business_hours: hours.value,
       delivery_available: values.deliveryAvailable,
       full_address: values.fullAddress,
       location_label: values.locationLabel,

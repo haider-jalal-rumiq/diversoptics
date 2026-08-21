@@ -1,6 +1,6 @@
 # Phase 03 — public catalog handoff
 
-Status: implementation complete; two migrations await application, and real pilot inventory plus confirmed store facts remain content gates.
+Status: implementation complete. Both migrations are applied to the `diversoptics` project. Real pilot inventory, confirmed store facts and the first owner identity remain gates.
 
 Date: 2026-08-22
 
@@ -23,7 +23,7 @@ Two gaps in the Phase 02 policy set blocked any anonymous public read. Both are 
 
 Hashing happens in the application, so no reversible visitor identifier ever reaches the database.
 
-`apps/web/src/types/database.types.ts` carries a hand-written entry for `record_inquiry_event` because regenerating requires Docker, which is unavailable on the current workstation. Regenerate it with `pnpm supabase:types` once the migrations are applied.
+`apps/web/src/types/database.types.ts` carried a hand-written entry for `record_inquiry_event` because regenerating requires Docker, which is unavailable on the current workstation. After the migrations were applied it was compared against a freshly generated set and matched exactly, so no regeneration was needed.
 
 ## Routes
 
@@ -71,7 +71,7 @@ Crawling remains closed. `isSearchIndexingEnabled()` requires both the productio
 ## Verification
 
 - Prettier, ESLint with zero warnings, and strict TypeScript pass.
-- 82 Vitest tests across 14 files.
+- 103 Vitest tests across 16 files, including the business-hours builder and the inquiry metric aggregation added alongside this phase.
 - 88 Playwright scenarios pass across Chromium, Firefox, WebKit and mobile Chromium, covering category scoping, filtering and reset on both desktop and the mobile drawer, search, product detail, structured data, shortlist round trip, the inquiry redirect contents, the unknown-product path, robots closure, focus restore, and axe checks on the listing and product pages.
 - Lighthouse desktop, now covering the home, category and product pages: performance 100, accessibility 100, best practices 96, SEO 100, LCP 648–760 ms, CLS 0, TBT under 5 ms on all three.
 - 20 new pgTAP assertions cover the inquiry function's privilege shape, idempotent replay, payload allowlist, entry-path stripping and every rejection case. These run in CI, which has Docker; `supabase start` is unavailable on this workstation.
@@ -87,8 +87,10 @@ Lighthouse figures are local lab measurements, not field data.
 
 ## Outstanding before launch
 
-1. **Apply the two migrations** to the `diversoptics` project (`supabase db push`), then regenerate `database.types.ts`. Until then the public site logs a failed inquiry-event write and falls back to no reference, and store settings read as unconfirmed. Both degrade cleanly.
-2. **Business hours cannot be edited in the CMS.** `site_settings.business_hours` is not in the CMS settings form or action, so the store page will keep saying hours are unconfirmed even after the client supplies them. The public reader accepts both plausible shapes; the CMS editor is the missing piece.
+1. ~~Apply the two migrations~~ **Done.** Both were applied on 2026-08-22 and verified live: `anon` reads `site_settings`, may execute `record_inquiry_event`, and still has no insert or select right on `inquiry_events`. The function was smoke-tested inside a rolled-back transaction, confirming that a free-text `note` key, a non-UTM `secret` key and an entry-path query string are all discarded. `database.types.ts` was checked against a fresh generation and already matched, so no regeneration was needed.
+
+   Supabase's database linter now reports two `SECURITY DEFINER` warnings for `record_inquiry_event`, both expected and documented in `docs/19-analytics-and-reporting.md`. Do not resolve them by revoking `EXECUTE`; that would silently stop all inquiry recording.
+2. ~~Business hours cannot be edited in the CMS~~ **Done.** The settings screen now has a seven-day editor. A blank day stays unconfirmed and unpublished, which is deliberately different from marking the shop closed.
 3. **Confirm the inquiry session cookie** in a privacy notice. `diverso_inquiry_session` is a random, `httpOnly`, first-party token used only to tell one visitor's inquiries apart so a double tap is not double-counted. It is hashed before storage and carries no personal data, but it should be disclosed.
 4. **Real pilot inventory**, confirmed store facts, policy text and review evidence remain content gates owned by the client.
 5. **Analytics reporting definitions** (`TASKS.md`) are not built. The inquiry event now records the data they will read.

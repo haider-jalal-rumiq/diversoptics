@@ -9,13 +9,9 @@ import { getStoreSettings } from "@/features/catalog/data/store-settings";
 import { buildLocalBusinessSchema } from "@/features/catalog/domain/structured-data";
 import {
   buildWhatsAppHref,
-  toInternationalDigits,
+  resolveWhatsAppDestination,
 } from "@/features/catalog/domain/whatsapp";
-import {
-  getSiteUrl,
-  getWhatsAppDestination,
-  siteConfig,
-} from "@/lib/config/site";
+import { getSiteUrl, siteConfig } from "@/lib/config/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/store" },
@@ -51,14 +47,13 @@ function ConfirmedFact({
 export default async function StorePage() {
   const settings = await getStoreSettings();
 
-  const whatsappNumber =
-    settings?.whatsappNumber ?? getWhatsAppDestination().display;
-  const whatsappDigits =
-    toInternationalDigits(whatsappNumber) ??
-    getWhatsAppDestination().internationalDigits;
+  // Showing the CMS number while dialling the test one would be worse than
+  // either, so the displayed number is whichever the link actually uses.
+  const destination = resolveWhatsAppDestination(settings?.whatsappNumber);
+  const whatsappNumber = destination.display;
 
   const whatsappHref = buildWhatsAppHref(
-    whatsappDigits,
+    destination.internationalDigits,
     "Hello Diverso Optics — I would like to ask about visiting the F-11 store.",
   );
 

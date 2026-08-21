@@ -48,7 +48,7 @@ Routes under `/cms` provide:
 - Collection-to-product assignment.
 - Category-specific text, number, boolean, option, and multi-option definitions.
 - Atomic product attribute editing with required-field publication enforcement.
-- Authenticated signed upload authorization sends originals directly from the browser to private Supabase Storage, avoiding Vercel's 4.5 MB Function request limit while retaining the bucket's 15 MB source allowance. The server then verifies the path, byte size, decoded format, dimensions, and pixel count before generating a Sharp WebP derivative with a content-hashed public path. Alt text, rights status, atomic primary selection, and recoverable archive behavior remain enforced.
+- Original image validation, private upload, dimension/pixel safeguards, Sharp WebP derivatives, content-hashed public paths, alt text, rights status, atomic primary selection, and recoverable archive behavior.
 - Cross-product media review.
 - Guide, policy, and general Markdown page management.
 - All-or-nothing CSV-to-draft import for up to 500 rows/1 MB.
@@ -69,15 +69,13 @@ Local Supabase uses `supabase/templates/invite.html`. Hosted Auth still needs th
 
 This follows Supabase's current server-side token-hash flow and server-only admin-key guidance. Sources retrieved 2026-08-21: [Email templates](https://supabase.com/docs/guides/auth/auth-email-templates), [User management](https://supabase.com/docs/guides/auth/users), and [inviteUserByEmail](https://supabase.com/docs/reference/javascript/auth-admin-inviteuserbyemail).
 
-The media transfer follows the providers' recommended direct-upload model. Sources retrieved 2026-08-21: [Vercel Function body-size guidance](https://examples.vercel.com/kb/guide/how-to-bypass-vercel-body-size-limit-serverless-functions), [Supabase signed uploads](https://supabase.com/docs/reference/javascript/file-buckets-uploadtosignedurl), and [Supabase bucket restrictions](https://supabase.com/docs/guides/storage/buckets/fundamentals).
-
 ## Verification
 
 - 30 pgTAP assertions passed against the connected Postgres 17 project inside a rollback transaction.
 - Supabase security advisor: zero findings.
 - Supabase performance advisor: no warning/error findings; 18 expected `unused_index` informational notices while catalog tables are empty.
 - Cloud catalog residue check: zero profiles, categories, brands, products, and media; the intended singleton settings row remains.
-- Formatting, ESLint with zero warnings, strict TypeScript, 24 Vitest tests, and the Next.js production build pass.
+- Formatting, ESLint with zero warnings, strict TypeScript, 20 Vitest tests, and the Next.js production build pass.
 - All 24 Playwright scenarios pass across Chromium, Firefox, WebKit, and mobile Chromium, including anonymous CMS protection, login accessibility, public fixture disclosure, mobile navigation, and reduced motion.
 - Lighthouse desktop: Performance 99, Accessibility 100, Best Practices 100, SEO 100, LCP 0.8 s, CLS 0, and TBT 0 ms.
 - Docker is not installed on this workstation, so local `supabase start` was unavailable. CI now starts the local stack and runs `supabase test db` on GitHub's Docker-enabled runner.

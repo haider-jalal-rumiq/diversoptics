@@ -105,9 +105,20 @@ export async function finalizeProductMedia(
   }
 
   let metadata: Metadata;
+  let derivative: { data: Buffer; info: OutputInfo };
 
   try {
     metadata = await sharp(sourceBuffer, { failOn: "warning" }).metadata();
+    derivative = await sharp(sourceBuffer, { failOn: "warning" })
+      .rotate()
+      .resize({
+        fit: "inside",
+        height: 1_800,
+        width: 1_800,
+        withoutEnlargement: true,
+      })
+      .webp({ effort: 5, quality: 84 })
+      .toBuffer({ resolveWithObject: true });
   } catch {
     await supabase.storage
       .from("catalog-source")
@@ -131,25 +142,6 @@ export async function finalizeProductMedia(
       .from("catalog-source")
       .remove([parsed.data.sourcePath]);
     return { message: "The image dimensions are too large to process safely." };
-  }
-
-  let derivative: { data: Buffer; info: OutputInfo };
-  try {
-    derivative = await sharp(sourceBuffer, { failOn: "warning" })
-      .rotate()
-      .resize({
-        fit: "inside",
-        height: 1_800,
-        width: 1_800,
-        withoutEnlargement: true,
-      })
-      .webp({ effort: 5, quality: 84 })
-      .toBuffer({ resolveWithObject: true });
-  } catch {
-    await supabase.storage
-      .from("catalog-source")
-      .remove([parsed.data.sourcePath]);
-    return { message: "The catalog derivative could not be generated safely." };
   }
 
   const hash = createHash("sha256").update(sourceBuffer).digest("hex");

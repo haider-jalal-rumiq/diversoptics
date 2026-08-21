@@ -24,7 +24,7 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - Phase 01 establishes the production Next.js 16/React 19 foundation in `apps/web`, the Golden Orbit home experience, typed preview fixtures, environment-safe WhatsApp routing, and automated quality gates.
 - Supabase project `diversoptics` (`eevpaueawctcutxultpi`) is connected and healthy.
 - Phase 02 implements six cloud migrations, generated database types, explicit grants/RLS, two Storage buckets, invite-only profile activation, transactional media/attribute functions, and the responsive owner CMS.
-- CMS coverage includes products, variants, signed direct-to-private-Storage media uploads and server-side optimization, brands, categories, structured attributes, collections, pages, CSV draft import, business settings, staff roles, product preview, and audit activity.
+- CMS coverage includes products, variants, media optimization, brands, categories, structured attributes, collections, pages, CSV draft import, business settings, staff roles, product preview, and audit activity.
 - Phase 02 verification currently passes 30 pgTAP assertions, the Supabase security advisor, strict application checks, production build, and cross-browser anonymous Auth/accessibility tests.
 - No real catalog or staff identities were seeded. The singleton settings row contains only already confirmed facts.
 

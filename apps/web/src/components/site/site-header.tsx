@@ -25,7 +25,7 @@ export function SiteHeader({
         DELIVERY AVAILABLE · COVERAGE AND TIMING CONFIRMED ON INQUIRY
       </div>
       <header className="bg-porcelain py-2">
-        <Container className="flex h-[72px] items-center gap-3 rounded-none bg-white px-4 sm:h-[88px] sm:gap-[18px] sm:px-8">
+        <Container className="flex h-[72px] items-center gap-3 rounded-none bg-white px-6 sm:h-[88px] sm:gap-[18px] sm:px-14">
           {/* BrandMark is already a link home; wrapping it nested one anchor
               inside another, which is invalid markup. */}
           <BrandMark className="h-12 w-[82px] sm:h-16 sm:w-[108px]" />

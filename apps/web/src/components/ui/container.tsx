@@ -8,7 +8,7 @@ export function Container({
 }: ComponentPropsWithoutRef<"div">) {
   return (
     <div
-      className={cn("mx-auto w-full max-w-[80rem] px-4 sm:px-8", className)}
+      className={cn("mx-auto w-full max-w-[80rem] px-6 sm:px-14", className)}
       {...props}
     />
   );

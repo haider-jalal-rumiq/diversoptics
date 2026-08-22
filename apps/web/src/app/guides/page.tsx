@@ -7,6 +7,14 @@ import { SiteShell } from "@/components/site/site-shell";
 import { Container } from "@/components/ui/container";
 import { createCatalogRepository } from "@/features/catalog/data/catalog-repository";
 
+/**
+ * This page is prerendered, and its content comes from the CMS. Without a
+ * revalidation window it would be baked at deploy time and never reflect a
+ * product the owner publishes later, until someone redeployed. Sixty seconds
+ * keeps CMS edits visible quickly at negligible cost for this traffic level.
+ */
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   alternates: { canonical: "/guides" },
   description:

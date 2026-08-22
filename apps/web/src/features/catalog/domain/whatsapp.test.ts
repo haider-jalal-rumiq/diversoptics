@@ -5,6 +5,7 @@ import {
   buildShortlistMessage,
   buildSingleProductMessage,
   buildWhatsAppHref,
+  resolveWhatsAppDestination,
   toInternationalDigits,
 } from "./whatsapp";
 
@@ -76,6 +77,37 @@ describe("click to chat links", () => {
 
   it("refuses a destination that holds no digits", () => {
     expect(() => buildWhatsAppHref("not a number", "hi")).toThrow();
+  });
+
+  it("never dials the live business number outside production", () => {
+    // The CMS settings row holds the real shop number and every environment
+    // reads it. Phase 01 requires test and production destinations to stay
+    // separate, so a preview or local session must not reach the live shop.
+    const live = "+92 333 5777710";
+
+    for (const environment of ["development", "preview", "test"] as const) {
+      const destination = resolveWhatsAppDestination(live, environment);
+
+      expect(destination.internationalDigits).not.toBe("923335777710");
+      expect(destination.internationalDigits).toBe("923438067821");
+    }
+  });
+
+  it("uses the CMS number in production so it can change without a deploy", () => {
+    expect(resolveWhatsAppDestination("+92 300 1234567", "production")).toEqual(
+      {
+        display: "+92 300 1234567",
+        internationalDigits: "923001234567",
+      },
+    );
+  });
+
+  it("falls back to the configured destination when settings hold nothing usable", () => {
+    for (const value of [null, undefined, "", "no digits here"]) {
+      expect(
+        resolveWhatsAppDestination(value, "production").internationalDigits,
+      ).toBe("923335777710");
+    }
   });
 
   it("converts a local number to international digits", () => {

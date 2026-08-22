@@ -30,11 +30,11 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 - [x] Configure Supabase environments, migrations, Auth, RLS, and Storage policies.
 - [x] Build catalog, search/filtering, product pages, shortlist, and inquiry redirect.
 - [x] Build owner CMS and product media workflow.
-- [!] Bootstrap the first owner and configure hosted Auth URLs, invite template, SMTP, and server-only secret after the client supplies the owner email.
+- [!] Create the first owner Auth identity in the Supabase dashboard, then configure hosted Auth URLs, invite template, SMTP, and the server-only secret. Emails are supplied; the identity itself must be created by a human because it requires setting a password.
 - [x] Add metadata, sitemap, Product/Breadcrumb/LocalBusiness structured data, and social previews.
-- [~] Add analytics events and reporting definitions; first-party inquiry events are recorded, reporting definitions remain.
-- [!] Apply the two Phase 03 migrations to the cloud project and regenerate database types.
-- [!] Add business-hours editing to the CMS settings screen; the public store page cannot show confirmed hours without it.
+- [x] Add analytics events and reporting definitions; see `docs/19-analytics-and-reporting.md` and the CMS Inquiries screen.
+- [x] Apply the two Phase 03 migrations to the cloud project and verify the generated database types.
+- [x] Add business-hours editing to the CMS settings screen.
 - [ ] Seed a 10–20 product pilot set and validate the schema before bulk entry.
 - [ ] Complete accessibility, performance, device, content, and security QA.
 - [ ] Train owner/admin and launch.

@@ -7,10 +7,7 @@ export function BrandMark({ className }: { className?: string }) {
   return (
     <Link
       aria-label="Diverso Optics home"
-      className={cn(
-        "relative block h-12 w-[82px] overflow-hidden rounded-lg border border-smoke/50 bg-white",
-        className,
-      )}
+      className={cn("relative block h-12 w-[82px]", className)}
       href="/"
     >
       <Image

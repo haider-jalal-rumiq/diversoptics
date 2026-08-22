@@ -11,6 +11,7 @@ const links = [
   { href: "/cms/collections", label: "Collections" },
   { href: "/cms/pages", label: "Pages" },
   { href: "/cms/media", label: "Media" },
+  { href: "/cms/inquiries", label: "Inquiries" },
   { href: "/cms/settings", label: "Settings" },
 ] as const;
 

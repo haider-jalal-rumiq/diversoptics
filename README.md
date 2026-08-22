@@ -34,7 +34,8 @@ Golden Orbit and the responsive Gate 4 handoff are approved. Phase 01 provides t
 | `docs/16-phase-01-web-foundation.md` | Implemented web-foundation architecture, verification and Phase 02 handoff |
 | `docs/17-phase-02-supabase-cms.md` | Applied cloud schema, CMS capabilities, security verification and operational Auth handoff |
 | `docs/18-phase-03-public-catalog.md` | Public catalog, search, product, shortlist and inquiry implementation, decisions and outstanding gates |
+| `docs/19-analytics-and-reporting.md` | Inquiry event contract, metric definitions, where to read them, and known limits |
 
 ## Immediate next step
 
-Apply the two Phase 03 migrations and regenerate database types, bootstrap the first owner after receiving the client-approved email, then seed the 10-20 product pilot set so the public catalog renders real inventory.
+Create the first owner Auth identity in the Supabase dashboard and configure hosted Auth URLs and SMTP, then seed the 10-20 product pilot set so the public catalog renders real inventory.

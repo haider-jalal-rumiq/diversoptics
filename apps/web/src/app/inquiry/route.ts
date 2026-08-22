@@ -25,13 +25,9 @@ import {
   buildShortlistMessage,
   buildSingleProductMessage,
   buildWhatsAppHref,
-  toInternationalDigits,
+  resolveWhatsAppDestination,
 } from "@/features/catalog/domain/whatsapp";
-import {
-  absoluteUrl,
-  getWhatsAppDestination,
-  resolveDeploymentEnvironment,
-} from "@/lib/config/site";
+import { absoluteUrl, resolveDeploymentEnvironment } from "@/lib/config/site";
 
 /**
  * A random, opaque token used only to tell one visitor's inquiries apart so a
@@ -158,9 +154,9 @@ export async function GET(request: Request) {
   });
 
   const settings = await getStoreSettings();
-  const destination =
-    (settings && toInternationalDigits(settings.whatsappNumber)) ??
-    getWhatsAppDestination().internationalDigits;
+  const destination = resolveWhatsAppDestination(
+    settings?.whatsappNumber,
+  ).internationalDigits;
 
   const singleProduct = Boolean(productSlug) && items.length === 1;
 

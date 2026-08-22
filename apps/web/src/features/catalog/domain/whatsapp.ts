@@ -1,3 +1,9 @@
+import {
+  getWhatsAppDestination,
+  resolveDeploymentEnvironment,
+  type DeploymentEnvironment,
+} from "@/lib/config/site";
+
 import type { InquirySnapshotItem } from "./types";
 
 /**
@@ -81,6 +87,39 @@ export function buildWhatsAppHref(
   url.searchParams.set("text", message);
 
   return url.toString();
+}
+
+export type WhatsAppDestination = {
+  display: string;
+  internationalDigits: string;
+};
+
+/**
+ * Resolves which number a click-to-chat link should dial.
+ *
+ * Outside production the CMS number is deliberately ignored. Phase 01 established
+ * that test and production WhatsApp destinations must never mix, and every
+ * environment reads the same settings row — which holds the real business number.
+ * Without this guard a preview deployment or a local session would send test
+ * inquiries to the live shop.
+ *
+ * In production the CMS is the source of truth, so the number can be corrected
+ * without a deploy. A missing or unusable value falls back to the configured
+ * destination rather than producing a broken link.
+ */
+export function resolveWhatsAppDestination(
+  settingsNumber: string | null | undefined,
+  environment: DeploymentEnvironment = resolveDeploymentEnvironment(),
+): WhatsAppDestination {
+  if (environment !== "production") {
+    return getWhatsAppDestination(environment);
+  }
+
+  const digits = settingsNumber ? toInternationalDigits(settingsNumber) : null;
+
+  return digits && settingsNumber
+    ? { display: settingsNumber, internationalDigits: digits }
+    : getWhatsAppDestination(environment);
 }
 
 /**

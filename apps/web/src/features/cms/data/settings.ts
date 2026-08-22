@@ -8,7 +8,7 @@ export async function getCmsSettings() {
     supabase
       .from("site_settings")
       .select(
-        "id, location_label, full_address, whatsapp_number, phone_number, public_email, delivery_available, updated_at",
+        "id, location_label, full_address, whatsapp_number, phone_number, public_email, business_hours, delivery_available, updated_at",
       )
       .eq("id", true)
       .single(),

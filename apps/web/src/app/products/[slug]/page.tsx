@@ -124,7 +124,7 @@ export default async function ProductPage(
       {breadcrumbSchema ? <JsonLd data={breadcrumbSchema} /> : null}
 
       <main className="bg-porcelain py-8 sm:py-12" id="main">
-        <Container className="sm:max-w-[70rem]">
+        <Container>
           <div className="space-y-5">
             <Breadcrumbs trail={trail} />
             <DemoCatalogNotice active={isDemoCatalog()} />

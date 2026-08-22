@@ -25,10 +25,10 @@ export function SiteHeader({
         DELIVERY AVAILABLE · COVERAGE AND TIMING CONFIRMED ON INQUIRY
       </div>
       <header className="bg-porcelain py-2">
-        <Container className="flex h-[72px] items-center gap-3 rounded-none bg-white px-3 sm:h-[88px] sm:gap-[18px] sm:px-6 lg:max-w-[70rem]">
-          <Link aria-label="Diverso Optics home" href="/">
-            <BrandMark className="h-12 w-[82px] sm:h-16 sm:w-[108px]" />
-          </Link>
+        <Container className="flex h-[72px] items-center gap-3 rounded-none bg-white px-4 sm:h-[88px] sm:gap-[18px] sm:px-8">
+          {/* BrandMark is already a link home; wrapping it nested one anchor
+              inside another, which is invalid markup. */}
+          <BrandMark className="h-12 w-[82px] sm:h-16 sm:w-[108px]" />
           <nav
             aria-label="Primary navigation"
             className="hidden min-w-0 flex-1 items-center gap-5 lg:flex"

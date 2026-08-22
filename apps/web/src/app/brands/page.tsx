@@ -23,7 +23,7 @@ export default async function BrandsPage() {
   return (
     <SiteShell>
       <main className="bg-porcelain py-8 sm:py-12" id="main">
-        <Container className="sm:max-w-[70rem]">
+        <Container>
           <DemoCatalogNotice active={isDemoCatalog()} />
 
           <h1 className="mt-5 font-display text-[2.75rem] leading-[1.05] tracking-[-0.01em] sm:text-5xl">

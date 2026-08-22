@@ -28,10 +28,20 @@ export function OrbitArtwork() {
       <div className="absolute -left-[13%] top-[22%] h-[55%] w-[95%] rotate-[18deg]">
         <Image alt="" fill priority sizes="300px" src="/orbit/ring-depth.svg" />
       </div>
-      <div className="absolute left-[17%] top-[30%] flex h-[40%] w-[63%] rotate-[5deg] items-center justify-center overflow-hidden rounded-xl bg-porcelain px-5 text-center text-[11px] font-semibold leading-[18px] text-obsidian shadow-2xl">
-        REAL PRODUCT ASSET
-        <br />
-        PENDING CMS
+      {/*
+        Brand artwork rather than a product photograph, so it makes no claim
+        about a specific item. Real hero photography replaces it once the shoot
+        list in TASKS.md is done.
+      */}
+      <div className="absolute left-[13%] top-[26%] h-[48%] w-[74%] rotate-[5deg] overflow-hidden rounded-xl bg-porcelain shadow-2xl">
+        <Image
+          alt=""
+          className="object-cover"
+          fill
+          priority
+          sizes="(min-width: 1024px) 300px, 240px"
+          src="/brand/hero-eyewear.webp"
+        />
       </div>
       <span className="absolute left-[13%] top-[22%] size-2">
         <Image alt="" fill sizes="8px" src="/orbit/node-small.svg" />

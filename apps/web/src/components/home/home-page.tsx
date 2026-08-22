@@ -38,7 +38,7 @@ export function HomePage({
 
       {demo ? (
         <div className="bg-porcelain pt-8">
-          <Container className="sm:max-w-[55rem]">
+          <Container>
             <DemoCatalogNotice active />
           </Container>
         </div>
@@ -48,7 +48,7 @@ export function HomePage({
         className="content-auto bg-porcelain py-[4.5rem]"
         id="categories"
       >
-        <Container className="sm:max-w-[55rem]">
+        <Container>
           <SectionHeading
             eyebrow="CURATED FOR EVERYDAY LIFE"
             title="Choose your starting point."
@@ -67,7 +67,7 @@ export function HomePage({
       </section>
 
       <section className="content-auto bg-white py-[4.5rem]" id="featured">
-        <Container className="sm:max-w-[55rem]">
+        <Container>
           <div className="flex items-end justify-between gap-5">
             <SectionHeading
               eyebrow="THE GOLDEN EDIT"

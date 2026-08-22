@@ -12,6 +12,9 @@ const STATIC_PATHS = [
   { changeFrequency: "monthly", path: "/store", priority: 0.7 },
 ] as const;
 
+/** Regenerated periodically so newly published products enter the sitemap. */
+export const revalidate = 3600;
+
 /**
  * Lists only pages a visitor can reach and a crawler should see. `/search`,
  * `/shortlist`, `/inquiry` and every filter permutation are excluded: they carry

@@ -233,7 +233,9 @@ async function main() {
       );
     }
 
-    console.log(`\ndry run: ${files.length} products prepared, nothing written`);
+    console.log(
+      `\ndry run: ${files.length} products prepared, nothing written`,
+    );
     return;
   }
 
@@ -279,7 +281,9 @@ async function main() {
     try {
       const row = await importOne(file, category.data.id);
       imported.push(row);
-      console.log(`ok   ${file} -> ${row.slug} (${Math.round(row.size / 1024)} kB)`);
+      console.log(
+        `ok   ${file} -> ${row.slug} (${Math.round(row.size / 1024)} kB)`,
+      );
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : String(cause);
       failures.push(`${file}: ${message}`);

@@ -22,11 +22,24 @@ export const siteConfig = {
     { href: "/#brands", label: "Pens" },
     { href: "/#categories", label: "Contact Lenses" },
   ],
+  /**
+   * Profile URLs are unconfirmed, so each one is an obvious placeholder rather
+   * than a guessed handle. `href: null` renders the icon as plain, unlinked
+   * text: the row still reads correctly and nothing points at an account that
+   * may belong to someone else. Paste the real URLs here and the links wake up.
+   */
+  social: [
+    { href: null, label: "Facebook", name: "facebook" },
+    { href: null, label: "Instagram", name: "instagram" },
+    { href: null, label: "TikTok", name: "tiktok" },
+  ],
   whatsapp: {
     production: productionWhatsApp,
     test: testWhatsApp,
   },
 } as const;
+
+export type SocialPlatform = (typeof siteConfig.social)[number]["name"];
 
 export function resolveDeploymentEnvironment(
   vercelEnvironment = process.env.VERCEL_ENV,

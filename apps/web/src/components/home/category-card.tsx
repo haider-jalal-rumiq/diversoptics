@@ -7,7 +7,7 @@ import type { CatalogCategory } from "@/features/catalog/domain/types";
 export function CategoryCard({ category }: { category: CatalogCategory }) {
   return (
     <Link
-      className="group flex min-h-[340px] min-w-[17.25rem] flex-1 flex-col overflow-hidden rounded-xl border border-porcelain/50 bg-obsidian p-[15px] text-porcelain shadow-card sm:min-w-0"
+      className="group flex min-h-[340px] min-w-[17.25rem] flex-1 flex-col overflow-hidden rounded-xl border border-porcelain/50 bg-obsidian p-[15px] text-porcelain shadow-card transition-[transform,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-orbit-gold motion-safe:hover:-translate-y-1 sm:min-w-0"
       href={category.href as Route}
     >
       <div className="relative h-44 overflow-hidden rounded-lg bg-charcoal">

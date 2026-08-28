@@ -72,3 +72,69 @@ export function parseBusinessHours(
 
   return entries;
 }
+
+/**
+ * Collapses opening hours into a single line for the footer, where the full
+ * seven-row table the store page renders would not fit.
+ *
+ * Only the two patterns that can be stated unambiguously in one line are
+ * summarised: every day open on the same times, or a contiguous run of days on
+ * the same times. Anything more irregular returns null and the caller shows
+ * nothing, because a footer is the wrong place to approximate a shop's hours and
+ * the store page already lists them in full.
+ */
+export function summariseBusinessHours(
+  entries: readonly StoreOpeningHours[],
+): string | null {
+  const open = entries.filter(
+    (entry) => !entry.closed && entry.opens && entry.closes,
+  );
+
+  const first = open[0];
+  if (!first?.opens || !first.closes) return null;
+
+  const { closes, opens } = first;
+  if (
+    !open.every((entry) => entry.opens === opens && entry.closes === closes)
+  ) {
+    return null;
+  }
+
+  const window = `${opens} – ${closes}`;
+  if (open.length === DAY_ORDER.length) return `Open daily ${window}`;
+
+  // Contiguity is checked against the canonical week order, so a run that wraps
+  // or skips a day in the middle is reported as unsummarisable rather than
+  // flattened into a range that would read as covering the gap.
+  const indexes: number[] = [];
+
+  for (const entry of open) {
+    const index = DAY_ORDER.indexOf(
+      entry.day.toLowerCase() as (typeof DAY_ORDER)[number],
+    );
+
+    if (index < 0) return null;
+
+    indexes.push(index);
+  }
+
+  indexes.sort((a, b) => a - b);
+
+  const start = indexes.at(0);
+  const end = indexes.at(-1);
+
+  if (start === undefined || end === undefined) return null;
+  if (end - start !== indexes.length - 1) return null;
+
+  const startDay = DAY_ORDER[start];
+  const endDay = DAY_ORDER[end];
+
+  if (!startDay || !endDay) return null;
+
+  const startLabel = titleCase(startDay).slice(0, 3);
+  const endLabel = titleCase(endDay).slice(0, 3);
+
+  return start === end
+    ? `${startLabel} ${window}`
+    : `${startLabel}–${endLabel} ${window}`;
+}

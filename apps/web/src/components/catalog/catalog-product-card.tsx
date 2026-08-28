@@ -23,7 +23,7 @@ export function CatalogProductCard({
   const priceLabel = formatPriceLabel(product);
 
   return (
-    <article className="relative flex h-full min-w-[17.25rem] flex-col rounded-xl border border-smoke/60 bg-white p-[15px] shadow-card sm:min-w-0">
+    <article className="group/card relative flex h-full min-w-[17.25rem] flex-col rounded-xl border border-smoke/60 bg-white p-[15px] shadow-card transition-[transform,box-shadow,border-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-orbit-gold hover:shadow-[0_18px_40px_rgb(21_21_21/0.12)] motion-safe:hover:-translate-y-1 sm:min-w-0">
       <Link
         className="group focus-visible:outline-none"
         href={product.href as Route}

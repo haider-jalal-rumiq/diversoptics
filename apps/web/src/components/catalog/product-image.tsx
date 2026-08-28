@@ -45,7 +45,7 @@ export function ProductImage({
     >
       <Image
         alt={image.altText}
-        className="object-cover"
+        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover/card:scale-[1.05]"
         fill
         priority={priority}
         sizes={sizes}

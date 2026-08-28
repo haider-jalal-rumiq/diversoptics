@@ -67,6 +67,219 @@ button {
   transform-origin: center;
 }
 
+/* ---------------------------------------------------------------------------
+   Motion
+   ---------------------------------------------------------------------------
+   Every animation below is a progressive enhancement, per AGENTS.md: the page
+   is complete and readable with none of it running.
+
+   Nothing here ever hides content. Scroll reveals move a block and never fade
+   it, so a session where the observer never fires renders every section legible
+   and in the accessibility tree, just sitting a few pixels low. That is also why
+   there is no scripted `js` flag on the document: the guard would only earn its
+   hydration cost if there were something hidden to recover.
+
+   Everything sits inside `prefers-reduced-motion: no-preference`, and only
+   `transform` and `opacity` are animated, which keeps the work off the main
+   thread and contributes nothing to CLS.
+--------------------------------------------------------------------------- */
+
+/*
+  Transform only. Any text that fades in from `opacity: 0` is sampled part-way
+  through by axe, which blends the colour against the page and reports a serious
+  contrast violation; Firefox and WebKit hit that window far more often than
+  Chromium, so it surfaces as a flaky accessibility gate rather than an obvious
+  bug. The rule across this file is therefore: nothing carrying text animates
+  opacity.
+*/
+@keyframes dx-rise {
+  from {
+    transform: translate3d(0, 1.75rem, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes dx-line-up {
+  from {
+    transform: translate3d(0, 110%, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+/*
+  Wipes the figure in from its bottom edge upward. `inset()` insets from the top,
+  so animating that value from 100% to 0% grows the visible region up from the
+  bottom, which is the direction asked for. Clip rather than opacity keeps the
+  silhouette solid the whole way in instead of ghosting over the wordmark.
+*/
+@keyframes dx-figure-rise {
+  from {
+    clip-path: inset(100% 0 0 0);
+    transform: translate3d(0, 2rem, 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    transform: none;
+  }
+}
+
+@keyframes dx-ring-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82) rotate(-25deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dx-scroll-hint {
+  0%,
+  100% {
+    transform: none;
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(0, 0.4rem, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes dx-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -6%, 0);
+  }
+}
+
+/* Scroll-reveal. Always legible; the observer only settles it into position. */
+.dx-reveal {
+  --dx-reveal-delay: 0ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+    Transform only, deliberately: fading text in from `opacity: 0` makes axe
+    compute the blended colour against the page and report a serious contrast
+    violation for every section still below the fold, which the accessibility
+    gate treats as a failure. Sliding the block up reads the same and leaves the
+    text at full contrast and in the accessibility tree the whole time.
+  */
+  .dx-reveal {
+    transform: translate3d(0, 1.75rem, 0);
+    transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--dx-reveal-delay);
+    will-change: transform;
+  }
+
+  .dx-reveal[data-in="true"] {
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Hero entrance. Above the fold, so it runs on load rather than on scroll. */
+  .dx-hero-line {
+    display: block;
+    animation: dx-line-up 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--dx-delay, 0ms);
+  }
+
+  .dx-hero-fade {
+    animation: dx-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--dx-delay, 0ms);
+  }
+
+  .dx-hero-figure {
+    animation: dx-figure-rise 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 140ms;
+  }
+
+  .dx-hero-ring {
+    animation: dx-ring-in 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: 80ms;
+  }
+
+  .dx-scroll-hint {
+    animation: dx-scroll-hint 2.4s ease-in-out infinite;
+  }
+
+  /*
+    Scroll-linked parallax with no scroll listener and no JS. Chrome and Safari
+    run it; browsers without scroll-driven animations simply skip the block and
+    the layer stays where it was composed.
+  */
+  @supports (animation-timeline: view()) {
+    .dx-parallax-slow {
+      animation: dx-drift linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 100%;
+    }
+  }
+}
+
+/*
+  Dissolves the bottom of the cut-out portrait into the section instead of
+  ending it on the hard edge left by background removal.
+
+  The fade starts late on purpose. It exists only to dissolve the hard edge where
+  the cut-out crops the chest, and the wordmark passes behind exactly this band:
+  fading from 74% made the shoulders semi-transparent and the letters read as if
+  they were in front of him.
+*/
+.dx-fade-bottom {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 90%,
+    rgb(0 0 0 / 0.55) 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 90%,
+    rgb(0 0 0 / 0.55) 96%,
+    transparent 100%
+  );
+}
+
+/*
+  Fades the wordmark out before the figure stops covering it.
+
+  The figure is only tall enough to hide the top ~85% of the letters; past that
+  its own bottom fade kicks in and then it ends altogether, so the letter feet
+  were surfacing over the shoulders and reading as if they sat in front. Fading
+  the wordmark itself is what fixes that: raising it alone just moves the leak.
+*/
+.dx-wordmark-fade {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 55%,
+    rgb(0 0 0 / 0.4) 72%,
+    transparent 85%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 55%,
+    rgb(0 0 0 / 0.4) 72%,
+    transparent 85%
+  );
+}
+
+/* Text clipped to a line box, so `dx-line-up` slides in from below the line. */
+.dx-line-mask {
+  display: block;
+  overflow: hidden;
+  /* Descenders would otherwise be shaved by the mask. */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -77,5 +290,7 @@ button {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

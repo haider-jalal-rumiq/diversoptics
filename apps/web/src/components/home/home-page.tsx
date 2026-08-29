@@ -16,7 +16,7 @@ import { Button } from "../ui/button";
 import { Container } from "../ui/container";
 import { Reveal } from "../ui/reveal";
 import { BrandTile } from "./brand-tile";
-import { CategoryCard } from "./category-card";
+import { CategoryCarousel } from "./category-carousel";
 import { Hero } from "./hero";
 import { SectionHeading } from "./section-heading";
 
@@ -56,17 +56,9 @@ export function HomePage({
               title="Choose your starting point."
             />
           </Reveal>
-          <div className="mt-7 flex snap-x gap-4 overflow-x-auto pb-4 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0">
-            {categories.map((category, index) => (
-              <Reveal
-                className="flex min-w-[17.25rem] flex-1 sm:min-w-0"
-                delay={index * 80}
-                key={category.id}
-              >
-                <CategoryCard category={category} />
-              </Reveal>
-            ))}
-          </div>
+          <Reveal className="mt-7 block">
+            <CategoryCarousel categories={categories} />
+          </Reveal>
           {categories.length === 0 ? (
             <p className="mt-8 rounded-xl border border-smoke/30 bg-white p-6 text-sm text-smoke">
               Categories appear here once they are published in the CMS.

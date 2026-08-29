@@ -54,15 +54,6 @@ export function Hero() {
         <div className="absolute inset-[9%] rounded-full border border-antique-brass/20" />
       </div>
 
-      {/* ------------------------------------------------------ z-0 wordmark */}
-      <p
-        aria-hidden="true"
-        className="dx-hero-fade dx-wordmark-fade pointer-events-none absolute inset-x-0 bottom-[3.25rem] z-0 select-none whitespace-nowrap text-center font-display text-[26vw] leading-[0.72] tracking-[-0.05em] text-porcelain/[0.09] lg:bottom-[8rem] lg:left-[53%] lg:right-auto lg:-translate-x-1/2 lg:text-[19rem]"
-        style={{ "--dx-delay": "420ms" } as never}
-      >
-        <span className="dx-wordmark-drift inline-block">DIVERSO</span>
-      </p>
-
       {/* ------------------------------------------------------ z-10 headline */}
       <Container className="relative z-10 flex flex-col pt-10 lg:min-h-[36rem] lg:pt-10">
         <h1
@@ -82,39 +73,59 @@ export function Hero() {
         </h1>
 
         {/*
-          The intro sits in the headline container rather than the actions layer
-          so its spacing is measured from the last line of the headline. Pinning
-          it to the bottom meant the gap grew and shrank with the viewport, since
-          the headline size is a clamp().
+          On `lg` the intro sits right under the headline, measured from its
+          last line. Below `lg` it moves down to the actions layer instead (see
+          the duplicate near the bottom row) — there's no single element that
+          can sit in both spots, since the two layers are separate stacking
+          contexts for the figure-overlap trick above.
         */}
-        <p className="dx-hero-fade mx-auto mt-6 max-w-[19rem] text-center text-sm leading-6 text-porcelain/70 lg:mx-0 lg:mt-7 lg:text-left">
+        <p className="dx-hero-fade hidden max-w-[19rem] text-sm leading-6 text-porcelain/70 lg:mt-7 lg:block lg:text-left">
           Browse the frames on the wall in F-11 Markaz, then ask the counter
           anything before you visit.
         </p>
       </Container>
 
-      {/* -------------------------------------------------------- z-20 figure */}
+      {/* -------------------------------------------------- z-20 figure + wordmark */}
       {/*
-        One element, two behaviours: a normal block after the headline on small
-        screens, an absolute centred layer on `lg`. Rendering it twice and
-        toggling with `hidden` would preload the hero image twice, at two
-        different widths, and only ever paint one of them.
+        Below `lg` the wordmark moves in here too, so it sits directly behind
+        the figure instead of pinned to the section's bottom edge — with the
+        intro paragraph now gone from the flow above, that fixed offset no
+        longer lands behind the portrait, wherever it ends up on a given
+        screen. `lg:contents` drops this wrapper from the box tree at `lg`, so
+        the figure and wordmark go right back to being absolutely positioned
+        against the section itself, exactly as before.
       */}
-      <div className="dx-hero-figure relative z-20 mx-auto mt-8 w-[min(24rem,84vw)] lg:absolute lg:bottom-[4rem] lg:left-[54%] lg:mt-0 lg:w-[min(36rem,42vw)] lg:-translate-x-1/2">
+      <div className="relative lg:contents">
+        <p
+          aria-hidden="true"
+          className="dx-hero-fade dx-wordmark-fade pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center whitespace-nowrap font-display text-[26vw] leading-[0.72] tracking-[-0.05em] text-porcelain/[0.09] lg:absolute lg:inset-auto lg:block lg:bottom-[8rem] lg:left-[53%] lg:right-auto lg:-translate-x-1/2 lg:text-center lg:text-[19rem]"
+          style={{ "--dx-delay": "420ms" } as never}
+        >
+          <span className="dx-wordmark-drift inline-block">DIVERSO</span>
+        </p>
+
         {/*
-          No parallax on this one. The drift is up to 6% of the figure height and
-          it stacks on the CSS offset, which pushed the top of the hair through
-          the section edge and clipped it flat once the figure sat this high.
+          One element, two behaviours: a normal block after the headline on small
+          screens, an absolute centred layer on `lg`. Rendering it twice and
+          toggling with `hidden` would preload the hero image twice, at two
+          different widths, and only ever paint one of them.
         */}
-        <div className="dx-fade-bottom relative aspect-[1046/911] w-full">
-          <Image
-            alt="A customer wearing aviator sunglasses from Diverso Optics"
-            className="object-contain object-bottom"
-            fill
-            priority
-            sizes="(min-width: 1024px) 576px, 384px"
-            src="/brand/hero-portrait-silhouette.webp"
-          />
+        <div className="dx-hero-figure relative z-20 mx-auto mt-4 w-[min(24rem,84vw)] lg:absolute lg:bottom-[4rem] lg:left-[54%] lg:mt-0 lg:w-[min(36rem,42vw)] lg:-translate-x-1/2">
+          {/*
+            No parallax on this one. The drift is up to 6% of the figure height and
+            it stacks on the CSS offset, which pushed the top of the hair through
+            the section edge and clipped it flat once the figure sat this high.
+          */}
+          <div className="dx-fade-bottom relative aspect-[1046/911] w-full">
+            <Image
+              alt="A customer wearing aviator sunglasses from Diverso Optics"
+              className="object-contain object-bottom"
+              fill
+              priority
+              sizes="(min-width: 1024px) 576px, 384px"
+              src="/brand/hero-portrait-silhouette.webp"
+            />
+          </div>
         </div>
       </div>
 
@@ -156,6 +167,12 @@ export function Hero() {
           </p>
           <SocialLinks className="mt-3 justify-center lg:justify-end" />
         </div>
+
+        {/* Below `lg` only — see the note by the headline for why this isn't one element. */}
+        <p className="dx-hero-fade pointer-events-auto mx-auto max-w-[19rem] text-center text-sm leading-6 text-porcelain/70 lg:hidden">
+          Browse the frames on the wall in F-11 Markaz, then ask the counter
+          anything before you visit.
+        </p>
 
         <div className="dx-hero-fade pointer-events-auto flex items-center justify-between gap-4 border-t border-porcelain/10 pt-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-porcelain/75 lg:mt-8">
           <span>{siteConfig.locationLabel}</span>

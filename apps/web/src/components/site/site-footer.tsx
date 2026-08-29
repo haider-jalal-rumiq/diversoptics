@@ -98,7 +98,9 @@ export async function SiteFooter({
         </FooterColumn>
 
         <FooterColumn title="Store">
-          <li>{address ?? settings?.locationLabel ?? siteConfig.locationLabel}</li>
+          <li>
+            {address ?? settings?.locationLabel ?? siteConfig.locationLabel}
+          </li>
           {hours ? <li>{hours}</li> : null}
           {phone ? (
             <li>

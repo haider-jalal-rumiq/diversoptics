@@ -19,7 +19,9 @@ export async function SiteShell({ children }: { children: React.ReactNode }) {
     <>
       <SiteHeader navigation={navigation.length > 0 ? navigation : undefined} />
       {children}
-      <SiteFooter />
+      <SiteFooter
+        navigation={navigation.length > 0 ? navigation : undefined}
+      />
     </>
   );
 }

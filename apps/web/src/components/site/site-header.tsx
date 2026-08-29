@@ -21,9 +21,6 @@ export function SiteHeader({
 
   return (
     <>
-      <div className="bg-orbit-gold px-4 py-2 text-center text-[11px] font-semibold tracking-[0.08em] text-obsidian sm:text-xs">
-        DELIVERY AVAILABLE · COVERAGE AND TIMING CONFIRMED ON INQUIRY
-      </div>
       <header className="bg-porcelain py-1.5">
         <Container className="flex h-[66px] items-center gap-3 rounded-none bg-white px-6 sm:h-[76px] sm:gap-[18px] sm:px-14">
           {/* BrandMark is already a link home; wrapping it nested one anchor

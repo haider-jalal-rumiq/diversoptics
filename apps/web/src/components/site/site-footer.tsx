@@ -1,7 +1,51 @@
+import type { Route } from "next";
+import Link from "next/link";
+import type { ReactNode } from "react";
+
 import { Container } from "@/components/ui/container";
 import { getStoreSettings } from "@/features/catalog/data/store-settings";
 import { summariseBusinessHours } from "@/features/catalog/domain/store-hours";
 import { siteConfig } from "@/lib/config/site";
+
+import type { HeaderNavItem } from "./site-header";
+
+const EXPLORE_LINKS = [
+  { href: "/new-and-featured", label: "New & featured" },
+  { href: "/brands", label: "Brands" },
+  { href: "/guides", label: "Guides" },
+  { href: "/shortlist", label: "Shortlist" },
+] as const;
+
+function FooterColumn({
+  children,
+  title,
+}: {
+  children: ReactNode;
+  title: string;
+}) {
+  return (
+    <div className="space-y-4">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-porcelain/50">
+        {title}
+      </p>
+      <ul className="space-y-2.5 text-sm text-porcelain/70">{children}</ul>
+    </div>
+  );
+}
+
+function FooterLinks({ links }: { links: readonly HeaderNavItem[] }) {
+  return (
+    <>
+      {links.map(({ href, label }) => (
+        <li key={`${label}-${href}`}>
+          <Link className="hover:text-porcelain" href={href as Route}>
+            {label}
+          </Link>
+        </li>
+      ))}
+    </>
+  );
+}
 
 /**
  * Address and hours come from the CMS singleton, the same source the store page
@@ -12,33 +56,87 @@ import { siteConfig } from "@/lib/config/site";
  * value, so the footer can never assert an address or an opening time the shop
  * has not confirmed.
  */
-export async function SiteFooter() {
+export async function SiteFooter({
+  navigation = siteConfig.navigation,
+}: {
+  /** Defaults to the static links; catalog pages pass the published categories. */
+  navigation?: readonly HeaderNavItem[];
+}) {
   const settings = await getStoreSettings();
   const address = settings?.fullAddress ?? null;
   const hours = summariseBusinessHours(settings?.businessHours ?? []);
   const phone = settings?.phoneNumber ?? null;
 
   return (
-    <footer className="bg-obsidian py-11 text-porcelain">
-      <Container className="space-y-4">
-        <p className="font-display text-2xl">DIVERSO OPTICS</p>
-        <p className="text-sm">Catalog · Brands · Store · Guides · Policies</p>
-        <address className="space-y-1 text-sm not-italic leading-6 text-porcelain/75">
-          <p>
-            {address ?? settings?.locationLabel ?? siteConfig.locationLabel}
+    <footer className="relative overflow-hidden bg-obsidian pb-6 pt-16 text-porcelain">
+      {/*
+        The wordmark sits behind the columns rather than below them, the same
+        layering the hero uses for its own DIVERSO — a backdrop, not a section
+        of its own.
+      */}
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 select-none whitespace-nowrap text-center font-display text-[19vw] leading-[0.72] tracking-[-0.05em] text-porcelain/[0.06]"
+      >
+        DIVERSO
+      </p>
+
+      <Container className="relative z-10 grid gap-x-8 gap-y-12 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
+        <div className="max-w-xs space-y-4">
+          <p className="font-display text-2xl tracking-tight">DIVERSO</p>
+          <p className="text-sm leading-6 text-porcelain/65">
+            {siteConfig.description}
           </p>
-          {hours ? <p>{hours}</p> : null}
+        </div>
+
+        <FooterColumn title="Shop">
+          <FooterLinks links={navigation} />
+        </FooterColumn>
+
+        <FooterColumn title="Explore">
+          <FooterLinks links={EXPLORE_LINKS} />
+        </FooterColumn>
+
+        <FooterColumn title="Store">
+          <li>{address ?? settings?.locationLabel ?? siteConfig.locationLabel}</li>
+          {hours ? <li>{hours}</li> : null}
           {phone ? (
-            <p>
+            <li>
               <a
-                className="hover:text-orbit-gold hover:underline"
+                className="hover:text-porcelain"
                 href={`tel:${phone.replace(/\s+/g, "")}`}
               >
                 {phone}
               </a>
-            </p>
+            </li>
           ) : null}
-        </address>
+        </FooterColumn>
+
+        <FooterColumn title="Social">
+          {siteConfig.social.map(({ href, label, name }) =>
+            href ? (
+              <li key={name}>
+                <a
+                  className="hover:text-porcelain"
+                  href={href}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {label}
+                </a>
+              </li>
+            ) : (
+              <li className="text-porcelain/40" key={name}>
+                {label}
+              </li>
+            ),
+          )}
+        </FooterColumn>
+      </Container>
+
+      <Container className="relative z-10 mt-14 flex flex-col gap-2 border-t border-porcelain/10 py-6 text-[11px] font-semibold uppercase tracking-[0.1em] text-porcelain/45 sm:flex-row sm:items-center sm:justify-between">
+        <p>© {new Date().getFullYear()} Diverso Optics. All rights reserved.</p>
+        <p>Catalog · Brands · Store · Guides · Policies</p>
       </Container>
     </footer>
   );

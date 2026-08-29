@@ -35,7 +35,7 @@ export function Hero() {
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative isolate min-h-[42rem] overflow-hidden bg-obsidian text-porcelain lg:min-h-[40rem]"
+      className="dx-hero group relative isolate min-h-[42rem] overflow-hidden bg-obsidian text-porcelain lg:min-h-[36rem]"
     >
       {/*
         The light behind the figure. This is what the graded portrait is lit to
@@ -60,11 +60,11 @@ export function Hero() {
         className="dx-hero-fade dx-wordmark-fade pointer-events-none absolute inset-x-0 bottom-[3.25rem] z-0 select-none whitespace-nowrap text-center font-display text-[26vw] leading-[0.72] tracking-[-0.05em] text-porcelain/[0.09] lg:bottom-[8rem] lg:left-[53%] lg:right-auto lg:-translate-x-1/2 lg:text-[19rem]"
         style={{ "--dx-delay": "420ms" } as never}
       >
-        DIVERSO
+        <span className="dx-wordmark-drift inline-block">DIVERSO</span>
       </p>
 
       {/* ------------------------------------------------------ z-10 headline */}
-      <Container className="relative z-10 flex flex-col pt-10 lg:min-h-[40rem] lg:pt-10">
+      <Container className="relative z-10 flex flex-col pt-10 lg:min-h-[36rem] lg:pt-10">
         <h1
           className="text-center font-display text-[clamp(3rem,12vw,4.75rem)] leading-[0.9] tracking-[-0.035em] lg:max-w-[45rem] lg:text-left lg:text-[clamp(4.75rem,8vw,7.5rem)]"
           id="hero-heading"
@@ -100,7 +100,7 @@ export function Hero() {
         toggling with `hidden` would preload the hero image twice, at two
         different widths, and only ever paint one of them.
       */}
-      <div className="dx-hero-figure relative z-20 mx-auto mt-8 w-[min(24rem,84vw)] lg:absolute lg:bottom-[7rem] lg:left-[54%] lg:mt-0 lg:w-[min(36rem,42vw)] lg:-translate-x-1/2">
+      <div className="dx-hero-figure relative z-20 mx-auto mt-8 w-[min(24rem,84vw)] lg:absolute lg:bottom-[4rem] lg:left-[54%] lg:mt-0 lg:w-[min(36rem,42vw)] lg:-translate-x-1/2">
         {/*
           No parallax on this one. The drift is up to 6% of the figure height and
           it stacks on the CSS offset, which pushed the top of the hair through
@@ -125,7 +125,7 @@ export function Hero() {
         Pointer events are off on the spacer and back on for the controls, so the
         empty area never swallows a click meant for something underneath.
       */}
-      <Container className="pointer-events-none relative z-30 mt-10 flex flex-col gap-8 pb-9 lg:-mt-[40rem] lg:min-h-[40rem] lg:justify-end lg:gap-0 lg:pb-10">
+      <Container className="pointer-events-none relative z-30 mt-10 flex flex-col gap-8 pb-9 lg:-mt-[36rem] lg:min-h-[36rem] lg:justify-end lg:gap-0 lg:pb-6">
         {/*
           `flex-nowrap` from `lg` keeps the two actions on one line. They are
           narrow enough to fit and wrapping them read as a mistake rather than a
@@ -157,7 +157,7 @@ export function Hero() {
           <SocialLinks className="mt-3 justify-center lg:justify-end" />
         </div>
 
-        <div className="dx-hero-fade pointer-events-auto flex items-center justify-between gap-4 border-t border-porcelain/10 pt-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-porcelain/75 lg:mt-12">
+        <div className="dx-hero-fade pointer-events-auto flex items-center justify-between gap-4 border-t border-porcelain/10 pt-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-porcelain/75 lg:mt-8">
           <span>{siteConfig.locationLabel}</span>
           {/*
             The pulse rides the arrow, not the label. On the label its opacity

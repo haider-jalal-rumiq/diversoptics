@@ -159,6 +159,27 @@ button {
   }
 }
 
+/* Background wordmark, nudged sideways in place while the hero is hovered. */
+@keyframes dx-wordmark-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    letter-spacing: -0.05em;
+  }
+  50% {
+    transform: translate3d(1.2%, 0, 0);
+    letter-spacing: -0.02em;
+  }
+}
+
+.dx-wordmark-drift {
+  transition: letter-spacing 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-hero:hover .dx-wordmark-drift {
+  animation: dx-wordmark-drift 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
 /* Scroll-reveal. Always legible; the observer only settles it into position. */
 .dx-reveal {
   --dx-reveal-delay: 0ms;

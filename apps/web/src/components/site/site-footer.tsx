@@ -33,12 +33,19 @@ function FooterColumn({
   );
 }
 
+/**
+ * `py-1.5 -my-1.5` grows the link's clickable box to the 24px WCAG 2.2 target
+ * size without changing the list's visual rhythm — the negative margin cancels
+ * the padding it just added.
+ */
+const FOOTER_LINK_CLASS = "inline-block -my-1.5 py-1.5 hover:text-porcelain";
+
 function FooterLinks({ links }: { links: readonly HeaderNavItem[] }) {
   return (
     <>
       {links.map(({ href, label }) => (
         <li key={`${label}-${href}`}>
-          <Link className="hover:text-porcelain" href={href as Route}>
+          <Link className={FOOTER_LINK_CLASS} href={href as Route}>
             {label}
           </Link>
         </li>
@@ -72,11 +79,18 @@ export async function SiteFooter({
       {/*
         The wordmark sits behind the columns rather than below them, the same
         layering the hero uses for its own DIVERSO — a backdrop, not a section
-        of its own.
+        of its own. It gets the same warm glow the hero puts behind its
+        wordmark, not just for the brand echo: a flat obsidian backdrop makes
+        the low-opacity glyphs fail contrast tooling outright, where the hero's
+        glow reads as a gradient and is exempt as decorative background text.
       */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[26vw] bg-[radial-gradient(ellipse_at_center,rgba(254,204,41,0.16)_0%,rgba(168,121,42,0.08)_45%,transparent_75%)]"
+      />
       <p
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 select-none whitespace-nowrap text-center font-display text-[19vw] leading-[0.72] tracking-[-0.05em] text-porcelain/[0.06]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 select-none whitespace-nowrap text-center font-display text-[19vw] leading-[0.72] tracking-[-0.05em] text-porcelain/[0.09]"
       >
         DIVERSO
       </p>
@@ -105,7 +119,7 @@ export async function SiteFooter({
           {phone ? (
             <li>
               <a
-                className="hover:text-porcelain"
+                className={FOOTER_LINK_CLASS}
                 href={`tel:${phone.replace(/\s+/g, "")}`}
               >
                 {phone}
@@ -119,7 +133,7 @@ export async function SiteFooter({
             href ? (
               <li key={name}>
                 <a
-                  className="hover:text-porcelain"
+                  className={FOOTER_LINK_CLASS}
                   href={href}
                   rel="noreferrer noopener"
                   target="_blank"
@@ -128,7 +142,7 @@ export async function SiteFooter({
                 </a>
               </li>
             ) : (
-              <li className="text-porcelain/40" key={name}>
+              <li className="text-porcelain/60" key={name}>
                 {label}
               </li>
             ),
@@ -136,7 +150,7 @@ export async function SiteFooter({
         </FooterColumn>
       </Container>
 
-      <Container className="relative z-10 mt-14 flex flex-col gap-2 border-t border-porcelain/10 py-6 text-[11px] font-semibold uppercase tracking-[0.1em] text-porcelain/45 sm:flex-row sm:items-center sm:justify-between">
+      <Container className="relative z-10 mt-14 flex flex-col gap-2 border-t border-porcelain/10 py-6 text-[11px] font-semibold uppercase tracking-[0.1em] text-porcelain/60 sm:flex-row sm:items-center sm:justify-between">
         <p>© {new Date().getFullYear()} Diverso Optics. All rights reserved.</p>
         <p>Catalog · Brands · Store · Guides · Policies</p>
       </Container>

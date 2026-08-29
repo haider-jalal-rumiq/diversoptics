@@ -180,6 +180,135 @@ button {
   animation: dx-wordmark-drift 4s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 }
 
+/*
+  Category carousel. The panels are laid out in a column on small screens and a
+  row from `md`, and `flex-basis` drives the open/closed size in both — flex
+  sizing runs along whichever axis the container is using, so one transition
+  covers both directions.
+
+  Percentages rather than `flex-grow`: growing from 1 to 5 moves fastest at the
+  start and crawls at the end, which reads as the panel sticking. A basis
+  percentage moves at the rate the easing curve actually asks for.
+
+  The sizes are written straight onto the property at each breakpoint rather
+  than through a `var()` the media query reassigns. A transition watches the
+  property's own specified value, and `flex-basis: var(--x)` never changes as
+  far as it is concerned, so swapping the variable underneath leaves the panel
+  interpolating towards a stale figure — a desktop layout can end up holding the
+  mobile width, on the wrong panel.
+*/
+.dx-cat-panel {
+  flex-basis: 17%;
+  flex-grow: 0;
+  flex-shrink: 0;
+  transition: flex-basis 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-cat-panel[data-active="true"] {
+  flex-basis: 66%;
+}
+
+@media (min-width: 768px) {
+  .dx-cat-panel {
+    flex-basis: 20%;
+  }
+
+  .dx-cat-panel[data-active="true"] {
+    flex-basis: 60%;
+  }
+}
+
+/* A slow drift out of the closed crop, so the still is never quite static. */
+.dx-cat-art {
+  transform: scale(1.12);
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.9s ease;
+  /* Held back rather than dimmed flat: the closed panels still have to carry a
+     legible name across whatever happens to be under it. */
+  filter: saturate(0.8) brightness(0.78);
+}
+
+.dx-cat-panel[data-active="true"] .dx-cat-art {
+  transform: scale(1);
+  filter: none;
+}
+
+.dx-cat-glow {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+
+.dx-cat-panel[data-active="true"] .dx-cat-glow {
+  opacity: 1;
+}
+
+/*
+  Both faces of a panel swap on `visibility`, never on `opacity` alone. An
+  element left at `opacity: 0` stays in the accessibility tree, and axe then
+  blends it against the panel behind and reports a serious contrast violation
+  for every panel that happens to be closed — the same trap documented on
+  `.dx-reveal` below. `visibility: hidden` takes it out of the tree, and the
+  zero-duration step at the end of the transition keeps the motion intact.
+*/
+.dx-cat-tab,
+.dx-cat-body {
+  transition:
+    opacity 0.45s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.45s;
+}
+
+.dx-cat-tab {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dx-cat-body {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, 1rem, 0);
+}
+
+.dx-cat-panel[data-active="true"] .dx-cat-tab {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(0, -0.5rem, 0);
+}
+
+.dx-cat-panel[data-active="true"] .dx-cat-body {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  /* Held back until the panel has most of its width, so the copy is not
+     reflowing inside a box that is still moving. */
+  transition:
+    opacity 0.5s ease 0.3s,
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s,
+    visibility 0s;
+}
+
+.dx-cat-arrow {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-cat-panel:hover .dx-cat-arrow {
+  transform: translate3d(0.25rem, 0, 0);
+}
+
+@keyframes dx-cat-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.dx-cat-progress {
+  animation: dx-cat-progress 5s linear both;
+}
+
 /* Scroll-reveal. Always legible; the observer only settles it into position. */
 .dx-reveal {
   --dx-reveal-delay: 0ms;
@@ -313,5 +442,18 @@ button {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  /*
+    The rule above zeroes durations but not delays, and the carousel holds its
+    copy back by 300ms and swaps `visibility` at the end of the fade. Left
+    alone, opening a panel would sit blank for a third of a second on exactly
+    the setting that asked for less motion, so the staging is dropped here.
+  */
+  .dx-cat-tab,
+  .dx-cat-body,
+  .dx-cat-panel[data-active="true"] .dx-cat-tab,
+  .dx-cat-panel[data-active="true"] .dx-cat-body {
+    transition-delay: 0s !important;
   }
 }

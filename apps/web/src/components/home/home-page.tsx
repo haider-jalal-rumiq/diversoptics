@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { CatalogProductCard } from "@/components/catalog/catalog-product-card";
 import { DemoCatalogNotice } from "@/components/catalog/demo-catalog-notice";
 import type {
   CatalogBrand,
@@ -17,6 +16,7 @@ import { Container } from "../ui/container";
 import { Reveal } from "../ui/reveal";
 import { BrandTile } from "./brand-tile";
 import { CategoryCarousel } from "./category-carousel";
+import { FeaturedCoverflow } from "./featured-coverflow";
 import { Hero } from "./hero";
 import { SectionHeading } from "./section-heading";
 
@@ -83,18 +83,9 @@ export function HomePage({
               </Link>
             </div>
           </Reveal>
-          <ul className="mt-7 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
-            {products.slice(0, 3).map((product, index) => (
-              <li key={product.id}>
-                <Reveal delay={index * 80}>
-                  <CatalogProductCard
-                    priority={index === 0}
-                    product={product}
-                  />
-                </Reveal>
-              </li>
-            ))}
-          </ul>
+          <Reveal className="mt-7 block">
+            <FeaturedCoverflow products={products} />
+          </Reveal>
           {products.length === 0 ? (
             <p className="mt-8 rounded-xl border border-smoke/30 bg-porcelain p-6 text-sm text-smoke">
               {/*

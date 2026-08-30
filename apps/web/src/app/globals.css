@@ -296,6 +296,40 @@ button {
   transform: translate3d(0.25rem, 0, 0);
 }
 
+/*
+  Featured coverflow. Only transform and opacity move, so each card change is a
+  compositor job rather than a layout one — eight cards re-laying out together
+  every four seconds would not hold frame rate.
+*/
+.dx-flow-card {
+  transition:
+    transform 0.8s cubic-bezier(0.3, 1, 0.35, 1),
+    opacity 0.5s ease;
+  will-change: transform;
+}
+
+.dx-flow-veil {
+  transition: opacity 0.8s ease;
+}
+
+/*
+  Caption swap. Transform only, never opacity: this text is the one place the
+  product is actually named, and fading it in makes axe blend it against the
+  stage and report the contrast failure documented on `.dx-reveal`.
+*/
+@keyframes dx-flow-caption {
+  from {
+    transform: translate3d(0, 0.6rem, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.dx-flow-caption {
+  animation: dx-flow-caption 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @keyframes dx-cat-progress {
   from {
     transform: scaleX(0);

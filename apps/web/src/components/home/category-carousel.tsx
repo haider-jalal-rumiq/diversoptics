@@ -4,10 +4,12 @@ import type { Route } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import type { MouseEvent } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { CatalogCategory } from "@/features/catalog/domain/types";
 import { cn } from "@/lib/utils/cn";
+
+import { useInView } from "./use-in-view";
 
 /**
  * One curated still per top-level category, keyed by slug. A category with no
@@ -35,6 +37,8 @@ export function CategoryCarousel({
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const stage = useRef<HTMLDivElement>(null);
+  const inView = useInView(stage);
 
   useEffect(() => {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -48,19 +52,20 @@ export function CategoryCarousel({
   /**
    * Auto-advance is a convenience, never the only way through: every panel is a
    * focusable link and the dots below drive the same state. It stops while a
-   * pointer or the keyboard is inside the carousel, so it can never yank a panel
-   * out from under someone mid-read, and it never starts at all when the reader
-   * has asked for reduced motion.
+   * pointer or the keyboard is inside the carousel, waits until the section is
+   * actually on screen, and never starts at all when the reader has asked for
+   * reduced motion — so it can never yank a panel out from under someone
+   * mid-read, nor spend the scroll down the page cycling unseen.
    */
   useEffect(() => {
-    if (paused || reducedMotion || categories.length < 2) return;
+    if (paused || reducedMotion || !inView || categories.length < 2) return;
 
     const timer = window.setInterval(() => {
       setActive((current) => (current + 1) % categories.length);
     }, ADVANCE_MS);
 
     return () => window.clearInterval(timer);
-  }, [categories.length, paused, reducedMotion]);
+  }, [categories.length, inView, paused, reducedMotion]);
 
   if (categories.length === 0) return null;
 
@@ -71,6 +76,7 @@ export function CategoryCarousel({
       onFocusCapture={() => setPaused(true)}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      ref={stage}
     >
       <ul className="flex h-[38rem] list-none flex-col gap-2 p-0 md:h-[34rem] md:flex-row">
         {categories.map((category, index) => {

@@ -61,6 +61,8 @@ The vector recreation remains a working asset until it has been visually compare
 - Antique Brass is decorative and must not be used for small functional text.
 - Availability and error states always include a label or icon; color alone is insufficient.
 - Interactive colors and focus states must meet WCAG AA contrast in their actual context.
+- The public website header uses an Obsidian editorial surface with restrained Orbit Gold light and rules; white header canvases are no longer part of the approved web treatment.
+- The public page canvas may layer Porcelain, warm neutral gradients, large orbit lines and low-opacity gold/brass light fields. Product cards remain opaque for accurate imagery and readable specifications.
 
 ## Typography
 
@@ -99,6 +101,7 @@ Both approved families are available in the connected Figma environment.
 - Mobile/low-power devices may receive a short optimized video or layered still instead of live 3D.
 - `prefers-reduced-motion` receives static posters and crossfades without losing content or navigation.
 - No mandatory intro, scroll hijacking or animation that blocks the WhatsApp action.
+- Header dropdowns use a short 180 ms transform transition. The public background may drift slowly using decorative transform-only layers, and must become static for reduced-motion users.
 
 ## Voice
 

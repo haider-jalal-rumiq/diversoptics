@@ -16,7 +16,7 @@ export function BrandMark({ className }: { className?: string }) {
         fill
         priority
         sizes="108px"
-        src="/brand/current-logo.png"
+        src="/brand/diverso-logo-transparent.png"
       />
     </Link>
   );

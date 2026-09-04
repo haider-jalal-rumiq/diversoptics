@@ -38,7 +38,7 @@ export function HomePage({
       <Hero />
 
       {demo ? (
-        <div className="bg-porcelain pt-8">
+        <div className="dx-atmosphere-band pt-8">
           <Container>
             <DemoCatalogNotice active />
           </Container>
@@ -46,7 +46,7 @@ export function HomePage({
       ) : null}
 
       <section
-        className="content-auto bg-porcelain py-[4.5rem]"
+        className="dx-atmosphere-band content-auto py-[4.5rem]"
         id="categories"
       >
         <Container>
@@ -67,7 +67,10 @@ export function HomePage({
         </Container>
       </section>
 
-      <section className="content-auto bg-white py-[4.5rem]" id="featured">
+      <section
+        className="dx-atmosphere-band dx-atmosphere-band-warm content-auto py-[4.5rem]"
+        id="featured"
+      >
         <Container>
           <Reveal>
             <div className="flex items-end justify-between gap-5">
@@ -132,7 +135,7 @@ export function HomePage({
         </section>
       ) : null}
 
-      <section className="content-auto bg-porcelain py-20">
+      <section className="dx-atmosphere-band content-auto py-20">
         <Container>
           <Reveal>
             <p className="text-sm font-semibold tracking-[0.08em]">

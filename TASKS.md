@@ -33,6 +33,7 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 - [!] Create the first owner Auth identity in the Supabase dashboard, then configure hosted Auth URLs, invite template, SMTP, and the server-only secret. Emails are supplied; the identity itself must be created by a human because it requires setting a password.
 - [x] Add metadata, sitemap, Product/Breadcrumb/LocalBusiness structured data, and social previews.
 - [x] Add analytics events and reporting definitions; see `docs/19-analytics-and-reporting.md` and the CMS Inquiries screen.
+- [x] Revise the public header into the client-approved catalog mega-navigation and add the lightweight Golden Orbit site atmosphere.
 - [x] Apply the two Phase 03 migrations to the cloud project and verify the generated database types.
 - [x] Add business-hours editing to the CMS settings screen.
 - [ ] Seed a 10–20 product pilot set and validate the schema before bulk entry.

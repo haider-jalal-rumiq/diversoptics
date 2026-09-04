@@ -37,7 +37,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background: var(--color-porcelain);
+  background: #ece7dc;
   color: var(--color-obsidian);
   font-family: var(--font-manrope), Arial, sans-serif;
   text-rendering: optimizeLegibility;
@@ -453,6 +453,280 @@ button {
     rgb(0 0 0 / 0.4) 72%,
     transparent 85%
   );
+}
+
+/* ---------------------------------------------------------------------------
+   Public shell, header and catalog navigation
+   ---------------------------------------------------------------------------
+   The public background is a fixed decorative layer. Its colour fields move by
+   transform only, so the atmosphere does not repaint the page or compete with
+   scrolling. CMS routes do not use this shell and remain intentionally plain.
+*/
+.dx-public-shell {
+  position: relative;
+  isolation: isolate;
+  min-height: 100dvh;
+}
+
+.dx-site-atmosphere {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 13% 24%,
+      transparent 0 10.25rem,
+      rgb(168 121 42 / 0.13) 10.32rem,
+      transparent 10.42rem
+    ),
+    radial-gradient(
+      circle at 89% 66%,
+      transparent 0 16rem,
+      rgb(254 204 41 / 0.12) 16.08rem,
+      transparent 16.18rem
+    ),
+    linear-gradient(128deg, #e6dfd1 0%, #f8f5ee 44%, #e9e1d2 100%);
+}
+
+.dx-site-atmosphere::before,
+.dx-site-atmosphere::after {
+  position: absolute;
+  content: "";
+  aspect-ratio: 1;
+  border-radius: 999px;
+  will-change: transform;
+}
+
+.dx-site-atmosphere::before {
+  top: 5%;
+  left: -14rem;
+  width: min(45rem, 82vw);
+  background: radial-gradient(
+    circle,
+    rgb(254 204 41 / 0.2),
+    rgb(254 204 41 / 0.05) 45%,
+    transparent 69%
+  );
+}
+
+.dx-site-atmosphere::after {
+  right: -18rem;
+  bottom: 3%;
+  width: min(54rem, 92vw);
+  background: radial-gradient(
+    circle,
+    rgb(168 121 42 / 0.16),
+    rgb(255 255 255 / 0.18) 48%,
+    transparent 70%
+  );
+}
+
+/* Public listing and editorial pages now reveal the atmospheric shell. Cards
+   retain opaque surfaces so catalog copy and product imagery stay crisp. */
+.dx-public-shell main {
+  background-color: transparent;
+}
+
+.dx-atmosphere-band {
+  background: linear-gradient(
+    102deg,
+    rgb(247 244 237 / 0.8),
+    rgb(255 255 255 / 0.5) 48%,
+    rgb(247 244 237 / 0.72)
+  );
+}
+
+.dx-atmosphere-band-warm {
+  background: linear-gradient(
+    116deg,
+    rgb(255 255 255 / 0.6),
+    rgb(254 204 41 / 0.1) 52%,
+    rgb(247 244 237 / 0.72)
+  );
+}
+
+.dx-site-header {
+  background:
+    radial-gradient(
+      circle at 14% -80%,
+      rgb(254 204 41 / 0.25),
+      transparent 38%
+    ),
+    linear-gradient(110deg, #111 0%, #1c1b19 54%, #121211 100%);
+  box-shadow: 0 12px 34px rgb(21 21 21 / 0.2);
+}
+
+.dx-nav-trigger::before {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0;
+  left: 0.75rem;
+  height: 2px;
+  content: "";
+  background: var(--color-orbit-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-nav-trigger::after {
+  width: 0.34rem;
+  height: 0.34rem;
+  margin-left: 0.5rem;
+  content: "";
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  transform: translateY(-0.12rem) rotate(45deg);
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-mega-panel {
+  z-index: 20;
+  pointer-events: none;
+  visibility: hidden;
+  transform: translate3d(-50%, -0.55rem, 0) scale(0.99);
+  transform-origin: top center;
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 180ms;
+}
+
+.dx-mega-panel-card {
+  background:
+    radial-gradient(circle at 90% 0%, rgb(254 204 41 / 0.12), transparent 32%),
+    linear-gradient(135deg, #282623, #171716 72%);
+}
+
+.dx-nav-group:focus-within .dx-mega-panel {
+  pointer-events: auto;
+  visibility: visible;
+  transform: translate3d(-50%, 0, 0) scale(1);
+  transition:
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+.dx-nav-group:focus-within .dx-nav-trigger {
+  color: var(--color-white);
+}
+
+.dx-nav-group:focus-within .dx-nav-trigger::before {
+  transform: scaleX(1);
+}
+
+.dx-nav-group:focus-within .dx-nav-trigger::after {
+  transform: translateY(0.1rem) rotate(225deg);
+}
+
+.dx-mega-link,
+.dx-mega-all-link,
+.dx-header-icon,
+.dx-whatsapp-button {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-mobile-chevron {
+  width: 0.52rem;
+  height: 0.52rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-0.12rem) rotate(45deg);
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dx-mobile-chevron-open {
+  transform: translateY(0.12rem) rotate(225deg);
+}
+
+/* Grid rows provide the one justified layout animation in this header: a short
+   accordion expansion. Closed links are also hidden from keyboard focus. */
+.dx-mobile-group-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 220ms;
+}
+
+.dx-mobile-group-content > div {
+  overflow: hidden;
+}
+
+.dx-mobile-group-content-open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dx-nav-group:hover .dx-mega-panel {
+    pointer-events: auto;
+    visibility: visible;
+    transform: translate3d(-50%, 0, 0) scale(1);
+    transition:
+      transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s;
+  }
+
+  .dx-nav-group:hover .dx-nav-trigger {
+    color: var(--color-white);
+  }
+
+  .dx-nav-group:hover .dx-nav-trigger::before {
+    transform: scaleX(1);
+  }
+
+  .dx-nav-group:hover .dx-nav-trigger::after {
+    transform: translateY(0.1rem) rotate(225deg);
+  }
+
+  .dx-mega-link:hover,
+  .dx-mega-all-link:hover {
+    color: var(--color-orbit-gold);
+    transform: translate3d(0.18rem, 0, 0);
+  }
+
+  .dx-header-icon:hover {
+    color: var(--color-orbit-gold);
+    background: rgb(255 255 255 / 0.08);
+    transform: translate3d(0, -0.1rem, 0);
+  }
+
+  .dx-whatsapp-button:hover {
+    background: #1a6840;
+    transform: translate3d(0, -0.1rem, 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dx-site-atmosphere::before {
+    animation: dx-atmosphere-drift-a 22s ease-in-out infinite alternate;
+  }
+
+  .dx-site-atmosphere::after {
+    animation: dx-atmosphere-drift-b 26s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes dx-atmosphere-drift-a {
+  to {
+    transform: translate3d(8vw, 10vh, 0) scale(1.08);
+  }
+}
+
+@keyframes dx-atmosphere-drift-b {
+  to {
+    transform: translate3d(-7vw, -9vh, 0) scale(0.94);
+  }
 }
 
 /* Text clipped to a line box, so `dx-line-up` slides in from below the line. */

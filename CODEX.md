@@ -4,7 +4,7 @@
 
 Build Diverso Optics into a credible premium local retail brand: a visually distinctive catalog website, an easy product CMS, a human WhatsApp inquiry experience, and a sustainable Instagram/Facebook/TikTok content operation.
 
-## Current state — 2026-08-22
+## Current state — 2026-09-04
 
 - Workspace began with two JPEG logo variants and no codebase.
 - Competitor and benchmark research is documented.
@@ -32,6 +32,7 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - The CMS settings screen now edits seven-day opening hours, and a new CMS Inquiries screen reports recorded WhatsApp inquiry events. Metric definitions live in `docs/19-analytics-and-reporting.md`.
 - Metadata, canonical URLs, generated sitemap, robots, and Product/Breadcrumb/LocalBusiness structured data are in place. Crawling stays closed behind a single launch flag.
 - Phase 03 verification: 82 Vitest tests, 88 Playwright scenarios across four browsers, 20 new pgTAP assertions, and Lighthouse 100 performance and 100 accessibility on the home, category and product pages.
+- The public shell now uses a dark Golden Orbit mega-navigation with the client-requested Sunglasses, Optical Frames, Pens, Watches and Eyewear taxonomy. Mobile receives the same hierarchy as an accessible accordion, and a CSS-only atmospheric background replaces the flat public-page canvas while respecting reduced motion.
 
 ## Recommended next move
 

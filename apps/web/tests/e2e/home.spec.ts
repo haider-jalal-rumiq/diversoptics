@@ -40,6 +40,32 @@ test("home preview has no automatically detectable serious accessibility violati
   expect(seriousViolations).toEqual([]);
 });
 
+test("desktop mega-navigation exposes the requested catalog hierarchy", async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+
+  const sunglassesTrigger = page
+    .getByRole("link", { exact: true, name: "Sunglasses" })
+    .first();
+  await sunglassesTrigger.focus();
+
+  const sunglassesMenu = page.getByRole("navigation", {
+    name: "Sunglasses menu",
+  });
+  await expect(sunglassesMenu).toBeVisible();
+  await expect(
+    sunglassesMenu.getByRole("link", { exact: true, name: "Chopard" }),
+  ).toHaveAttribute("href", /brand=chopard/);
+  await expect(
+    sunglassesMenu.getByRole("link", { exact: true, name: "Louis Vuitton" }),
+  ).toHaveAttribute("href", /brand=louis-vuitton/);
+  await page.screenshot({
+    path: testInfo.outputPath("desktop-mega-menu-preview.png"),
+  });
+});
+
 test("fixture product detail remains clearly fictional", async ({ page }) => {
   await page.goto("/preview/products/demo-frame-01");
 
@@ -65,6 +91,17 @@ test("mobile reduced-motion navigation remains complete and contained", async ({
   await expect(page.getByRole("dialog")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Browse Diverso" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { exact: true, name: "Sunglasses" }),
+  ).toHaveAttribute("aria-expanded", "true");
+  await expect(
+    page.getByRole("link", { exact: true, name: "Chopard" }),
+  ).toBeVisible();
+
+  await page.getByRole("button", { exact: true, name: "Watches" }).click();
+  await expect(
+    page.getByRole("link", { exact: true, name: "G-Shock" }),
   ).toBeVisible();
   await expect(
     page.getByRole("link", { name: "Ask on WhatsApp" }).last(),

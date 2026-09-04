@@ -17,10 +17,11 @@ export const siteConfig = {
     "A curated catalog of eyewear, watches and writing instruments from Diverso Optics in F-11 Markaz, Islamabad.",
   locationLabel: "F-11 Markaz, Islamabad",
   navigation: [
-    { href: "/#categories", label: "Eyewear" },
-    { href: "/#featured", label: "Watches" },
-    { href: "/#brands", label: "Pens" },
-    { href: "/#categories", label: "Contact Lenses" },
+    { href: "/eyewear/sunglasses", label: "Sunglasses" },
+    { href: "/eyewear/optical-frames", label: "Optical Frames" },
+    { href: "/writing-instruments", label: "Pens" },
+    { href: "/watches", label: "Watches" },
+    { href: "/eyewear", label: "Eyewear" },
   ],
   /**
    * Profile URLs are unconfirmed, so each one is an obvious placeholder rather

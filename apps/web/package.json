@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "next build",
+    "catalog:import:cufflinks": "node scripts/import-montblanc-cufflinks.mjs",
+    "catalog:import:pens": "node scripts/import-montblanc-pens.mjs",
     "dev": "next dev --hostname 127.0.0.1",
     "lint": "eslint . --max-warnings=0",
     "start": "next start --hostname 127.0.0.1",

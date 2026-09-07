@@ -8,6 +8,7 @@ describe("catalog navigation", () => {
       "Sunglasses",
       "Optical Frames",
       "Pens",
+      "Cufflinks",
       "Watches",
       "Eyewear",
     ]);
@@ -51,6 +52,7 @@ describe("catalog navigation", () => {
         "/eyewear/sunglasses",
         "/eyewear/optical-frames",
         "/writing-instruments",
+        "/cufflinks",
         "/watches",
       ]).toContain(url.pathname);
     }

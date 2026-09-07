@@ -19,6 +19,10 @@ import { useInView } from "./use-in-view";
 const PANEL_ART: Record<string, { objectPosition: string; src: string }> = {
   // Cropped low so each product rides above the band the copy sits in rather
   // than behind it.
+  cufflinks: {
+    objectPosition: "50% 45%",
+    src: "/brand/categories/cufflinks.webp",
+  },
   eyewear: { objectPosition: "50% 64%", src: "/brand/categories/eyewear.webp" },
   watches: { objectPosition: "50% 38%", src: "/brand/categories/watches.webp" },
   "writing-instruments": {

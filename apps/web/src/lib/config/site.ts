@@ -20,6 +20,7 @@ export const siteConfig = {
     { href: "/eyewear/sunglasses", label: "Sunglasses" },
     { href: "/eyewear/optical-frames", label: "Optical Frames" },
     { href: "/writing-instruments", label: "Pens" },
+    { href: "/cufflinks", label: "Cufflinks" },
     { href: "/watches", label: "Watches" },
     { href: "/eyewear", label: "Eyewear" },
   ],

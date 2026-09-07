@@ -57,7 +57,8 @@ async function mapWithLimit(values, limit, worker) {
   return results;
 }
 
-const transientErrorPattern = /fetch failed|network|timeout|timed out|gateway|econn|socket|5\d\d/i;
+const transientErrorPattern =
+  /fetch failed|network|timeout|timed out|gateway|econn|socket|5\d\d/i;
 
 /**
  * Storage occasionally rejects an upload with an empty message, which the
@@ -84,19 +85,24 @@ export async function retryNetwork(label, operation, attempts = 5) {
     }
 
     if (attempt < attempts) {
-      await new Promise((resolve) => setTimeout(resolve, 750 * 2 ** (attempt - 1)));
+      await new Promise((resolve) =>
+        setTimeout(resolve, 750 * 2 ** (attempt - 1)),
+      );
       console.log(`Retrying ${label} (${attempt + 1}/${attempts}).`);
     }
   }
 
-  throw new Error(`${label} failed after ${attempts} attempts: ${String(lastError)}`);
+  throw new Error(
+    `${label} failed after ${attempts} attempts: ${String(lastError)}`,
+  );
 }
 
 async function uploadOrThrow(bucket, path, data, options) {
   const result = await retryNetwork(`upload ${path}`, () =>
     bucket.upload(path, data, { ...options, upsert: true }),
   );
-  if (result.error) throw new Error(`Could not upload ${path}: ${result.error.message}`);
+  if (result.error)
+    throw new Error(`Could not upload ${path}: ${result.error.message}`);
 }
 
 function validateManifest(config, sourceRoot) {
@@ -107,7 +113,8 @@ function validateManifest(config, sourceRoot) {
     if (skus.has(product.sku)) throw new Error(`Duplicate SKU ${product.sku}.`);
     skus.add(product.sku);
 
-    if (!product.files.length) throw new Error(`SKU ${product.sku} has no media.`);
+    if (!product.files.length)
+      throw new Error(`SKU ${product.sku} has no media.`);
     for (const file of product.files) {
       if (files.has(file)) throw new Error(`Duplicate source image ${file}.`);
       if (!existsSync(join(sourceRoot, file))) {
@@ -134,57 +141,70 @@ async function prepareAssets(config, sourceRoot) {
   let sourceBytes = 0;
   let outputBytes = 0;
 
-  const prepared = await mapWithLimit(jobs, 4, async ({ file, index, product }, jobIndex) => {
-    const sourcePath = join(sourceRoot, file);
-    const sourceBuffer = await readFile(sourcePath);
-    const sourceMetadata = await sharp(sourceBuffer, { failOn: "warning" }).metadata();
-    if (!sourceMetadata.width || !sourceMetadata.height) {
-      throw new Error(`${file} has invalid dimensions.`);
-    }
+  const prepared = await mapWithLimit(
+    jobs,
+    4,
+    async ({ file, index, product }, jobIndex) => {
+      const sourcePath = join(sourceRoot, file);
+      const sourceBuffer = await readFile(sourcePath);
+      const sourceMetadata = await sharp(sourceBuffer, {
+        failOn: "warning",
+      }).metadata();
+      if (!sourceMetadata.width || !sourceMetadata.height) {
+        throw new Error(`${file} has invalid dimensions.`);
+      }
 
-    const hash = createHash("sha256").update(sourceBuffer).digest("hex");
-    const derivative = await sharp(sourceBuffer, { failOn: "warning" })
-      .rotate()
-      .resize({ fit: "inside", height: 1800, width: 1800, withoutEnlargement: true })
-      .webp({ effort: 6, quality: 88, smartSubsample: true })
-      .toBuffer({ resolveWithObject: true });
-    const token = skuToken(product.sku);
-    const outputPath = join(
-      outputRoot,
-      token,
-      `${token}-${String(index + 1).padStart(2, "0")}${index === 0 ? "-primary" : ""}.webp`,
-    );
+      const hash = createHash("sha256").update(sourceBuffer).digest("hex");
+      const derivative = await sharp(sourceBuffer, { failOn: "warning" })
+        .rotate()
+        .resize({
+          fit: "inside",
+          height: 1800,
+          width: 1800,
+          withoutEnlargement: true,
+        })
+        .webp({ effort: 6, quality: 88, smartSubsample: true })
+        .toBuffer({ resolveWithObject: true });
+      const token = skuToken(product.sku);
+      const outputPath = join(
+        outputRoot,
+        token,
+        `${token}-${String(index + 1).padStart(2, "0")}${index === 0 ? "-primary" : ""}.webp`,
+      );
 
-    await mkdir(dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, derivative.data);
-    sourceBytes += sourceBuffer.byteLength;
-    outputBytes += derivative.data.byteLength;
+      await mkdir(dirname(outputPath), { recursive: true });
+      await writeFile(outputPath, derivative.data);
+      sourceBytes += sourceBuffer.byteLength;
+      outputBytes += derivative.data.byteLength;
 
-    if ((jobIndex + 1) % 20 === 0 || jobIndex + 1 === jobs.length) {
-      console.log(`Prepared ${jobIndex + 1}/${jobs.length} images.`);
-    }
+      if ((jobIndex + 1) % 20 === 0 || jobIndex + 1 === jobs.length) {
+        console.log(`Prepared ${jobIndex + 1}/${jobs.length} images.`);
+      }
 
-    return {
-      derivative: derivative.data,
-      file,
-      hash,
-      height: derivative.info.height,
-      index,
-      outputPath,
-      product,
-      sourceBuffer,
-      sourceHeight: sourceMetadata.height,
-      sourceWidth: sourceMetadata.width,
-      width: derivative.info.width,
-    };
-  });
+      return {
+        derivative: derivative.data,
+        file,
+        hash,
+        height: derivative.info.height,
+        index,
+        outputPath,
+        product,
+        sourceBuffer,
+        sourceHeight: sourceMetadata.height,
+        sourceWidth: sourceMetadata.width,
+        width: derivative.info.width,
+      };
+    },
+  );
 
   const report = {
     generatedAt: new Date().toISOString(),
     imageCount: prepared.length,
     outputBytes,
     productCount: config.manifest.length,
-    reductionPercent: Number((100 - (outputBytes / sourceBytes) * 100).toFixed(2)),
+    reductionPercent: Number(
+      (100 - (outputBytes / sourceBytes) * 100).toFixed(2),
+    ),
     source: config.sourceLabel,
     sourceBytes,
   };
@@ -201,32 +221,43 @@ async function prepareAssets(config, sourceRoot) {
 
 async function applyCatalog(config, prepared, refreshMedia) {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const secretKey = process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const secretKey =
+    process.env.SUPABASE_SECRET_KEY ?? process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !secretKey) {
     throw new Error("Supabase URL and server-only secret key are required.");
   }
   if (!new URL(supabaseUrl).hostname.startsWith(`${EXPECTED_PROJECT_REF}.`)) {
-    throw new Error(`Refusing to import into a project other than ${EXPECTED_PROJECT_REF}.`);
+    throw new Error(
+      `Refusing to import into a project other than ${EXPECTED_PROJECT_REF}.`,
+    );
   }
 
   const supabase = createClient(supabaseUrl, secretKey, {
     auth: { autoRefreshToken: false, persistSession: false },
   });
-  const [{ data: category, error: categoryError }, { data: brand, error: brandError }] =
-    await Promise.all([
-      retryNetwork(`load ${config.categorySlug} category`, () =>
-        supabase
-          .from("categories")
-          .select("id, status")
-          .eq("slug", config.categorySlug)
-          .single(),
-      ),
-      retryNetwork(`load ${config.brandSlug} brand`, () =>
-        supabase.from("brands").select("id, status").eq("slug", config.brandSlug).single(),
-      ),
-    ]);
+  const [
+    { data: category, error: categoryError },
+    { data: brand, error: brandError },
+  ] = await Promise.all([
+    retryNetwork(`load ${config.categorySlug} category`, () =>
+      supabase
+        .from("categories")
+        .select("id, status")
+        .eq("slug", config.categorySlug)
+        .single(),
+    ),
+    retryNetwork(`load ${config.brandSlug} brand`, () =>
+      supabase
+        .from("brands")
+        .select("id, status")
+        .eq("slug", config.brandSlug)
+        .single(),
+    ),
+  ]);
   if (categoryError || brandError || !category || !brand) {
-    throw new Error(`The ${config.categorySlug} category or ${config.brandSlug} brand is missing.`);
+    throw new Error(
+      `The ${config.categorySlug} category or ${config.brandSlug} brand is missing.`,
+    );
   }
   if (category.status !== "published" || brand.status !== "published") {
     throw new Error(
@@ -239,8 +270,13 @@ async function applyCatalog(config, prepared, refreshMedia) {
     "load existing products",
     () => supabase.from("products").select("id, sku").in("sku", skuList),
   );
-  if (existingError) throw new Error(`Could not load existing products: ${existingError.message}`);
-  const productIds = new Map((existingProducts ?? []).map((product) => [product.sku, product.id]));
+  if (existingError)
+    throw new Error(
+      `Could not load existing products: ${existingError.message}`,
+    );
+  const productIds = new Map(
+    (existingProducts ?? []).map((product) => [product.sku, product.id]),
+  );
 
   for (const product of config.manifest) {
     const payload = config.buildProduct(product, {
@@ -249,31 +285,43 @@ async function applyCatalog(config, prepared, refreshMedia) {
     });
     const existingId = productIds.get(product.sku);
     if (existingId) {
-      const { error } = await retryNetwork(`update product ${product.sku}`, () =>
-        supabase.from("products").update(payload).eq("id", existingId),
+      const { error } = await retryNetwork(
+        `update product ${product.sku}`,
+        () => supabase.from("products").update(payload).eq("id", existingId),
       );
-      if (error) throw new Error(`Could not update ${product.sku}: ${error.message}`);
+      if (error)
+        throw new Error(`Could not update ${product.sku}: ${error.message}`);
       continue;
     }
 
-    const { data, error } = await retryNetwork(`create product ${product.sku}`, () =>
-      supabase
-        .from("products")
-        .insert({ ...payload, status: "draft" })
-        .select("id")
-        .single(),
+    const { data, error } = await retryNetwork(
+      `create product ${product.sku}`,
+      () =>
+        supabase
+          .from("products")
+          .insert({ ...payload, status: "draft" })
+          .select("id")
+          .single(),
     );
-    if (error) throw new Error(`Could not create ${product.sku}: ${error.message}`);
+    if (error)
+      throw new Error(`Could not create ${product.sku}: ${error.message}`);
     productIds.set(product.sku, data.id);
   }
 
   const ids = [...productIds.values()];
   const { data: existingMedia, error: mediaReadError } = await retryNetwork(
     "load existing media",
-    () => supabase.from("product_media").select("id, product_id, source_path").in("product_id", ids),
+    () =>
+      supabase
+        .from("product_media")
+        .select("id, product_id, source_path")
+        .in("product_id", ids),
   );
-  if (mediaReadError) throw new Error(`Could not load existing media: ${mediaReadError.message}`);
-  const mediaBySourcePath = new Map((existingMedia ?? []).map((media) => [media.source_path, media]));
+  if (mediaReadError)
+    throw new Error(`Could not load existing media: ${mediaReadError.message}`);
+  const mediaBySourcePath = new Map(
+    (existingMedia ?? []).map((media) => [media.source_path, media]),
+  );
   const groupedPrepared = new Map();
 
   await mapWithLimit(prepared, 4, async (item, transferIndex) => {
@@ -284,14 +332,24 @@ async function applyCatalog(config, prepared, refreshMedia) {
     const existing = mediaBySourcePath.get(sourcePath);
     if (!existing || refreshMedia) {
       await Promise.all([
-        uploadOrThrow(supabase.storage.from("catalog-source"), sourcePath, item.sourceBuffer, {
-          cacheControl: "31536000",
-          contentType: "image/png",
-        }),
-        uploadOrThrow(supabase.storage.from("catalog-public"), publicPath, item.derivative, {
-          cacheControl: "31536000",
-          contentType: "image/webp",
-        }),
+        uploadOrThrow(
+          supabase.storage.from("catalog-source"),
+          sourcePath,
+          item.sourceBuffer,
+          {
+            cacheControl: "31536000",
+            contentType: "image/png",
+          },
+        ),
+        uploadOrThrow(
+          supabase.storage.from("catalog-public"),
+          publicPath,
+          item.derivative,
+          {
+            cacheControl: "31536000",
+            contentType: "image/webp",
+          },
+        ),
       ]);
     }
 
@@ -311,51 +369,91 @@ async function applyCatalog(config, prepared, refreshMedia) {
     };
     let mediaId;
     if (existing && refreshMedia) {
-      const { error } = await retryNetwork(`update media for ${item.product.sku}`, () =>
-        supabase.from("product_media").update(mediaPayload).eq("id", existing.id),
+      const { error } = await retryNetwork(
+        `update media for ${item.product.sku}`,
+        () =>
+          supabase
+            .from("product_media")
+            .update(mediaPayload)
+            .eq("id", existing.id),
       );
-      if (error) throw new Error(`Could not update media for ${item.product.sku}: ${error.message}`);
+      if (error)
+        throw new Error(
+          `Could not update media for ${item.product.sku}: ${error.message}`,
+        );
       mediaId = existing.id;
     } else if (existing) {
       mediaId = existing.id;
     } else {
-      const { data, error } = await retryNetwork(`create media for ${item.product.sku}`, () =>
-        supabase.from("product_media").insert(mediaPayload).select("id").single(),
+      const { data, error } = await retryNetwork(
+        `create media for ${item.product.sku}`,
+        () =>
+          supabase
+            .from("product_media")
+            .insert(mediaPayload)
+            .select("id")
+            .single(),
       );
-      if (error) throw new Error(`Could not create media for ${item.product.sku}: ${error.message}`);
+      if (error)
+        throw new Error(
+          `Could not create media for ${item.product.sku}: ${error.message}`,
+        );
       mediaId = data.id;
     }
 
     const productMedia = groupedPrepared.get(item.product.sku) ?? [];
     productMedia.push({ ...item, mediaId });
     groupedPrepared.set(item.product.sku, productMedia);
-    if ((transferIndex + 1) % 10 === 0 || transferIndex + 1 === prepared.length) {
+    if (
+      (transferIndex + 1) % 10 === 0 ||
+      transferIndex + 1 === prepared.length
+    ) {
       console.log(`Uploaded ${transferIndex + 1}/${prepared.length} images.`);
     }
   });
 
   await mapWithLimit(config.manifest, 6, async (product) => {
     const productId = productIds.get(product.sku);
-    const primary = groupedPrepared.get(product.sku)?.find((item) => item.index === 0);
-    if (!primary) throw new Error(`Primary media is missing for ${product.sku}.`);
-    const { error: primaryError } = await retryNetwork(`set primary media for ${product.sku}`, () =>
-      supabase.rpc("set_product_primary_media", {
-        p_media_id: primary.mediaId,
-        p_product_id: productId,
-      }),
+    const primary = groupedPrepared
+      .get(product.sku)
+      ?.find((item) => item.index === 0);
+    if (!primary)
+      throw new Error(`Primary media is missing for ${product.sku}.`);
+    const { error: primaryError } = await retryNetwork(
+      `set primary media for ${product.sku}`,
+      () =>
+        supabase.rpc("set_product_primary_media", {
+          p_media_id: primary.mediaId,
+          p_product_id: productId,
+        }),
     );
     if (primaryError) {
-      throw new Error(`Could not set primary media for ${product.sku}: ${primaryError.message}`);
+      throw new Error(
+        `Could not set primary media for ${product.sku}: ${primaryError.message}`,
+      );
     }
   });
 
-  await config.afterMedia?.({ categoryId: category.id, ids, productIds, supabase });
+  await config.afterMedia?.({
+    categoryId: category.id,
+    ids,
+    productIds,
+    supabase,
+  });
 
-  const { error: publishError } = await retryNetwork("publish imported products", () =>
-    supabase.from("products").update({ archived_at: null, status: "published" }).in("id", ids),
+  const { error: publishError } = await retryNetwork(
+    "publish imported products",
+    () =>
+      supabase
+        .from("products")
+        .update({ archived_at: null, status: "published" })
+        .in("id", ids),
   );
-  if (publishError) throw new Error(`Could not publish products: ${publishError.message}`);
-  console.log(`Published ${config.manifest.length}/${config.manifest.length} products.`);
+  if (publishError)
+    throw new Error(`Could not publish products: ${publishError.message}`);
+  console.log(
+    `Published ${config.manifest.length}/${config.manifest.length} products.`,
+  );
 
   await config.afterPublish?.({ ids, productIds, supabase });
 }
@@ -382,6 +480,8 @@ export async function runImport(config) {
     await applyCatalog(config, prepared, refreshMedia);
     console.log(`The ${config.label} catalog was uploaded and published.`);
   } else {
-    console.log("Preparation complete. Re-run with --apply to update Supabase.");
+    console.log(
+      "Preparation complete. Re-run with --apply to update Supabase.",
+    );
   }
 }

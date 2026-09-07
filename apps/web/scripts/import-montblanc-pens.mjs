@@ -1,11 +1,22 @@
 import { montblancPens } from "./data/montblanc-pens-2026-04-06.mjs";
-import { retryNetwork, runImport, skuToken, slugify } from "./lib/import-catalog.mjs";
+import {
+  retryNetwork,
+  runImport,
+  skuToken,
+  slugify,
+} from "./lib/import-catalog.mjs";
 
 function buildProduct(product, { brandId, categoryId }) {
   const priceMode = product.price === null ? "on_inquiry" : "fixed";
   const availability =
-    product.quantity === null ? "ask" : product.quantity > 0 ? "in_store" : "out_of_stock";
-  const kind = product.accessory ? "Montblanc pen accessory" : "Montblanc writing instrument";
+    product.quantity === null
+      ? "ask"
+      : product.quantity > 0
+        ? "in_store"
+        : "out_of_stock";
+  const kind = product.accessory
+    ? "Montblanc pen accessory"
+    : "Montblanc writing instrument";
 
   return {
     archived_at: null,
@@ -14,7 +25,9 @@ function buildProduct(product, { brandId, categoryId }) {
     category_id: categoryId,
     currency: "PKR",
     description: `${product.name}. Client-supplied catalog reference/SKU: ${product.sku}. Contact Diverso Optics to confirm current availability and product configuration.`,
-    eyebrow: product.accessory ? "Montblanc · Pen accessory" : "Montblanc · Writing instrument",
+    eyebrow: product.accessory
+      ? "Montblanc · Pen accessory"
+      : "Montblanc · Writing instrument",
     featured: false,
     model_number: product.sku,
     name: product.name,
@@ -37,8 +50,11 @@ async function refreshAttributes({ categoryId, ids, productIds, supabase }) {
         .eq("category_id", categoryId)
         .in("key", ["instrument_type", "body_material"]),
   );
-  if (definitionsError) throw new Error(`Could not load attributes: ${definitionsError.message}`);
-  const definitionIds = new Map((definitions ?? []).map((definition) => [definition.key, definition.id]));
+  if (definitionsError)
+    throw new Error(`Could not load attributes: ${definitionsError.message}`);
+  const definitionIds = new Map(
+    (definitions ?? []).map((definition) => [definition.key, definition.id]),
+  );
   const attributeRows = montblancPens.flatMap((product) => {
     const productId = productIds.get(product.sku);
     return [
@@ -61,19 +77,24 @@ async function refreshAttributes({ categoryId, ids, productIds, supabase }) {
   if (!attributeRows.length) return;
 
   const definitionIdList = [...definitionIds.values()];
-  const { error: deleteError } = await retryNetwork("clear imported pen attributes", () =>
-    supabase
-      .from("product_attribute_values")
-      .delete()
-      .in("product_id", ids)
-      .in("attribute_definition_id", definitionIdList)
-      .is("variant_id", null),
+  const { error: deleteError } = await retryNetwork(
+    "clear imported pen attributes",
+    () =>
+      supabase
+        .from("product_attribute_values")
+        .delete()
+        .in("product_id", ids)
+        .in("attribute_definition_id", definitionIdList)
+        .is("variant_id", null),
   );
-  if (deleteError) throw new Error(`Could not refresh attributes: ${deleteError.message}`);
-  const { error: attributeError } = await retryNetwork("create imported pen attributes", () =>
-    supabase.from("product_attribute_values").insert(attributeRows),
+  if (deleteError)
+    throw new Error(`Could not refresh attributes: ${deleteError.message}`);
+  const { error: attributeError } = await retryNetwork(
+    "create imported pen attributes",
+    () => supabase.from("product_attribute_values").insert(attributeRows),
   );
-  if (attributeError) throw new Error(`Could not create attributes: ${attributeError.message}`);
+  if (attributeError)
+    throw new Error(`Could not create attributes: ${attributeError.message}`);
 }
 
 /** Retires the three generic PEN-1..3 preview rows the real catalog replaced. */
@@ -85,7 +106,8 @@ async function archivePlaceholders({ supabase }) {
       .update({ archived_at: archivedAt, status: "archived" })
       .in("sku", ["PEN-1", "PEN-2", "PEN-3"]),
   );
-  if (error) throw new Error(`Could not archive pen placeholders: ${error.message}`);
+  if (error)
+    throw new Error(`Could not archive pen placeholders: ${error.message}`);
 }
 
 await runImport({

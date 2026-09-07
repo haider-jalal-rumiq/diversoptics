@@ -45,7 +45,9 @@ No stock counts were supplied for cufflinks in any form. Every product therefore
 
 ## Storefront surfaces
 
-- `20260907190000_add_cufflinks_category.sql` publishes the top-level `cufflinks` category. The storefront resolves categories through the `app/[...category]` catch-all route, so `/cufflinks` needed no new route file.
+- The top-level `cufflinks` category (id 15, published) was created as a **data operation against the project**, not as a migration. The storefront resolves categories through the `app/[...category]` catch-all route, so `/cufflinks` needed no new route file.
+
+  This category was first added as a migration, which was wrong and broke CI. `supabase/seed.sql` states the rule directly — verified catalog content "belongs in isolated database tests, never production migrations" — and `supabase/tests/database/catalog_rls.test.sql` asserts exact category counts (`anon` sees 1, `viewer` sees 2) that only hold when migrations add no catalog rows. Any category inserted by a migration breaks both assertions. The migration was removed; categories are created the same way every other one was (CMS or a direct data operation), and migrations stay schema-only.
 - `Cufflinks` was added to the header navigation (`catalog-navigation.ts`) and the site navigation list (`site.ts`), between Pens and Watches.
 - `public/brand/categories/cufflinks.webp` is the homepage category-carousel still, cropped from SKU 116663's artwork to exclude the Diverso watermark and the caption panel.
 
@@ -77,6 +79,15 @@ Two behaviour notes from this refactor:
 - ESLint: passed with zero warnings.
 - Strict TypeScript and Next route generation: passed.
 - Headless browser: `/cufflinks` listing renders 72 products with prices and "Ask for status"; a product detail page renders breadcrumbs, price, WhatsApp inquiry and related items; homepage header, dropdown, carousel and footer all expose Cufflinks; zero console errors; all catalog and carousel images return 200.
+
+## CI follow-up (2026-09-07)
+
+The first push of this work turned `Phase quality gates` red in two jobs. Both are fixed:
+
+- `verify` → `pnpm format:check`: the import scripts and both manifests were not Prettier-formatted. Formatted. Note that a local `prettier --check` also flags `next-env.d.ts`, `next.config.ts`, `hero.tsx`, `package.json` and `ci.yml`; those are **false positives from `core.autocrlf=true`** giving tracked files CRLF on disk, and they pass on CI's Linux LF checkout. Only LF-on-disk files are genuine failures, so those five were deliberately left alone — reformatting them would rewrite every line for no reason.
+- `database` → `pnpm supabase:test`: caused by the category migration described above. Removed.
+
+One loose end: the remote project still records a `20260907135017 add_cufflinks_category` migration whose file no longer exists in the repo. It is history bookkeeping only — it holds no schema or data, and nothing in CI reads it — but it should be deleted from `supabase_migrations.schema_migrations` so `supabase db push` does not report drift.
 
 ## Open items for the client
 

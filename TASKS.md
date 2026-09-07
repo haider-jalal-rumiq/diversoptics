@@ -30,13 +30,14 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 - [x] Configure Supabase environments, migrations, Auth, RLS, and Storage policies.
 - [x] Build catalog, search/filtering, product pages, shortlist, and inquiry redirect.
 - [x] Build owner CMS and product media workflow.
-- [!] Create the first owner Auth identity in the Supabase dashboard, then configure hosted Auth URLs, invite template, SMTP, and the server-only secret. Emails are supplied; the identity itself must be created by a human because it requires setting a password.
+- [~] The first owner Auth identity is active. Configure and verify hosted Auth URLs, the invite template and SMTP before launch.
 - [x] Add metadata, sitemap, Product/Breadcrumb/LocalBusiness structured data, and social previews.
 - [x] Add analytics events and reporting definitions; see `docs/19-analytics-and-reporting.md` and the CMS Inquiries screen.
 - [x] Revise the public header into the client-approved catalog mega-navigation and add the lightweight Golden Orbit site atmosphere.
 - [x] Apply the two Phase 03 migrations to the cloud project and verify the generated database types.
 - [x] Add business-hours editing to the CMS settings screen.
-- [ ] Seed a 10–20 product pilot set and validate the schema before bulk entry.
+- [x] Seed and validate the first real catalog set: 89 Montblanc writing instruments/accessories with 102 optimized product images; see `docs/20-montblanc-pens-catalog-import.md`.
+- [x] Verify the Pens vertical through anonymous RLS, public Storage, unit checks, production build, and a browser-level catalog/product/WhatsApp flow.
 - [ ] Complete accessibility, performance, device, content, and security QA.
 - [ ] Train owner/admin and launch.
 

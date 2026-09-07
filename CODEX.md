@@ -4,7 +4,7 @@
 
 Build Diverso Optics into a credible premium local retail brand: a visually distinctive catalog website, an easy product CMS, a human WhatsApp inquiry experience, and a sustainable Instagram/Facebook/TikTok content operation.
 
-## Current state — 2026-09-04
+## Current state — 2026-09-07
 
 - Workspace began with two JPEG logo variants and no codebase.
 - Competitor and benchmark research is documented.
@@ -26,17 +26,20 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - Phase 02 implements six cloud migrations, generated database types, explicit grants/RLS, two Storage buckets, invite-only profile activation, transactional media/attribute functions, and the responsive owner CMS.
 - CMS coverage includes products, variants, media optimization, brands, categories, structured attributes, collections, pages, CSV draft import, business settings, staff roles, product preview, and audit activity.
 - Phase 02 verification currently passes 30 pgTAP assertions, the Supabase security advisor, strict application checks, production build, and cross-browser anonymous Auth/accessibility tests.
-- No real catalog or staff identities were seeded. The singleton settings row contains only already confirmed facts.
+- One active owner identity exists. The singleton settings row contains only already confirmed facts; hosted Auth URL/template/SMTP verification remains open.
 - Phase 03 implements the public catalog: root-level category listings, brand and collection pages, search, product detail with gallery, variants and specifications, a browser-local shortlist, and the WhatsApp inquiry redirect that records a first-party event first.
 - Two Phase 03 migrations expose the public settings row to anonymous readers and add a definer `record_inquiry_event()` function that rebuilds its stored payload from a key allowlist and accepts only hashed session tokens. Both are applied to the cloud project and verified live.
 - The CMS settings screen now edits seven-day opening hours, and a new CMS Inquiries screen reports recorded WhatsApp inquiry events. Metric definitions live in `docs/19-analytics-and-reporting.md`.
 - Metadata, canonical URLs, generated sitemap, robots, and Product/Breadcrumb/LocalBusiness structured data are in place. Crawling stays closed behind a single launch flag.
 - Phase 03 verification: 82 Vitest tests, 88 Playwright scenarios across four browsers, 20 new pgTAP assertions, and Lighthouse 100 performance and 100 accessibility on the home, category and product pages.
 - The public shell now uses a dark Golden Orbit mega-navigation with the client-requested Sunglasses, Optical Frames, Pens, Watches and Eyewear taxonomy. Mobile receives the same hierarchy as an accessible accordion, and a CSS-only atmospheric background replaces the flat public-page canvas while respecting reduced motion.
+- The first real catalog vertical is live in Supabase: 89 Montblanc writing instruments/accessories, 102 approved images, 76 fixed prices, 13 inquiry-only prices, and the three generic pen placeholders archived. The client-supplied PNGs were reduced from 238.1 MB to 11.0 MB of dimension-preserving WebPs (95.38% smaller); full reconciliation and safeguards are recorded in `docs/20-montblanc-pens-catalog-import.md`.
+- The repeatable Pens importer preserves private originals, publishes content-hashed WebPs, resumes safely, maps duplicate-SKU artwork into galleries, and refuses to target a Supabase project other than Diverso. The supporting service-role primary-media migration is applied locally and in the cloud.
+- Current verification passes 114 Vitest tests, lint, strict TypeScript, the production build, live anonymous RLS/Storage checks, and a headless Chromium Pens-to-product-to-inquiry check with zero console errors.
 
 ## Recommended next move
 
-Create the first owner Auth identity in the Supabase dashboard for haider.jalal@rumiq.ai, promote its profile to owner, and configure hosted Auth URLs, the invite template, SMTP and the server-only secret. The identity must be created by a human because it requires setting a password. Then seed the 10–20 verified pilot products so the catalog renders real inventory, and run the owner/editor/viewer acceptance scenarios, which have never been executed against a real session.
+Configure and verify hosted Auth URLs, the invite template and SMTP, then run the owner/editor/viewer acceptance scenarios against the live Montblanc catalog and collect the next verified product category.
 
 ## Non-negotiables
 

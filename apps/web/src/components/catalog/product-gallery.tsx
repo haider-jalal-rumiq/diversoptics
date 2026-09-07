@@ -38,12 +38,11 @@ export function ProductGallery({
       <div className="relative aspect-square overflow-hidden rounded-lg bg-porcelain">
         <Image
           alt={active.altText || productName}
-          className="object-cover"
+          className="object-contain"
           fill
           priority
           sizes={MAIN_SIZES}
           src={source}
-          style={{ objectPosition: focalObjectPosition(active) }}
         />
       </div>
 

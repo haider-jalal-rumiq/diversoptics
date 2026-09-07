@@ -148,6 +148,21 @@ export const catalogNavigation = [
   },
   {
     description:
+      "Browse Montblanc cufflinks chosen for gifting and formal wear.",
+    href: "/cufflinks",
+    label: "Cufflinks",
+    sections: [
+      {
+        heading: "Cufflinks",
+        links: [
+          { href: "/cufflinks", label: "All cufflinks" },
+          { href: "/cufflinks?brand=montblanc", label: "Montblanc" },
+        ],
+      },
+    ],
+  },
+  {
+    description:
       "Find everyday and statement timepieces from the requested labels.",
     href: "/watches",
     label: "Watches",

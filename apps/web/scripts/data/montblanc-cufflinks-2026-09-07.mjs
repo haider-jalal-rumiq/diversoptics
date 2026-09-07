@@ -1,0 +1,88 @@
+/**
+ * Client-supplied Montblanc cufflinks, reconciled against the artwork in
+ * Diverso-Products-images/Cufflings. Every SKU and price is transcribed from
+ * the caption panel rendered into each supplied PNG; no separate price list was
+ * provided for this batch, so the artwork is the only source of record.
+ *
+ * `price: null` means the client's own card carries no price, which publishes
+ * as `Price on inquiry` rather than a guessed figure. No stock counts were
+ * supplied at all, so every cufflink uses `ask` availability.
+ *
+ * Names are descriptive rather than official: the cards print only "MONTBLANC
+ * CUFFLINKS" plus the SKU, so each title describes the finish and face visible
+ * in the artwork and carries the client's SKU for unambiguous lookup.
+ */
+export const montblancCufflinks = [
+  { sku: "104506", name: "Montblanc Engraved Ring Black Onyx Round Cufflinks", price: null, files: ["IMG_4546.PNG"] },
+  { sku: "106625", name: "Montblanc Ribbed Guilloche Round Cufflinks", price: 116000, files: ["IMG_4573.PNG"] },
+  { sku: "107463", name: "Montblanc Engraved Signature Ring Round Cufflinks", price: 100000, files: ["IMG_4578.PNG"] },
+  { sku: "107585", name: "Montblanc Rose Gold-Tone White Guilloche Red Stone Cufflinks", price: 148000, files: ["IMG_4526.PNG"] },
+  { sku: "109512", name: "Montblanc Grey Mother-of-Pearl Square Cufflinks", price: 144500, files: ["IMG_4571.PNG"] },
+  { sku: "109788", name: "Montblanc Grey Plaid Round Cufflinks", price: null, files: ["IMG_4562.PNG"] },
+  { sku: "109789", name: "Montblanc Rose Gold-Tone Rectangular Bar Cufflinks", price: 138500, files: ["IMG_4470.PNG"] },
+  { sku: "111310", name: "Montblanc Rose Gold-Tone Onyx Bar Cufflinks", price: 126000, files: ["IMG_4523.PNG"] },
+  { sku: "111324", name: "Montblanc Black Braided Round Cufflinks", price: 100000, files: ["IMG_4575.PNG"] },
+  { sku: "112896", name: "Montblanc Stainless Steel Black Onyx Round Cufflinks", price: null, files: ["IMG_4557.PNG"] },
+  { sku: "112904", name: "Montblanc Navy Honeycomb Round Cufflinks", price: null, files: ["IMG_4555.PNG"] },
+  { sku: "112906", name: "Montblanc Stainless Steel Blue Aventurine Round Cufflinks", price: 111000, files: ["IMG_4544.PNG"] },
+  { sku: "112907", name: "Montblanc Black and Gold World Map Cufflinks", price: 106000, files: ["IMG_4576.PNG"] },
+  { sku: "112908", name: "Montblanc Rose Gold-Tone Blue Aventurine Round Cufflinks", price: 110500, files: ["IMG_4479.PNG"] },
+  { sku: "112929", name: "Montblanc Black PVD Ribbed Round Cufflinks", price: 100000, files: ["IMG_4583.PNG"] },
+  { sku: "112998", name: "Montblanc Steel Globe Sphere Cufflinks", price: null, files: ["IMG_4548.PNG"] },
+  { sku: "112999", name: "Montblanc Rose Gold-Tone Globe Sphere Cufflinks", price: null, files: ["IMG_4545.PNG"] },
+  { sku: "113000", name: "Montblanc Blue Globe Mosaic Round Cufflinks", price: 114500, files: ["IMG_4524.PNG"] },
+  { sku: "113395", name: "Montblanc Gold-Tone Black-Tipped Bar Cufflinks", price: 165500, files: ["IMG_4474.PNG"] },
+  { sku: "114764", name: "Montblanc Rose Gold-Tone Red Engraved Round Cufflinks", price: 124000, files: ["IMG_4520.PNG"] },
+  { sku: "114766", name: "Montblanc Geometric Rectangular Cufflinks", price: null, files: ["IMG_4556.PNG"] },
+  { sku: "114769", name: "Montblanc Violet Star Emblem Round Cufflinks", price: 131500, files: ["IMG_4568.PNG"] },
+  { sku: "114770", name: "Montblanc Stainless Steel Guilloche Star Emblem Cufflinks", price: 115000, files: ["IMG_4484.PNG"] },
+  { sku: "114772", name: "Montblanc Faceted Grey Crystal Round Cufflinks", price: 143500, files: ["IMG_4527.PNG"] },
+  { sku: "114779", name: "Montblanc Rose Gold-Tone Blue Patterned Round Cufflinks", price: 138500, files: ["IMG_4471.PNG"] },
+  { sku: "114780", name: "Montblanc Rose Gold-Tone Black Spiral Round Cufflinks", price: 131500, files: ["IMG_4473.PNG"] },
+  { sku: "115061", name: "Montblanc Stainless Steel Black Onyx Square Cufflinks", price: 100000, files: ["IMG_4580.PNG"] },
+  { sku: "116655", name: "Montblanc Blue Spiral Round Cufflinks", price: null, files: ["IMG_4565.PNG"] },
+  { sku: "116660", name: "Montblanc Stainless Steel Brushed Star Emblem Cufflinks", price: 144500, files: ["IMG_4485.PNG"] },
+  { sku: "116661", name: "Montblanc Stainless Steel Black Ring Star Emblem Cufflinks", price: 144500, files: ["IMG_4486.PNG"] },
+  { sku: "116662", name: "Montblanc Rose Gold-Tone Mother-of-Pearl Round Cufflinks", price: 91500, files: ["IMG_4483.PNG"] },
+  { sku: "116663", name: "Montblanc Rose Gold-Tone Black Onyx Round Cufflinks", price: 91500, files: ["IMG_4469.PNG"] },
+  { sku: "116665", name: "Montblanc Black PVD Signature Ring Cufflinks", price: 100000, files: ["IMG_4581.PNG"] },
+  { sku: "116666", name: "Montblanc Black Lacquer Star Emblem Round Cufflinks", price: 97500, files: ["IMG_4475.PNG"] },
+  { sku: "116668", name: "Montblanc Openwork Blue Stone Round Cufflinks", price: 136000, files: ["IMG_4569.PNG"] },
+  { sku: "118595", name: "Montblanc Stainless Steel Striped Square Cufflinks", price: 97500, files: ["IMG_4480.PNG"] },
+  { sku: "118596", name: "Montblanc Stainless Steel Striped Round Cufflinks", price: 97500, files: ["IMG_4481.PNG"] },
+  { sku: "118597", name: "Montblanc Radial Spoke Enamel Round Cufflinks", price: 120000, files: ["IMG_4521.PNG"] },
+  { sku: "118599", name: "Montblanc Faceted Black Onyx Hexagon Cufflinks", price: null, files: ["IMG_4547.PNG"] },
+  { sku: "118603", name: "Montblanc Blue Woven Round Cufflinks", price: null, files: ["IMG_4561.PNG"] },
+  { sku: "118607", name: "Montblanc Black Onyx Star Emblem Round Cufflinks", price: null, files: ["IMG_4558.PNG"] },
+  { sku: "118609", name: "Montblanc Stainless Steel Grey Stone Round Cufflinks", price: 95000, files: ["IMG_4525.PNG"] },
+  { sku: "118610", name: "Montblanc Blue Sodalite Round Cufflinks", price: null, files: ["IMG_4549.PNG"] },
+  { sku: "118611", name: "Montblanc Stainless Steel Woven Knot Cufflinks", price: 104500, files: ["IMG_4574.PNG"] },
+  { sku: "118613", name: "Montblanc Black Concentric Pattern Square Cufflinks", price: 126000, files: ["IMG_4528.PNG"] },
+  { sku: "118880", name: "Montblanc Stainless Steel Red Lacquer Round Cufflinks", price: 110500, files: ["IMG_4477.PNG"] },
+  { sku: "123801", name: "Montblanc Textured Guilloche Round Cufflinks", price: 130500, files: ["IMG_4570.PNG"] },
+  { sku: "123808", name: "Montblanc Stainless Steel Guilloche Mother-of-Pearl Emblem Cufflinks", price: 110500, files: ["IMG_4468.PNG"] },
+  { sku: "123809", name: "Montblanc Stainless Steel Sunburst Mother-of-Pearl Emblem Cufflinks", price: 144500, files: ["IMG_4482.PNG"] },
+  { sku: "123810", name: "Montblanc Mother-of-Pearl Star Inlay Round Cufflinks", price: 140000, files: ["IMG_4566.PNG"] },
+  { sku: "123812", name: "Montblanc Navy Lacquer Star Emblem Round Cufflinks", price: null, files: ["IMG_4552.PNG"] },
+  { sku: "124209", name: "Montblanc Black PVD Gold Script Round Cufflinks", price: 121500, files: ["IMG_4476.PNG"] },
+  { sku: "124295", name: "Montblanc Black Woven Carbon Round Cufflinks", price: null, files: ["IMG_4550.PNG"] },
+  { sku: "125972", name: "Montblanc Navy Striped Barrel Cufflinks", price: 167000, files: ["IMG_4567.PNG"] },
+  { sku: "126472", name: "Montblanc Rose Gold-Tone Red Marbled Stone Cufflinks", price: null, files: ["IMG_4551.PNG"] },
+  { sku: "128386", name: "Montblanc Heart and Spade Motif Round Cufflinks", price: 125000, files: ["IMG_4543.PNG"] },
+  { sku: "128401", name: "Montblanc Stainless Steel Guilloche Round Cufflinks", price: null, files: ["IMG_4554.PNG"] },
+  { sku: "129495", name: "Montblanc Rose Gold-Tone Guilloche Pearl Centre Cufflinks", price: 125500, files: ["IMG_4584.PNG"] },
+  { sku: "129508", name: "Montblanc Engraved Mountain Motif Round Cufflinks", price: 94000, files: ["IMG_4577.PNG"] },
+  { sku: "129831", name: "Montblanc Stainless Steel Green Woven Round Cufflinks", price: 123500, files: ["IMG_4478.PNG"] },
+  { sku: "129956", name: "Montblanc Orange Lacquer Star Emblem Round Cufflinks", price: 118000, files: ["IMG_4522.PNG"] },
+  { sku: "130265", name: "Montblanc Blue Art Deco Fan Round Cufflinks", price: null, files: ["IMG_4519.PNG"] },
+  { sku: "132964", name: "Montblanc Gold Fleck Cylinder Bar Cufflinks", price: null, files: ["IMG_4560.PNG"] },
+  { sku: "132966", name: "Montblanc Gold-Tone Textured Round Cufflinks", price: 113500, files: ["IMG_4585.PNG"] },
+  { sku: "132977", name: "Montblanc Black Lacquer Mother-of-Pearl Star Cufflinks", price: null, files: ["IMG_4563.PNG"] },
+  { sku: "132978", name: "Montblanc Compass Rose Round Cufflinks", price: null, files: ["IMG_4579.PNG"] },
+  { sku: "132979", name: "Montblanc Gold-Tone Green Art Deco Fan Cufflinks", price: null, files: ["IMG_4582.PNG"] },
+  { sku: "132980", name: "Montblanc Gold-Tone Red Art Deco Fan Cufflinks", price: 106500, files: ["IMG_4572.PNG"] },
+  { sku: "134469", name: "Montblanc Gold-Tone Red Woven Oval Cufflinks", price: 110500, files: ["IMG_4472.PNG"] },
+  { sku: "134672", name: "Montblanc Concentric Guilloche Round Cufflinks", price: null, files: ["IMG_4559.PNG"] },
+  { sku: "134674", name: "Montblanc Black Lacquer Star Emblem Square Cufflinks", price: null, files: ["IMG_4564.PNG"] },
+  { sku: "134675", name: "Montblanc Blue Enamel Star Emblem Round Cufflinks", price: 132500, files: ["IMG_4487.PNG"] },
+];

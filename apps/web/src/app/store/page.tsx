@@ -111,13 +111,22 @@ export default async function StorePage() {
                 Call {settings.phoneNumber}
               </a>
             ) : null}
+            <a
+              className="inline-flex min-h-12 items-center justify-center rounded-full border border-obsidian px-6 text-sm font-semibold"
+              href={siteConfig.googleMapsUrl}
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              Get directions
+            </a>
           </div>
 
           {/*
             AGENTS.md forbids inventing the shop number, hours, phone number or
             review evidence. Unconfirmed facts are listed as unconfirmed rather
-            than filled with plausible values, and no map pin or directions link
-            is rendered without a real address to point at.
+            than filled with plausible values. Directions point at the store's
+            own client-supplied Google listing, so the link resolves to a real
+            pin rather than a street address the business never confirmed.
           */}
           <section aria-labelledby="store-facts" className="mt-10">
             <h2

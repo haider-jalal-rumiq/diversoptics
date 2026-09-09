@@ -1,3 +1,5 @@
+import { siteConfig } from "@/lib/config/site";
+
 import type { ProductDetail, StoreSettings } from "./types";
 
 export type BreadcrumbEntry = { href: string | null; label: string };
@@ -152,6 +154,18 @@ export function buildLocalBusinessSchema(input: {
 
   if (settings.phoneNumber) schema.telephone = settings.phoneNumber;
   if (settings.publicEmail) schema.email = settings.publicEmail;
+
+  // The Google listing and the confirmed social profiles are the only
+  // off-site identities the business has approved, so they are safe to assert.
+  // Facebook is skipped while its URL is still unknown: `sameAs` is a claim of
+  // ownership, and a placeholder there would be exactly the kind of invented
+  // fact AGENTS.md rules out.
+  schema.hasMap = siteConfig.googleMapsUrl;
+
+  const profiles = siteConfig.social.flatMap((profile) =>
+    profile.href ? [profile.href] : [],
+  );
+  if (profiles.length > 0) schema.sameAs = profiles;
 
   const openingHours = settings.businessHours.flatMap((entry) =>
     entry.closed || !entry.opens || !entry.closes

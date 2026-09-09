@@ -126,6 +126,16 @@ export async function SiteFooter({
               </a>
             </li>
           ) : null}
+          <li>
+            <a
+              className={FOOTER_LINK_CLASS}
+              href={siteConfig.googleMapsUrl}
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              Get directions
+            </a>
+          </li>
         </FooterColumn>
 
         <FooterColumn title="Social">

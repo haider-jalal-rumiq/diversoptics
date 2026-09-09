@@ -16,6 +16,14 @@ export const siteConfig = {
   description:
     "A curated catalog of eyewear, watches and writing instruments from Diverso Optics in F-11 Markaz, Islamabad.",
   locationLabel: "F-11 Markaz, Islamabad",
+  /**
+   * The store's own Google Maps listing, supplied by the client and verified to
+   * resolve to "Diverso Optics Chemist & Watches" in F-11. AGENTS.md counts a
+   * directions request as a secondary conversion, and the store page's "no map
+   * pin without a real address" rule is satisfied by pointing at the business's
+   * own listing rather than a guessed pin.
+   */
+  googleMapsUrl: "https://maps.app.goo.gl/41FqMfUNMBKSefpc6",
   navigation: [
     { href: "/eyewear/sunglasses", label: "Sunglasses" },
     { href: "/eyewear/optical-frames", label: "Optical Frames" },
@@ -25,15 +33,23 @@ export const siteConfig = {
     { href: "/eyewear", label: "Eyewear" },
   ],
   /**
-   * Profile URLs are unconfirmed, so each one is an obvious placeholder rather
-   * than a guessed handle. `href: null` renders the icon as plain, unlinked
-   * text: the row still reads correctly and nothing points at an account that
-   * may belong to someone else. Paste the real URLs here and the links wake up.
+   * Instagram and TikTok are client-confirmed. Facebook stays `href: null`
+   * because no URL has been supplied: that renders the icon as plain, unlinked
+   * text, so the row still reads correctly and nothing points at an account
+   * that may belong to someone else. Paste the real URL here and it wakes up.
    */
   social: [
     { href: null, label: "Facebook", name: "facebook" },
-    { href: null, label: "Instagram", name: "instagram" },
-    { href: null, label: "TikTok", name: "tiktok" },
+    {
+      href: "https://www.instagram.com/diversoptics",
+      label: "Instagram",
+      name: "instagram",
+    },
+    {
+      href: "https://www.tiktok.com/@diversoptics",
+      label: "TikTok",
+      name: "tiktok",
+    },
   ],
   whatsapp: {
     production: productionWhatsApp,

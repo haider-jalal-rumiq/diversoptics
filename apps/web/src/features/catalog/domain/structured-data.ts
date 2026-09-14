@@ -130,6 +130,10 @@ export function buildLocalBusinessSchema(input: {
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Store",
+    // The approved wordmark, the one logo asset the brand guidelines and every
+    // header/footer render already use — safe to assert here for the same
+    // reason it's safe in the UI.
+    image: `${siteUrl}/brand/diverso-logo-transparent.png`,
     name: "Diverso Optics",
     url: siteUrl,
   };

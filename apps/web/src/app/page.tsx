@@ -21,6 +21,9 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
+  description:
+    "Browse eyewear, watches, pens and cufflinks from Diverso Optics in F-11 Markaz, Islamabad, then ask on WhatsApp before you visit.",
+  title: "Eyewear, Watches & Pens in F-11 Islamabad",
 };
 
 export default async function Page() {

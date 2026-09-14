@@ -3,6 +3,7 @@ import "server-only";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
 import { getSupabasePublicConfig } from "@/lib/supabase/config";
+import { fetchWithRetry } from "@/lib/supabase/retry-fetch";
 import type { Database } from "@/types/database.types";
 
 export type PublicCatalogClient = ReturnType<
@@ -28,5 +29,6 @@ export function createPublicCatalogClient(): PublicCatalogClient | null {
       detectSessionInUrl: false,
       persistSession: false,
     },
+    global: { fetch: fetchWithRetry },
   });
 }

@@ -13,6 +13,7 @@ const EXPLORE_LINKS = [
   { href: "/new-and-featured", label: "New & featured" },
   { href: "/brands", label: "Brands" },
   { href: "/guides", label: "Guides" },
+  { href: "/policies", label: "Policies" },
   { href: "/shortlist", label: "Shortlist" },
 ] as const;
 

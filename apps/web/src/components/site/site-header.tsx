@@ -77,9 +77,15 @@ export function SiteHeader() {
                   >
                     {item.sections.map((section) => (
                       <section key={section.heading}>
-                        <h2 className="text-[10px] font-bold uppercase tracking-[0.16em] text-porcelain/65">
+                        {/*
+                          Not a heading: this panel is `visibility: hidden`
+                          until hover/focus, but still sits in the initial DOM
+                          before the page's own h1 — an h2 here would put a
+                          heading ahead of every page's h1 in source order.
+                        */}
+                        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-porcelain/65">
                           {section.heading}
-                        </h2>
+                        </p>
                         <ul className="mt-3 grid grid-cols-2 gap-x-5 gap-y-1.5">
                           {section.links.map((link) => (
                             <li key={`${section.heading}-${link.label}`}>

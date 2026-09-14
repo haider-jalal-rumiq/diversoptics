@@ -25,7 +25,8 @@ export async function generateMetadata(
 
   return {
     alternates: { canonical: page.href },
-    ...(page.excerpt ? { description: page.excerpt } : {}),
+    description:
+      page.excerpt ?? `${page.title} — a guide from Diverso Optics.`,
     title: page.title,
   };
 }

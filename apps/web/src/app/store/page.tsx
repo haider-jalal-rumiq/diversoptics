@@ -164,10 +164,7 @@ export default async function StorePage() {
           </section>
 
           <section aria-labelledby="store-map" className="mt-10">
-            <h2
-              className="font-display text-3xl leading-tight"
-              id="store-map"
-            >
+            <h2 className="font-display text-3xl leading-tight" id="store-map">
               Find us
             </h2>
             <div className="mt-4 overflow-hidden rounded-xl border border-smoke/30">

@@ -163,6 +163,23 @@ export default async function StorePage() {
             </dl>
           </section>
 
+          <section aria-labelledby="store-map" className="mt-10">
+            <h2 className="font-display text-3xl leading-tight" id="store-map">
+              Find us
+            </h2>
+            <div className="mt-4 overflow-hidden rounded-xl border border-smoke/30">
+              <iframe
+                allowFullScreen
+                className="h-[320px] w-full sm:h-[420px]"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.9705150907944!2d72.98386967434314!3d33.68382763709617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbde41396ab67%3A0xe8e9acecc1ebd59b!2sDiverso%20Optics%20Chemist%20%26%20Watches!5e0!3m2!1sen!2s!4v1789367883307!5m2!1sen!2s"
+                style={{ border: 0 }}
+                title="Diverso Optics location on Google Maps"
+              />
+            </div>
+          </section>
+
           <section aria-labelledby="store-hours" className="mt-10">
             <h2
               className="font-display text-3xl leading-tight"

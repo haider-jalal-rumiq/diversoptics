@@ -1,6 +1,6 @@
 import type { Availability, CatalogFilterState, CatalogSort } from "./types";
 
-export const CATALOG_PAGE_SIZE = 24;
+export const CATALOG_PAGE_SIZE = 9;
 
 /** A deep page offset is expensive and no real visitor reaches it. */
 const MAX_PAGE = 200;

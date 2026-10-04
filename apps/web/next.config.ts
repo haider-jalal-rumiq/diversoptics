@@ -25,6 +25,14 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
+    // Vercel's image optimizer answers new images with HTTP 402
+    // (OPTIMIZED_IMAGE_REQUEST_PAYMENT_REQUIRED) once the team's usage limit is
+    // reached, which blanked every product photo added after that point. Every
+    // catalog image is already a compressed WebP derivative (<=1800px, ~50 KB)
+    // produced at import time, and site images are small WebP files, so they
+    // are served as-is and the optimizer is never involved. Remove this to go
+    // back to on-demand resizing once the Vercel plan or spend limit allows it.
+    unoptimized: true,
     remotePatterns: [
       {
         hostname: "**.supabase.co",

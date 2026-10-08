@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import { productFormSchema } from "@/features/cms/domain/product-form";
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type ProductActionState = {
@@ -93,6 +94,7 @@ export async function saveProduct(
 
     revalidatePath("/cms");
     revalidatePath("/cms/products");
+    revalidatePublicCatalog();
     redirect(`/cms/products/${data.id}`);
   }
 
@@ -122,6 +124,7 @@ export async function saveProduct(
   revalidatePath("/cms");
   revalidatePath("/cms/products");
   revalidatePath(`/cms/products/${productId}`);
+  revalidatePublicCatalog();
 
   return { message: "Saved successfully." };
 }

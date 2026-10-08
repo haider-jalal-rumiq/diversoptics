@@ -5,6 +5,7 @@ import { z } from "zod";
 
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import { csvRowsToRecords, parseCsv } from "@/features/cms/domain/csv";
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { createClient } from "@/lib/supabase/server";
 
 const MAX_CSV_BYTES = 1_000_000;
@@ -179,6 +180,7 @@ export async function importProductDrafts(
 
   revalidatePath("/cms");
   revalidatePath("/cms/products");
+  revalidatePublicCatalog();
   return {
     imported: inserts.length,
     message: `${inserts.length} drafts imported.`,

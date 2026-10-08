@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import { createClient } from "@/lib/supabase/server";
 
@@ -31,6 +32,7 @@ export async function addCollectionProduct(formData: FormData) {
     throw new Error("The product could not be assigned.");
   }
   revalidatePath(`/cms/collections/${parsed.data.collectionId}`);
+  revalidatePublicCatalog();
 }
 
 export async function removeCollectionProduct(
@@ -46,4 +48,5 @@ export async function removeCollectionProduct(
     .eq("collection_id", collectionId);
   if (error) throw new Error("The collection assignment could not be removed.");
   revalidatePath(`/cms/collections/${collectionId}`);
+  revalidatePublicCatalog();
 }

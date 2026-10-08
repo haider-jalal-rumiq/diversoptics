@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import { createClient } from "@/lib/supabase/server";
 
@@ -98,5 +99,6 @@ export async function saveAttributeDefinition(
     return { message: "This definition changed elsewhere. Refresh first." };
 
   revalidatePath(`/cms/categories/${categoryId}/attributes`);
+  revalidatePublicCatalog();
   return { message: "Attribute definition saved.", success: true };
 }

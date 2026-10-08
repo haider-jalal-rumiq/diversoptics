@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { requireOwner } from "@/features/cms/auth/staff";
 import {
   buildBusinessHours,
@@ -109,6 +110,7 @@ export async function saveSettings(
     return { message: "Settings changed elsewhere. Refresh and try again." };
 
   revalidatePath("/cms/settings");
+  revalidatePublicCatalog();
   return { message: "Settings saved.", success: true };
 }
 

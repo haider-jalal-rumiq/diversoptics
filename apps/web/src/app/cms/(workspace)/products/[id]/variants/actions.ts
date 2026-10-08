@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import { variantFormSchema } from "@/features/cms/domain/variant-form";
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type VariantActionState = { message?: string; success?: boolean };
@@ -71,5 +72,6 @@ export async function saveVariant(
     return { message: "This variant changed elsewhere. Refresh first." };
 
   revalidatePath(`/cms/products/${productId}`);
+  revalidatePublicCatalog();
   return { message: "Variant saved.", success: true };
 }

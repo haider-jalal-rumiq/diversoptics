@@ -38,6 +38,7 @@ Status key: `[ ]` pending, `[~]` in progress, `[x]` complete, `[!]` blocked by c
 - [x] Add business-hours editing to the CMS settings screen.
 - [x] Seed and validate the first real catalog set: 89 Montblanc writing instruments/accessories with 102 optimized product images; see `docs/20-montblanc-pens-catalog-import.md`.
 - [x] Verify the Pens vertical through anonymous RLS, public Storage, unit checks, production build, and a browser-level catalog/product/WhatsApp flow.
+- [x] Cache anonymous catalog reads, prerender published product routes, invalidate storefront data after CMS writes, and suppress bulk product-card prefetching to reduce unnecessary Vercel function invocations.
 - [ ] Complete accessibility, performance, device, content, and security QA.
 - [ ] Train owner/admin and launch.
 

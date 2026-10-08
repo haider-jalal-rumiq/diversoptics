@@ -7,6 +7,7 @@ import sharp, { type Metadata, type OutputInfo } from "sharp";
 import { z } from "zod";
 
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import {
   isExpectedMediaSourcePath,
   MAX_MEDIA_SOURCE_BYTES,
@@ -194,6 +195,7 @@ export async function finalizeProductMedia(
     });
 
     if (primaryResult.error) {
+      revalidatePublicCatalog();
       return {
         message:
           "The image was uploaded, but could not become primary. Select it below.",
@@ -204,6 +206,7 @@ export async function finalizeProductMedia(
   revalidatePath(`/cms/products/${productId}`);
   revalidatePath(`/cms/products/${productId}/media`);
   revalidatePath("/cms/media");
+  revalidatePublicCatalog();
   return { message: "Image processed and uploaded.", success: true };
 }
 
@@ -221,6 +224,7 @@ export async function makePrimary(productId: number, mediaId: number) {
 
   revalidatePath(`/cms/products/${productId}`);
   revalidatePath(`/cms/products/${productId}/media`);
+  revalidatePublicCatalog();
 }
 
 export async function archiveMedia(productId: number, mediaId: number) {
@@ -239,4 +243,5 @@ export async function archiveMedia(productId: number, mediaId: number) {
   revalidatePath(`/cms/products/${productId}`);
   revalidatePath(`/cms/products/${productId}/media`);
   revalidatePath("/cms/media");
+  revalidatePublicCatalog();
 }

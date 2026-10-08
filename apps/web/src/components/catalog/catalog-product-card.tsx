@@ -27,6 +27,7 @@ export function CatalogProductCard({
       <Link
         className="group focus-visible:outline-none"
         href={product.href as Route}
+        prefetch={false}
       >
         <ProductImage
           compact
@@ -53,7 +54,11 @@ export function CatalogProductCard({
       ) : null}
 
       <h3 className="mt-1 text-xl font-semibold leading-7">
-        <Link className="hover:underline" href={product.href as Route}>
+        <Link
+          className="hover:underline"
+          href={product.href as Route}
+          prefetch={false}
+        >
           {product.name}
         </Link>
       </h3>
@@ -68,6 +73,7 @@ export function CatalogProductCard({
       <Link
         className="mt-auto inline-flex min-h-11 items-center pt-3 text-sm text-smoke hover:underline"
         href={product.href as Route}
+        prefetch={false}
       >
         View details
       </Link>

@@ -17,6 +17,16 @@ import { buildBreadcrumbSchema } from "@/features/catalog/domain/structured-data
 import type { CatalogCategoryNode } from "@/features/catalog/domain/types";
 import { absoluteUrl } from "@/lib/config/site";
 
+export const revalidate = 3_600;
+
+export async function generateStaticParams() {
+  const categories = await createCatalogRepository().getCategories();
+
+  return categories.map((category) => ({
+    category: category.href.split("/").filter(Boolean),
+  }));
+}
+
 /**
  * The approved sitemap places categories at the site root (`/eyewear`,
  * `/eyewear/sunglasses`), so this catch-all resolves any unmatched path against

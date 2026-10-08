@@ -13,6 +13,14 @@ import { buildBreadcrumbSchema } from "@/features/catalog/domain/structured-data
 import type { CatalogCollection } from "@/features/catalog/domain/types";
 import { absoluteUrl } from "@/lib/config/site";
 
+export const revalidate = 3_600;
+
+export async function generateStaticParams() {
+  const collections = await createCatalogRepository().getCollections();
+
+  return collections.map((collection) => ({ collection: collection.slug }));
+}
+
 async function loadCollection(slug: string): Promise<CatalogCollection> {
   const collection = await createCatalogRepository().getCollectionBySlug(slug);
 

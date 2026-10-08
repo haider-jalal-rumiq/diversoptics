@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import { createClient } from "@/lib/supabase/server";
 
@@ -77,5 +78,6 @@ export async function savePage(
     return { message: "This page changed elsewhere. Refresh first." };
 
   revalidatePath("/cms/pages");
+  revalidatePublicCatalog();
   return { message: "Page saved.", success: true };
 }

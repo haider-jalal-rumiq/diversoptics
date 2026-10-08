@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
 import {
   entityFormSchema,
@@ -110,5 +111,6 @@ export async function saveEntity(
   const route = `${kind.data === "category" ? "categories" : `${kind.data}s`}`;
   revalidatePath(`/cms/${route}`);
   revalidatePath("/cms");
+  revalidatePublicCatalog();
   return { message: "Saved successfully.", success: true };
 }

@@ -30,6 +30,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
       <Link
         className="mt-3 inline-flex min-h-11 items-center text-sm text-smoke hover:underline"
         href={product.href as Route}
+        prefetch={false}
       >
         View details
       </Link>

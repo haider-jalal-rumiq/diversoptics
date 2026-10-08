@@ -9,6 +9,7 @@ import {
   createFixtureCatalogRepository,
   emptyCatalogRepository,
 } from "./fixture-catalog";
+import { cachePublicCatalogRepository } from "./public-catalog-cache";
 import { tryCreateSupabaseCatalogRepository } from "./supabase-catalog";
 
 function resolveActiveSource(): {
@@ -32,7 +33,9 @@ export function createCatalogRepository(): CatalogRepository {
   switch (source) {
     case "supabase":
       // supabase is non-null whenever the policy resolves to this source.
-      return supabase ?? emptyCatalogRepository;
+      return supabase
+        ? cachePublicCatalogRepository(supabase)
+        : emptyCatalogRepository;
     case "fixtures":
       return createFixtureCatalogRepository();
     default:

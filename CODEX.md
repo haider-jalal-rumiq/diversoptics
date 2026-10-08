@@ -4,7 +4,7 @@
 
 Build Diverso Optics into a credible premium local retail brand: a visually distinctive catalog website, an easy product CMS, a human WhatsApp inquiry experience, and a sustainable Instagram/Facebook/TikTok content operation.
 
-## Current state — 2026-09-07
+## Current state — 2026-10-08
 
 - Workspace began with two JPEG logo variants and no codebase.
 - Competitor and benchmark research is documented.
@@ -35,7 +35,8 @@ Build Diverso Optics into a credible premium local retail brand: a visually dist
 - The public shell now uses a dark Golden Orbit mega-navigation with the client-requested Sunglasses, Optical Frames, Pens, Watches and Eyewear taxonomy. Mobile receives the same hierarchy as an accessible accordion, and a CSS-only atmospheric background replaces the flat public-page canvas while respecting reduced motion.
 - The first real catalog vertical is live in Supabase: 89 Montblanc writing instruments/accessories, 102 approved images, 76 fixed prices, 13 inquiry-only prices, and the three generic pen placeholders archived. The client-supplied PNGs were reduced from 238.1 MB to 11.0 MB of dimension-preserving WebPs (95.38% smaller); full reconciliation and safeguards are recorded in `docs/20-montblanc-pens-catalog-import.md`.
 - The repeatable Pens importer preserves private originals, publishes content-hashed WebPs, resumes safely, maps duplicate-SKU artwork into galleries, and refuses to target a Supabase project other than Diverso. The supporting service-role primary-media migration is applied locally and in the cloud.
-- Current verification passes 114 Vitest tests, lint, strict TypeScript, the production build, live anonymous RLS/Storage checks, and a headless Chromium Pens-to-product-to-inquiry check with zero console errors.
+- Public catalog and store-setting reads now use the Next.js data cache with stale-while-revalidate invalidation after CMS writes. Published product routes are prerendered with one-hour ISR, and dense product grids no longer prefetch every product-detail route before a visitor chooses one.
+- Current verification passes 122 Vitest tests, lint, strict TypeScript, the production build, live anonymous RLS/Storage checks, and a headless Chromium Pens-to-product-to-inquiry check with zero console errors.
 
 ## Recommended next move
 

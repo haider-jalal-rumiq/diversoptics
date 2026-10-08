@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 
 import { requireCatalogEditor } from "@/features/cms/auth/staff";
+import { revalidatePublicCatalog } from "@/features/catalog/data/public-catalog-cache";
 import { createClient } from "@/lib/supabase/server";
 import type { Json } from "@/types/database.types";
 
@@ -97,5 +98,6 @@ export async function saveProductAttributes(
     return { message: "The structured attributes could not be saved." };
 
   revalidatePath(`/cms/products/${productId}`);
+  revalidatePublicCatalog();
   return { message: "Attributes saved.", success: true };
 }

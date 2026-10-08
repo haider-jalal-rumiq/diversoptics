@@ -13,6 +13,14 @@ import { buildBreadcrumbSchema } from "@/features/catalog/domain/structured-data
 import type { CatalogBrand } from "@/features/catalog/domain/types";
 import { absoluteUrl } from "@/lib/config/site";
 
+export const revalidate = 3_600;
+
+export async function generateStaticParams() {
+  const brands = await createCatalogRepository().getBrands();
+
+  return brands.map((brand) => ({ brand: brand.slug }));
+}
+
 async function loadBrand(slug: string): Promise<CatalogBrand> {
   const brand = await createCatalogRepository().getBrandBySlug(slug);
 

@@ -29,6 +29,14 @@ import {
 import type { ProductDetail } from "@/features/catalog/domain/types";
 import { absoluteUrl } from "@/lib/config/site";
 
+export const revalidate = 3_600;
+
+export async function generateStaticParams() {
+  const slugs = await createCatalogRepository().getAllProductSlugs();
+
+  return slugs.map((slug) => ({ slug }));
+}
+
 async function loadProduct(slug: string): Promise<ProductDetail> {
   const product = await createCatalogRepository().getProductBySlug(slug);
 

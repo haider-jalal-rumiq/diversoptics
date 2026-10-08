@@ -184,6 +184,7 @@ export function FeaturedCoverflow({
         <Link
           className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-orbit-gold px-6 text-sm font-semibold text-obsidian transition-colors hover:bg-orbit-gold/85"
           href={current.href as Route}
+          prefetch={false}
         >
           View details
           <svg

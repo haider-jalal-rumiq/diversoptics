@@ -1,5 +1,7 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
+
 import { createPublicCatalogClient } from "@/lib/supabase/public";
 import { resolveDeploymentEnvironment } from "@/lib/config/site";
 
@@ -7,13 +9,14 @@ import { resolveCatalogSource } from "../domain/catalog-source";
 import { parseBusinessHours } from "../domain/store-hours";
 import type { StoreSettings } from "../domain/types";
 import { demoStoreSettings } from "./demo-fixtures";
+import { PUBLIC_CATALOG_CACHE_TAG } from "./public-catalog-cache";
 
 /**
  * The WhatsApp destination, address and hours are business facts owned by the CMS
  * singleton. Nothing here is defaulted to a plausible value: an unset column stays
  * null so the interface can say the fact is not confirmed yet.
  */
-export async function getStoreSettings(): Promise<StoreSettings | null> {
+async function loadStoreSettings(): Promise<StoreSettings | null> {
   const client = createPublicCatalogClient();
   const source = resolveCatalogSource(
     resolveDeploymentEnvironment(),
@@ -58,3 +61,9 @@ export async function getStoreSettings(): Promise<StoreSettings | null> {
     whatsappNumber: data.whatsapp_number,
   };
 }
+
+export const getStoreSettings = unstable_cache(
+  loadStoreSettings,
+  ["public-catalog", "store-settings"],
+  { revalidate: 3_600, tags: [PUBLIC_CATALOG_CACHE_TAG] },
+);

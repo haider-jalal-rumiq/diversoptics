@@ -213,12 +213,24 @@ export interface CatalogRepository {
     segments: readonly string[],
   ): Promise<CatalogCategoryNode | null>;
   getFeaturedProducts(): Promise<readonly ProductSummary[]>;
+  /**
+   * Published products for choosing one photograph per brand. Featured products
+   * come first, and the read is capped at BRAND_PREVIEW_PRODUCT_LIMIT.
+   */
+  getBrandPreviewProducts(): Promise<readonly ProductSummary[]>;
   getFeaturedBrands(): Promise<readonly CatalogBrand[]>;
   getBrands(): Promise<readonly CatalogBrand[]>;
   getBrandBySlug(slug: string): Promise<CatalogBrand | null>;
   getCollections(): Promise<readonly CatalogCollection[]>;
   getCollectionBySlug(slug: string): Promise<CatalogCollection | null>;
   getProductBySlug(slug: string): Promise<ProductDetail | null>;
+  /**
+   * Full detail for each published product in the list, in the caller's order. It
+   * is one read, so a shortlist or an inquiry never pays a query per product.
+   */
+  getProductDetailsBySlugs(
+    slugs: readonly string[],
+  ): Promise<readonly ProductDetail[]>;
   getProductsBySlugs(
     slugs: readonly string[],
   ): Promise<readonly ProductSummary[]>;

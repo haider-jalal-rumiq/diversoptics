@@ -62,6 +62,28 @@ describe("fixture catalog", () => {
     expect(eyewear?.children.length).toBeGreaterThan(1);
   });
 
+  it("offers only published products for brand photographs", async () => {
+    const products =
+      await createFixtureCatalogRepository().getBrandPreviewProducts();
+
+    expect(products.length).toBeGreaterThan(0);
+    expect(products.every((product) => product.status === "published")).toBe(
+      true,
+    );
+  });
+
+  it("returns full detail for each requested product, in the caller's order", async () => {
+    const repository = createFixtureCatalogRepository();
+    const slugs = ["demo-watch-01", "demo-frame-01", "not-a-product"];
+    const details = await repository.getProductDetailsBySlugs(slugs);
+
+    expect(details.map((product) => product.slug)).toEqual([
+      "demo-watch-01",
+      "demo-frame-01",
+    ]);
+    expect(details[0]?.variants).toBeDefined();
+  });
+
   it("preserves shortlist order when resolving products", async () => {
     const repository = createFixtureCatalogRepository();
     const slugs = ["demo-watch-01", "demo-frame-01"];
@@ -86,6 +108,12 @@ describe("empty catalog", () => {
     await expect(emptyCatalogRepository.getFeaturedProducts()).resolves.toEqual(
       [],
     );
+    await expect(
+      emptyCatalogRepository.getBrandPreviewProducts(),
+    ).resolves.toEqual([]);
+    await expect(
+      emptyCatalogRepository.getProductDetailsBySlugs(["demo-frame-01"]),
+    ).resolves.toEqual([]);
     await expect(emptyCatalogRepository.getCategories()).resolves.toEqual([]);
     await expect(
       emptyCatalogRepository.getProductBySlug("demo-frame-01"),

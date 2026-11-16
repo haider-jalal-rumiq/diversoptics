@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 import { getSupabasePublicConfig } from "@/lib/supabase/config";
+import { sessionCookieOptions } from "@/lib/supabase/cookie-options";
 import type { Database } from "@/types/database.types";
 
 export async function refreshAuthSession(request: NextRequest) {
@@ -34,7 +35,7 @@ export async function refreshAuthSession(request: NextRequest) {
 
           response = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, options, value }) => {
-            response.cookies.set(name, value, options);
+            response.cookies.set(name, value, sessionCookieOptions(options));
           });
           Object.entries(cacheHeaders).forEach(([name, value]) => {
             response.headers.set(name, value);

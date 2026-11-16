@@ -674,6 +674,24 @@ export type Database = {
         };
         Relationships: [];
       };
+      rate_limit_counters: {
+        Row: {
+          bucket: string;
+          hits: number;
+          window_start: string;
+        };
+        Insert: {
+          bucket: string;
+          hits?: number;
+          window_start: string;
+        };
+        Update: {
+          bucket?: string;
+          hits?: number;
+          window_start?: string;
+        };
+        Relationships: [];
+      };
       site_settings: {
         Row: {
           business_hours: Json | null;
@@ -715,6 +733,14 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      consume_rate_limit: {
+        Args: {
+          p_bucket: string;
+          p_limit: number;
+          p_window_seconds: number;
+        };
+        Returns: boolean;
+      };
       record_inquiry_event: {
         Args: {
           p_anonymous_session_hash?: string;

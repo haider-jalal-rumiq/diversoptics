@@ -1,20 +1,29 @@
 import type { NextConfig } from "next";
 
+import {
+  buildSecurityHeaders,
+  NO_INDEX_HEADERS,
+  SVG_HEADERS,
+} from "./src/lib/security/security-headers";
+
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const nextConfig: NextConfig = {
   async headers() {
     return [
+      // Every response, including static pages and the files in public/.
       {
-        headers: [
-          {
-            key: "Strict-Transport-Security",
-            // Vercel already redirects HTTP to HTTPS; this tells browsers to
-            // skip that redirect and go straight to HTTPS on every future
-            // visit, including the first navigation from a bookmark or link.
-            value: "max-age=63072000; includeSubDomains; preload",
-          },
-        ],
+        headers: buildSecurityHeaders({
+          development: isDevelopment,
+          supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
+        }),
         source: "/:path*",
       },
+      // Later rules replace earlier ones for the same header, so these follow the
+      // global policy.
+      { headers: [...SVG_HEADERS], source: "/:file(.*\\.svg)" },
+      { headers: [...NO_INDEX_HEADERS], source: "/cms/:path*" },
+      { headers: [...NO_INDEX_HEADERS], source: "/api/cms/:path*" },
     ];
   },
   experimental: {

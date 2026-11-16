@@ -27,7 +27,7 @@
     "typecheck": "pnpm --filter @diverso/web typecheck"
   },
   "devDependencies": {
-    "@lhci/cli": "0.15.1",
+    "@lhci/cli": "0.16.1",
     "prettier": "3.9.6",
     "supabase": "2.115.0"
   }

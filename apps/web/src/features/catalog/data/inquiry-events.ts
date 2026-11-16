@@ -2,7 +2,7 @@ import "server-only";
 
 import { createHash, randomUUID } from "node:crypto";
 
-import { createPublicCatalogClient } from "@/lib/supabase/public";
+import { canCreateAdminClient, createAdminClient } from "@/lib/supabase/admin";
 
 import type { InquirySnapshotItem } from "../domain/types";
 
@@ -71,20 +71,28 @@ export async function recordInquiryEvent(
 ): Promise<string | null> {
   if (input.items.length === 0) return null;
 
-  const client = createPublicCatalogClient();
+  // The RPC is executable only by the service role, so recording needs the server secret.
+  if (!canCreateAdminClient()) {
+    console.error(
+      "Inquiry events are not recorded: SUPABASE_SECRET_KEY or the Supabase URL is not set.",
+    );
 
-  if (!client) return null;
+    return null;
+  }
 
-  const { data, error } = await client.rpc("record_inquiry_event", {
-    p_anonymous_session_hash: input.sessionToken
-      ? sha256Hex(input.sessionToken)
-      : undefined,
-    p_campaign: input.campaign,
-    p_catalog_snapshot: toSnapshot(input.items),
-    p_entry_path: input.entryPath ?? undefined,
-    p_event_type: input.eventType,
-    p_idempotency_key_hash: buildIdempotencyKey(input),
-  });
+  const { data, error } = await createAdminClient().rpc(
+    "record_inquiry_event",
+    {
+      p_anonymous_session_hash: input.sessionToken
+        ? sha256Hex(input.sessionToken)
+        : undefined,
+      p_campaign: input.campaign,
+      p_catalog_snapshot: toSnapshot(input.items),
+      p_entry_path: input.entryPath ?? undefined,
+      p_event_type: input.eventType,
+      p_idempotency_key_hash: buildIdempotencyKey(input),
+    },
+  );
 
   if (error) {
     console.error("Could not record inquiry event", error.message);

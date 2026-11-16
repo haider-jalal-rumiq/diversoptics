@@ -35,6 +35,9 @@ const INLINE_PATTERN =
 function safeHref(href: string): string | null {
   const trimmed = href.trim();
 
+  // `//host` and `/\host` are protocol-relative: browsers read them as another site.
+  if (trimmed.startsWith("//") || trimmed.startsWith("/\\")) return null;
+
   if (trimmed.startsWith("/") || trimmed.startsWith("#")) return trimmed;
 
   try {

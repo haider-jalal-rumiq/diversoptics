@@ -32,6 +32,11 @@ export function cachePublicCatalogRepository(
       ["public-catalog", "brand"],
       CACHE_OPTIONS,
     ),
+    getBrandPreviewProducts: unstable_cache(
+      () => repository.getBrandPreviewProducts(),
+      ["public-catalog", "brand-preview-products"],
+      CACHE_OPTIONS,
+    ),
     getBrands: unstable_cache(
       () => repository.getBrands(),
       ["public-catalog", "brands"],
@@ -80,6 +85,11 @@ export function cachePublicCatalogRepository(
     getPages: unstable_cache(
       (kind: string) => repository.getPages(kind),
       ["public-catalog", "editorial-pages"],
+      CACHE_OPTIONS,
+    ),
+    getProductDetailsBySlugs: unstable_cache(
+      (slugs: readonly string[]) => repository.getProductDetailsBySlugs(slugs),
+      ["public-catalog", "product-details-by-slug"],
       CACHE_OPTIONS,
     ),
     getProductBySlug: unstable_cache(

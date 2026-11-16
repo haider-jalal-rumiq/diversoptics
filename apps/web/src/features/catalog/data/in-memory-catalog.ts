@@ -1,3 +1,4 @@
+import { BRAND_PREVIEW_PRODUCT_LIMIT } from "../domain/brand-preview";
 import {
   buildCategoryTree,
   collectCategoryIds,
@@ -185,6 +186,22 @@ export function createInMemoryCatalogRepository(
     return { availability, brands };
   }
 
+  function toDetail(product: InMemoryProduct): ProductDetail {
+    const category = findCategoryById(tree, product.categoryId);
+
+    return {
+      ...toSummary(product),
+      attributes: product.attributes,
+      brandHref: product.brandSlug ? `/brands/${product.brandSlug}` : null,
+      categoryHref: category?.href ?? null,
+      description: product.description,
+      images: [],
+      publishedAt: null,
+      updatedAt: new Date(0).toISOString(),
+      variants: product.variants,
+    } satisfies ProductDetail;
+  }
+
   return {
     async getAllProductSlugs() {
       return data.products
@@ -233,6 +250,14 @@ export function createInMemoryCatalogRepository(
         .map(toSummary);
     },
 
+    async getBrandPreviewProducts() {
+      return data.products
+        .filter((product) => product.status === "published")
+        .sort((left, right) => Number(right.featured) - Number(left.featured))
+        .slice(0, BRAND_PREVIEW_PRODUCT_LIMIT)
+        .map(toSummary);
+    },
+
     async getPageBySlug(slug) {
       return data.pages.find((page) => page.slug === slug) ?? null;
     },
@@ -246,21 +271,17 @@ export function createInMemoryCatalogRepository(
         (entry) => entry.slug === slug && entry.status === "published",
       );
 
-      if (!product) return null;
+      return product ? toDetail(product) : null;
+    },
 
-      const category = findCategoryById(tree, product.categoryId);
+    async getProductDetailsBySlugs(slugs) {
+      return slugs.flatMap((slug) => {
+        const product = data.products.find(
+          (entry) => entry.slug === slug && entry.status === "published",
+        );
 
-      return {
-        ...toSummary(product),
-        attributes: product.attributes,
-        brandHref: product.brandSlug ? `/brands/${product.brandSlug}` : null,
-        categoryHref: category?.href ?? null,
-        description: product.description,
-        images: [],
-        publishedAt: null,
-        updatedAt: new Date(0).toISOString(),
-        variants: product.variants,
-      } satisfies ProductDetail;
+        return product ? [toDetail(product)] : [];
+      });
     },
 
     async getProductsBySlugs(slugs) {

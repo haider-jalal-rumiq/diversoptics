@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
 import { requireSupabasePublicConfig } from "@/lib/supabase/config";
+import { sessionCookieOptions } from "@/lib/supabase/cookie-options";
 import type { Database } from "@/types/database.types";
 
 /**
@@ -18,7 +19,7 @@ export async function createClient() {
       setAll: (cookiesToSet) => {
         try {
           cookiesToSet.forEach(({ name, options, value }) => {
-            cookieStore.set(name, value, options);
+            cookieStore.set(name, value, sessionCookieOptions(options));
           });
         } catch {
           // Server Components cannot write cookies; proxy.ts performs refreshes.

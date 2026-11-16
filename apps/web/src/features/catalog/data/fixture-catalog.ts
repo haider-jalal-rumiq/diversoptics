@@ -57,6 +57,9 @@ export const emptyCatalogRepository: CatalogRepository = {
   async getFeaturedProducts() {
     return [];
   },
+  async getBrandPreviewProducts() {
+    return [];
+  },
   async getPageBySlug() {
     return null;
   },
@@ -65,6 +68,9 @@ export const emptyCatalogRepository: CatalogRepository = {
   },
   async getProductBySlug() {
     return null;
+  },
+  async getProductDetailsBySlugs() {
+    return [];
   },
   async getProductsBySlugs() {
     return [];

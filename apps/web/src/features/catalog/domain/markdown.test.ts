@@ -37,6 +37,16 @@ describe("inline parsing", () => {
     }
   });
 
+  it("refuses protocol-relative targets that would leave the site", () => {
+    // `//host` and `/\host` look site-relative but browsers send them to another site.
+    for (const source of ["[x](//evil.example/a)", "[y](/\\evil.example)"]) {
+      const tokens = parseInline(source);
+
+      expect(tokens.every((token) => token.kind === "text")).toBe(true);
+      expect(tokens.map((token) => token.value).join("")).toBe(source);
+    }
+  });
+
   it("treats raw markup as literal text", () => {
     // Nothing is rendered as HTML, so a tag survives as characters.
     expect(parseInline("<script>alert(1)</script>")).toEqual([

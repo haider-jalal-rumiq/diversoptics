@@ -28,6 +28,8 @@ import {
   resolveWhatsAppDestination,
 } from "@/features/catalog/domain/whatsapp";
 import { absoluteUrl, resolveDeploymentEnvironment } from "@/lib/config/site";
+import { hashIdentifier, readClientAddress } from "@/lib/security/identifiers";
+import { consumeRateLimit } from "@/lib/security/rate-limit";
 
 /**
  * A random, opaque token used only to tell one visitor's inquiries apart so a
@@ -39,6 +41,24 @@ const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 180;
 
 const MAX_NOTE_LENGTH = 200;
 const MAX_VARIANT_SKU_LENGTH = 64;
+
+/** Generous for a shopper; a script hammering the endpoint reaches the limit quickly. */
+const INQUIRY_RATE_LIMIT = 30;
+const INQUIRY_RATE_WINDOW_SECONDS = 600;
+
+/** Without a client address there is nothing to count, so the event is recorded. */
+async function isWithinInquiryLimit(headers: Headers): Promise<boolean> {
+  const address = readClientAddress(headers);
+
+  if (!address) return true;
+
+  return consumeRateLimit({
+    bucket: `inquiry:${hashIdentifier("inquiry", address)}`,
+    limit: INQUIRY_RATE_LIMIT,
+    scope: "inquiry",
+    windowSeconds: INQUIRY_RATE_WINDOW_SECONDS,
+  });
+}
 
 type Selection = { slug: string; variantSku: string | null };
 
@@ -127,17 +147,11 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL("/shortlist", url), 303);
   }
 
-  const products = await repository.getProductsBySlugs(
+  // Variants decide whether a SKU in the link is real, so the detail read is the
+  // only read needed: one query covers every product in the selection.
+  const details = await repository.getProductDetailsBySlugs(
     selections.map((selection) => selection.slug),
   );
-
-  // Resolving details per product keeps variant validation honest; a summary
-  // does not carry the variant list.
-  const details = (
-    await Promise.all(
-      products.map((summary) => repository.getProductBySlug(summary.slug)),
-    )
-  ).filter((product): product is ProductDetail => product !== null);
 
   if (details.length === 0) {
     // Every requested product is unpublished or gone; send the visitor somewhere
@@ -168,13 +182,16 @@ export async function GET(request: Request) {
 
   const sessionToken = existingSession ?? randomUUID();
 
-  const reference = await recordInquiryEvent({
-    campaign: readCampaign(url.searchParams),
-    entryPath: url.pathname,
-    eventType: singleProduct ? "single_product" : "shortlist",
-    items,
-    sessionToken,
-  });
+  // Over the limit the visitor still reaches WhatsApp; only the stored event is skipped.
+  const reference = (await isWithinInquiryLimit(request.headers))
+    ? await recordInquiryEvent({
+        campaign: readCampaign(url.searchParams),
+        entryPath: url.pathname,
+        eventType: singleProduct ? "single_product" : "shortlist",
+        items,
+        sessionToken,
+      })
+    : null;
 
   const firstItem = items[0];
 
